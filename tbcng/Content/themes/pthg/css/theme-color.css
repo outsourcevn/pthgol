@@ -1,0 +1,154 @@
+/*===========================================================================*/
+						/*Default Theme Color Start*/
+/*===========================================================================*/
+.cp-nav-holder .navbar-nav li ul li:before,.cp_side-navigation li:hover > a,.cp-mega-menu .dropdown-menu li:before,#home-slider1 .owl-controls .owl-nav .owl-next,.cp-btn-style1,#cp-testimonial-slider .owl-dots .owl-dot span
+,#cp-blog-slider .owl-controls .owl-nav .owl-next,.cp-pro-meta li.pro-cart,.cp-footer,.widget-search form .btn-submit,.cp-slider-content .cp-readmore-btn,.cp-events-inner .left .date,.cp-our-skills-section,.widget-subscribe form .btn-submit,.cp-tab-box .nav-tabs > li.active > a, .cp-tab-box.nav-tabs > li.active > a:hover, .cp-tab-box .nav-tabs > li.active > a:focus, .cp-tab-box .nav-tabs > li a:hover
+,#cp-widget-slider .owl-dot.active span,.cp-btn-listing .nav-tabs > li.active > a,.cp-btn-listing .nav-tabs > li.active > a:hover,.cp-btn-listing .nav-tabs > li.active > a:focus,#cp-range-slider .ui-slider-range,.cp-range-slider-holder .cp-filter,.cp-error-section_v2,#cp-inner-error2,.cp-calendar-box .form-group .fa-users,#cp-calendar .fc-event,.cp-popup-holder form .subscribe,.cp-popup-holder #popup-close{
+ 	background-color:#c0a375; 
+
+ }
+
+/*
+Text Color Css*/
+.cp-nav-holder .navbar-default .navbar-nav > li:hover > a,.cp-sidemenu-btn a:hover,.cp-sidemenu-btn a:focus,.cp-sidemenu-btn a:active,.cp-mega-item .cp-text h6,.cp-heading-style1_v1 h2 span,.cp-heading-style1_v2 h2 span,.cp-feature-item h3
+,.cp-services-item h3,.cp-event-item .date,.cp-event-item .cp-caption h3 a,.countdown-holder .countdown-period,.cp-testimonial-inner .cp-signature,.cp-blog-item .cp-text p a:hover,.cp-social-links li a,.cp-pro-item .cp-text h3 a
+,.cp-tabs-holder .nav-tabs > li.active > a,.cp-tabs-holder .nav-tabs > li.active > a:hover,.cp-tabs-holder .nav-tabs > li.active > a:focus,.cp-tabs-holder .nav-tabs a:hover,.cp-price-item h4,.cp-blog-item .cp-text h3 a:hover,.cp-services-item .cp-text h3 a:hover
+,.cp-discount-item h2,.cp-events-outer h2 .more-btn,.cp-test-thumb-listed h3,.cp-about-section_v4 .cp-about-text h3,.cp-inner-banner-outer .breadcrumb li,.cp-inner-banner-outer .breadcrumb li a
+,.cp-pagination-row .pagination > li > a:hover, .cp-pagination-row .pagination > li > span:hover, .cp-pagination-row .pagination > li > a:focus, .cp-pagination-row .pagination > li > span:focus,.cp-pagination-row .pagination .active a,.cp-pagination-row .pagination .active span,.cp-team-section_v3 .cp-team-item .cp-caption h3 a,.cp-team-detail .cp-about-text h3,.cp-team-detail .cp-signature,.cp-career-listed h3
+,.cp-event-item2 .cp-meta-list li .fa,.cp-event-list-item .cp-thumb .date,.cp-event-list-item .cp-text .first,.cp-event-list-item .cp-meta-list li .fa,.cp-tab-box .nav-tabs > li > a,.cp-meta-list2 li,.widget-banner .cp-thumb .cp-caption span,.cp-pro-detail-info .items-list li .fa,.cp-pro-detail-info .cp-text .price,.categories-list > li span,.categories-list .cp-social-links a,.cp-cart-bottom h3
+,.cp-checkout-form .inner-holder a:hover,.checkout-table-row .woocommerce .cp-shop_table thead th,.cp-error-inner h3 a,.cp-get-box .cp-text h3,.cp_galleryFilter a:hover,.cp_galleryFilter a.current,.view-more,.view-more:hover,.color{
+	color:#c0a375;
+}
+
+
+/*
+Border Color Css*/
+.cp-nav-holder .navbar-nav li ul,.cp-cart-holder .cp-cart-inner,.cp-nav-holder .navbar-nav li .cp-mega-menu .dropdown-menu,.cp-range-slider-holder .ui-slider .ui-slider-handle,#cp-calendar .fc-event { 
+	border-color:#c0a375;
+}
+.cp-pagination-row .pagination > li:before,.cp-pagination-row .pagination li.active:before{
+	border-top-color: #c0a375;
+}
+
+/*+++++++++++++ Default Theme color 2 Css +++++++++++++*/
+.cp-services-inner,.cp-event-item .date,.countdown-holder .countdown-section,.cp-team-section,.cp-instagram-text,.widget-about .cp-social-links li a,.cp-footer .widget-search,.cp-event-list-item .cp-thumb .date
+{
+	background-color: #2f2725;
+}
+
+
+
+/*===========================================================================*/
+						/*Rider Shop / Box Layout Theme Color Start*/
+/*===========================================================================*/
+#cp-rider-boxed .cp-nav-holder .navbar-nav li ul li:before,#cp-rider-boxed .cp_side-navigation li:hover > a,#cp-rider-boxed .cp-mega-menu .dropdown-menu li:before,#cp-rider-boxed #home-slider1 .owl-controls .owl-nav .owl-next,#cp-rider-boxed .cp-btn-style1,#cp-rider-boxed #cp-testimonial-slider2 .owl-dots .owl-dot span
+,#cp-rider-boxed #cp-blog-slider .owl-controls .owl-nav .owl-next,#cp-rider-boxed .cp-pro-meta li.pro-cart,#cp-rider-boxed .widget-search form .btn-submit,#cp-rider-boxed .cp-services-section_v3 .cp-services-item:hover,#cp-rider-boxed .cp-instagram-text,#cp-rider-boxed .cp-slider-content .cp-readmore-btn
+,#home-slider3 .owl-controls .owl-nav .owl-next,#cp-rider-boxed #cp_header-v3 .cp-nav-holder,#home-slider4 .owl-controls .owl-nav .owl-next,#cp-rider-boxed .cp-cart-holder .cart-item,#cp-rider-boxed .cp-events-inner .left .date,#cp-rider-boxed .cp-our-skills-section,#cp-rider-boxed .widget-subscribe form .btn-submit,#cp-rider-boxed .cp-tab-box .nav-tabs > li.active > a,#cp-rider-boxed .cp-tab-box.nav-tabs > li.active > a:hover,#cp-rider-boxed .cp-tab-box .nav-tabs > li.active > a:focus,#cp-rider-boxed .cp-tab-box .nav-tabs > li a:hover,#cp-rider-boxed #cp-widget-slider .owl-dot.active span,#cp-rider-boxed #cp-range-slider .ui-slider-range,#cp-rider-boxed .cp-range-slider-holder .cp-filter,#cp-rider-boxed .cp-error-section_v2,#cp-rider-boxed #cp-inner-error2,#cp-rider-boxed .cp-calendar-box .form-group .fa-users
+,#cp-rider-boxed .cp-popup-holder #popup-close,#cp-rider-boxed .cp-popup-holder form .subscribe{
+ 	background-color:#ffcf00; 
+ }
+
+/*
+Text Color Css*/
+#cp-rider-boxed .cp-mega-item .cp-text h6,#cp-rider-boxed .cp-heading-style1_v1 h2 span,#cp-rider-boxed .cp-heading-style1_v2 h2 span,#cp-rider-boxed .cp-feature-item h3
+,#cp-rider-boxed .cp-services-item h3,#cp-rider-boxed .cp-event-item .date,#cp-rider-boxed .cp-event-item .cp-caption h3 a,#cp-rider-boxed .countdown-holder .countdown-period,#cp-rider-boxed .cp-testimonial-inner .cp-signature,#cp-rider-boxed .cp-blog-item .cp-text p a:hover,#cp-rider-boxed .cp-social-links li a,#cp-rider-boxed .cp-pro-item .cp-text h3 a
+,#cp-rider-boxed .cp-tabs-holder .nav-tabs > li.active > a,#cp-rider-boxed .cp-tabs-holder .nav-tabs > li.active > a:hover,#cp-rider-boxed .cp-tabs-holder .nav-tabs > li.active > a:focus,#cp-rider-boxed .cp-tabs-holder .nav-tabs a:hover,#cp-rider-boxed .cp-about-section_v3 .cp-about-text h3,#cp-rider-boxed .cp-opening-item h3,#cp-rider-boxed .cp-team-item .cp-social-links li a:hover
+,#cp-rider-boxed .cp-price-item h4,#cp-rider-boxed .cp-blog-item .cp-text h3 a:hover,#cp-rider-boxed .cp-services-item .cp-text h3 a:hover,.cp-discount-item h2,#cp-rider-boxed .cp-discount-item h2,#cp-rider-boxed .cp-events-outer h2 .more-btn,#cp-rider-boxed .cp-test-thumb-listed h3,
+#cp-rider-boxed .cp-about-section_v4 .cp-about-text h3,#cp-rider-boxed .cp-inner-banner-outer .breadcrumb li,#cp-rider-boxed .cp-inner-banner-outer .breadcrumb li + li:after,#cp-rider-boxed .cp-inner-banner-outer .breadcrumb li a,
+#cp-rider-boxed .cp-pagination-row .pagination .active a,#cp-rider-boxed .cp-pagination-row .pagination .active span,#cp-rider-boxed .cp-pagination-row .pagination > li > a:hover,#cp-rider-boxed .cp-pagination-row .pagination > li > span:hover,#cp-rider-boxed .cp-pagination-row .pagination > li > a:focus,#cp-rider-boxed .cp-pagination-row .pagination > li > span:focus,#cp-rider-boxed .cp-team-section_v3 .cp-team-item .cp-caption h3 a,#cp-rider-boxed .cp-team-detail .cp-about-text h3,#cp-rider-boxed .cp-team-detail .cp-signature,#cp-rider-boxed .cp-career-listed h3
+,#cp-rider-boxed .cp-event-item2 .cp-meta-list li .fa,#cp-rider-boxed .cp-event-list-item .cp-thumb .date,#cp-rider-boxed .cp-event-list-item .cp-text .first,#cp-rider-boxed .cp-event-list-item .cp-meta-list li .fa,#cp-rider-boxed .cp-tab-box .nav-tabs > li > a,#cp-rider-boxed .cp-meta-list2 li,#cp-rider-boxed .widget-banner .cp-thumb .cp-caption span,#cp-rider-boxed .cp-pro-detail-info .items-list li .fa,#cp-rider-boxed .cp-pro-detail-info .cp-text .price,#cp-rider-boxed .categories-list > li span,#cp-rider-boxed .categories-list .cp-social-links a,
+#cp-rider-boxed .cp-btn-listing .nav-tabs > li.active > a,#cp-rider-boxed .cp-btn-listing .nav-tabs > li.active > a:hover,#cp-rider-boxed .cp-btn-listing .nav-tabs > li.active > a:focus,#cp-rider-boxed .cp-cart-bottom h3,#cp-rider-boxed .cp-checkout-form .inner-holder a:hover,#cp-rider-boxed .checkout-table-row .woocommerce .cp-shop_table thead th,#cp-rider-boxed .cp-error-inner h3 a,#cp-rider-boxed .cp-get-box .cp-text h3,#cp-rider-boxed .cp-events-inner .cp-text .cp-meta-list li .fa{
+	color:#ffcf00;
+}
+
+
+/*
+Border Color Css*/
+
+#cp-rider-boxed .cp-nav-holder .navbar-nav li ul,#cp-rider-boxed .cp-cart-holder .cp-cart-inner,#cp-rider-boxed .cp-nav-holder .navbar-nav li .cp-mega-menu .dropdown-menu,#cp-rider-boxed .cp-heading-style1_v1 h2::after,#cp-rider-boxed .cp-heading-style1_v2 h2::after,#cp-rider-boxed .cp-range-slider-holder .ui-slider .ui-slider-handle{ 
+	border-color:#ffcf00;
+}
+
+#cp-rider-boxed .cp-pagination-row .pagination > li:before,#cp-rider-boxed .cp-pagination-row .pagination .active:before{
+	border-top-color: #ffcf00;
+}
+
+
+
+
+
+/*===========================================================================*/
+					/*Rider Repair Shop Theme Color Start*/
+/*===========================================================================*/
+#cp-rider-repair .cp-nav-holder .navbar-nav li ul li:before,#cp-rider-repair .cp_side-navigation li:hover > a,#cp-rider-repair .cp-mega-menu .dropdown-menu li:before,#cp-rider-repair #home-slider1 .owl-controls .owl-nav .owl-next,#cp-rider-repair .cp-btn-style1,#cp-rider-repair #cp-testimonial-slider2 .owl-dots .owl-dot span
+,#cp-rider-repair #cp-blog-slider .owl-controls .owl-nav .owl-next,#cp-rider-repair .cp-pro-meta li.pro-cart,#cp-rider-repair .cp-footer,#cp-rider-repair .widget-search form .btn-submit,#cp-rider-repair .cp-services-section_v3 .cp-services-item:hover,#cp-rider-repair .cp-instagram-text,#cp-rider-repair .cp-slider-content .cp-readmore-btn
+,#home-slider3 .owl-controls .owl-nav .owl-next,#cp-rider-repair #cp_header-v3 .cp-nav-holder,#cp-rider-repair .cp-events-inner .left .date,#cp-rider-repair .cp-our-skills-section,#cp-rider-repair .widget-subscribe form .btn-submit,#cp-rider-repair .cp-tab-box .nav-tabs > li.active > a,#cp-rider-repair .cp-tab-box.nav-tabs > li.active > a:hover,#cp-rider-repair .cp-tab-box .nav-tabs > li.active > a:focus,#cp-rider-repair .cp-tab-box .nav-tabs > li a:hover,#cp-rider-repair #cp-widget-slider .owl-dot.active span,#cp-rider-repair #cp-range-slider .ui-slider-range,#cp-rider-repair .cp-range-slider-holder .cp-filter,#cp-rider-repair .cp-error-section_v2,#cp-rider-repair #cp-inner-error2,#cp-rider-repair .cp-calendar-box .form-group .fa-users
+,#cp-rider-repair .cp-popup-holder #popup-close,#cp-rider-repair .cp-popup-holder form .subscribe{
+ 	background-color:#f05050; 
+ }
+
+/*
+Text Color Css*/
+#cp-rider-repair .cp-mega-item .cp-text h6,#cp-rider-repair .cp-heading-style1_v1 h2 span,#cp-rider-repair .cp-heading-style1_v2 h2 span,#cp-rider-repair .cp-feature-item h3
+,#cp-rider-repair .cp-services-item h3,#cp-rider-repair .cp-event-item .date,#cp-rider-repair .cp-event-item .cp-caption h3 a,#cp-rider-repair .countdown-holder .countdown-period,#cp-rider-repair .cp-testimonial-inner .cp-signature,#cp-rider-repair .cp-blog-item .cp-text p a:hover,#cp-rider-repair .cp-social-links li a,#cp-rider-repair .cp-pro-item .cp-text h3 a
+,#cp-rider-repair .cp-tabs-holder .nav-tabs > li.active > a,#cp-rider-repair .cp-tabs-holder .nav-tabs > li.active > a:hover,#cp-rider-repair .cp-tabs-holder .nav-tabs > li.active > a:focus,#cp-rider-repair .cp-tabs-holder .nav-tabs a:hover,#cp-rider-repair .cp-about-section_v3 .cp-about-text h3,#cp-rider-repair .cp-opening-item h3,#cp-rider-repair .cp-team-item .cp-social-links li a:hover
+,#cp-rider-repair .cp-price-item h4,#cp-rider-repair .cp-blog-item .cp-text h3 a:hover,#cp-rider-repair .cp-services-item .cp-text h3 a:hover,#cp-rider-repair .cp-discount-item h2,#cp-rider-repair .cp-events-outer h2 .more-btn,#cp-rider-repair .cp-test-thumb-listed h3,
+#cp-rider-repair .cp-about-section_v4 .cp-about-text h3,#cp-rider-repair .cp-inner-banner-outer .breadcrumb li,#cp-rider-repair .cp-inner-banner-outer .breadcrumb li + li:after,#cp-rider-repair .cp-inner-banner-outer .breadcrumb li a,
+#cp-rider-repair .cp-pagination-row .pagination .active a,#cp-rider-repair .cp-pagination-row .pagination .active span,#cp-rider-repair .cp-pagination-row .pagination > li > a:hover,#cp-rider-repair .cp-pagination-row .pagination > li > span:hover,#cp-rider-repair .cp-pagination-row .pagination > li > a:focus,#cp-rider-repair .cp-pagination-row .pagination > li > span:focus,#cp-rider-repair .cp-team-section_v3 .cp-team-item .cp-caption h3 a,#cp-rider-repair .cp-team-detail .cp-about-text h3,#cp-rider-repair .cp-team-detail .cp-signature,#cp-rider-repair .cp-career-listed h3
+,#cp-rider-repair .cp-event-item2 .cp-meta-list li .fa,#cp-rider-repair .cp-event-list-item .cp-thumb .date,#cp-rider-repair .cp-event-list-item .cp-text .first,#cp-rider-repair .cp-event-list-item .cp-meta-list li .fa,#cp-rider-repair .cp-tab-box .nav-tabs > li > a,#cp-rider-repair .cp-meta-list2 li,#cp-rider-repair .widget-banner .cp-thumb .cp-caption span,#cp-rider-repair .cp-pro-detail-info .items-list li .fa,#cp-rider-repair .cp-pro-detail-info .cp-text .price,#cp-rider-repair .categories-list > li span,#cp-rider-repair .categories-list .cp-social-links a,
+#cp-rider-repair .cp-btn-listing .nav-tabs > li.active > a,#cp-rider-repair .cp-btn-listing .nav-tabs > li.active > a:hover,#cp-rider-repair .cp-btn-listing .nav-tabs > li.active > a:focus,#cp-rider-repair .cp-cart-bottom h3,#cp-rider-repair .cp-checkout-form .inner-holder a:hover,#cp-rider-repair .checkout-table-row .woocommerce .cp-shop_table thead th,#cp-rider-repair .cp-error-inner h3 a,#cp-rider-repair .cp-get-box .cp-text h3{
+	color:#f05050;
+}
+
+
+/*
+Border Color Css*/
+
+#cp-rider-repair .cp-nav-holder .navbar-nav li ul,#cp-rider-repair .cp-cart-holder .cp-cart-inner,#cp-rider-repair .cp-nav-holder .navbar-nav li .cp-mega-menu .dropdown-menu,#cp-rider-repair .cp-range-slider-holder .ui-slider .ui-slider-handle{ 
+	border-color:#f05050;
+}
+
+#cp-rider-repair .cp-pagination-row .pagination > li:before,#cp-rider-repair .cp-pagination-row .pagination .active:before{
+	border-top-color: #f05050;
+}
+
+
+
+
+/*===========================================================================*/
+						/*Rider Store Theme Color Start*/
+/*===========================================================================*/
+
+#cp-rider-store .cp-nav-holder .navbar-nav li ul li:before,#cp-rider-store .cp_side-navigation li:hover > a,#cp-rider-store .cp-mega-menu .dropdown-menu li:before,#cp-rider-store #home-slider1 .owl-controls .owl-nav .owl-next,#cp-rider-store .cp-btn-style1,#cp-rider-store #cp-testimonial-slider2 .owl-dots .owl-dot span
+,#cp-rider-store #cp-blog-slider .owl-controls .owl-nav .owl-next,#cp-rider-store .cp-pro-meta li.pro-cart,#cp-rider-store .cp-footer,#cp-rider-store .widget-search form .btn-submit,#cp-rider-store .cp-services-section_v2 .cp-services-item:hover,#cp-rider-store .cp-instagram-text,#cp-rider-store .cp-slider-content .cp-readmore-btn
+,#cp-rider-store .cp-cart-holder .cart-item,#cp-rider-store .cp-events-inner .left .date,.cp-calendar-box .form-group .fa-users,#cp-rider-store .cp-our-skills-section,#cp-rider-store .widget-subscribe form .btn-submit,#cp-rider-store .cp-tab-box .nav-tabs > li.active > a,#cp-rider-store .cp-tab-box.nav-tabs > li.active > a:hover,#cp-rider-store .cp-tab-box .nav-tabs > li.active > a:focus,#cp-rider-store .cp-tab-box .nav-tabs > li a:hover,#cp-rider-store #cp-widget-slider .owl-dot.active span,#cp-rider-store #cp-range-slider .ui-slider-range,#cp-rider-store .cp-range-slider-holder .cp-filter,#cp-rider-store .cp-error-section_v2,#cp-rider-store #cp-inner-error2,#cp-rider-store .cp-calendar-box .form-group .fa-users
+,#cp-rider-store .cp-popup-holder #popup-close,#cp-rider-store .cp-popup-holder form .subscribe{
+ 	background-color:#91c9da; 
+ }
+
+/*
+Text Color Css*/
+#cp-rider-store .cp-nav-holder .navbar-default .navbar-nav > li:hover > a,#cp-rider-store .cp-sidemenu-btn a:hover,#cp-rider-store .cp-sidemenu-btn a:focus,#cp-rider-store .cp-sidemenu-btn a:active,#cp-rider-store .cp-mega-item .cp-text h6,#cp-rider-store .cp-heading-style1_v1 h2 span,#cp-rider-store .cp-heading-style1_v2 h2 span,#cp-rider-store .cp-feature-item h3
+,#cp-rider-store .cp-services-item h3,#cp-rider-store .cp-event-item .date,#cp-rider-store .cp-event-item .cp-caption h3 a,#cp-rider-store .countdown-holder .countdown-period,#cp-rider-store .cp-testimonial-inner .cp-signature,#cp-rider-store .cp-blog-item .cp-text p a:hover,#cp-rider-store .cp-social-links li a,#cp-rider-store .cp-pro-item .cp-text h3 a
+,#cp-rider-store .cp-tabs-holder .nav-tabs > li.active > a,#cp-rider-store .cp-tabs-holder .nav-tabs > li.active > a:hover,#cp-rider-store .cp-tabs-holder .nav-tabs > li.active > a:focus,#cp-rider-store .cp-tabs-holder .nav-tabs a:hover,#cp-rider-store .cp-price-item h4,#cp-rider-store .cp-blog-item .cp-text h3 a:hover,#cp-rider-store .cp-services-item .cp-text h3 a:hover
+,#cp-rider-store .cp-discount-item h2,#cp-rider-store .cp-events-outer h2 .more-btn,#cp-rider-store .cp-test-thumb-listed h3,
+#cp-rider-store .cp-about-section_v4 .cp-about-text h3,#cp-rider-store .cp-inner-banner-outer .breadcrumb li,#cp-rider-store .cp-inner-banner-outer .breadcrumb li + li:after,#cp-rider-store .cp-inner-banner-outer .breadcrumb li a,
+#cp-rider-store .cp-pagination-row .pagination .active a,#cp-rider-store .cp-pagination-row .pagination .active span,#cp-rider-store .cp-pagination-row .pagination > li > a:hover,#cp-rider-store .cp-pagination-row .pagination > li > span:hover,#cp-rider-store .cp-pagination-row .pagination > li > a:focus,#cp-rider-store .cp-pagination-row .pagination > li > span:focus,#cp-rider-store .cp-team-section_v3 .cp-team-item .cp-caption h3 a,#cp-rider-store .cp-team-detail .cp-about-text h3,#cp-rider-store .cp-team-detail .cp-signature,#cp-rider-store .cp-career-listed h3
+,#cp-rider-store .cp-event-item2 .cp-meta-list li .fa,#cp-rider-store .cp-event-list-item .cp-thumb .date,#cp-rider-store .cp-event-list-item .cp-text .first,#cp-rider-store .cp-event-list-item .cp-meta-list li .fa,#cp-rider-store .cp-tab-box .nav-tabs > li > a,#cp-rider-store .cp-meta-list2 li,#cp-rider-store .widget-banner .cp-thumb .cp-caption span,#cp-rider-store .cp-pro-detail-info .items-list li .fa,#cp-rider-store .cp-pro-detail-info .cp-text .price,#cp-rider-store .categories-list > li span,#cp-rider-store .categories-list .cp-social-links a,
+#cp-rider-store .cp-btn-listing .nav-tabs > li.active > a,#cp-rider-store .cp-btn-listing .nav-tabs > li.active > a:hover,#cp-rider-store .cp-btn-listing .nav-tabs > li.active > a:focus,#cp-rider-store .cp-cart-bottom h3,#cp-rider-store .cp-checkout-form .inner-holder a:hover,#cp-rider-store .checkout-table-row .woocommerce .cp-shop_table thead th,#cp-rider-store .cp-error-inner h3 a,#cp-rider-store .cp-get-box .cp-text h3{
+	color:#91c9da;
+}
+
+
+/*
+Border Color Css*/
+
+#cp-rider-store .cp-nav-holder .navbar-nav li ul,#cp-rider-store .cp-cart-holder .cp-cart-inner,#cp-rider-store .cp-nav-holder .navbar-nav li .cp-mega-menu .dropdown-menu,#cp-rider-store .cp-range-slider-holder .ui-slider .ui-slider-handle{ 
+	border-color:#91c9da;
+}
+
+#cp-rider-store .cp-pagination-row .pagination > li:before,#cp-rider-store .cp-pagination-row .pagination .active:before{
+	border-top-color: #91c9da;
+}
+
+

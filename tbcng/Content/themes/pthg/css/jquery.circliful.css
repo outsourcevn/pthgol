@@ -1,0 +1,39 @@
+.circliful {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+}
+
+.circle-info, .circle-info-half {
+	color: #999;
+}
+
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}
+.circliful .circle-text{
+	font-weight: 700;
+	color: #fff;
+}
+.circle-container{
+	text-align: center;
+	position: relative;
+}
+.circle-container .small{
+	font-size: 14px;
+	font-weight: 600;
+	position: absolute;
+	top: 56%;
+	left: 0;
+	right: 0;
+	color: #424242;
+}
