@@ -1,0 +1,86 @@
+﻿@using tbcng.Models
+@using tbcng.Helpers
+@model List<product>
+           <div class="kf_banner_wrap" style="height: 383px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 hidden-xs">
+
+            </div>
+            <div class="col-md-9">
+                <!-- Place somewhere in the <body> of your page -->
+                <div class="flexslider">
+                    <ul class="slides">
+                        @foreach (var item in Model)
+                        {
+                            string _link = string.Format("/san-pham/{0}/{1}-{2}", item.cat.cat_url, configs.unicodeToNoMark(@item.product_name), @item.product_id);
+                            <li>
+                                <div style="position: relative;">
+                                    <a href="@_link"><img src="@item.product_photo" style="height:376px;" /></a>
+                                    <div class="flex-caption">
+                                        <a href="@_link">
+                                            @item.product_name
+                                        </a>
+                                        <h4 style="color: #fff;">
+                                            <span>Giá: </span>
+                                            @if (item.product_price_public != null && item.product_price_public > 0)
+                                            {
+
+                                                <text>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public)</text> <b>đồng.</b>
+                                            }
+                                            else
+                                            {
+                                                <text>Thỏa thuận</text>
+                                            }
+                                        </h4>
+                                    </div>
+                                </div>
+
+
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div class="kf_banner_wrap">
+
+        @if (Model.Count > 0)
+        {
+            <ul class="banner_bxslider">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@item.product_photo" alt="@item.product_name" style="height: 500px;">
+                        <div class="kf_schedule_wrap">
+                            <h3>@item.product_name</h3>
+                            <p>@Html.Raw(item.product_des)</p>
+                            <div class="kf_schedule_visit">
+                                <h4>
+                                    <span>Giá: </span>
+                                    @if (item.product_price_public != null && item.product_price_public > 0)
+                                    {
+
+                                        <text>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public)</text> <b>đồng.</b>
+                                    }
+                                    else
+                                    {
+                                        <text>Thỏa thuận</text>
+                                    }
+                                </h4>
+                                <a href="@string.Format("/san-pham/{0}/{1}-{2}", item.cat.cat_url, configs.unicodeToNoMark(@item.product_name), @item.product_id)">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            </ul>
+        }
+
+
+
+    </div>*@
+

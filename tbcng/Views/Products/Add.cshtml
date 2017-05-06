@@ -1,0 +1,249 @@
+﻿@using tbcng.Models
+@model ProductVM
+
+@{
+    ViewBag.Title = "Thêm mới sản phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/dropzonescss")
+}
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+@section PageTitleHeader {
+    <div class="page-header">
+        <h3><i class="fa fa-product-hunt fa-2x fa-color-red"></i> @ViewBag.Title</h3>
+    </div>
+    @if (TempData["Updated"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            @Html.Raw(TempData["Updated"])
+        </div>
+    }
+    @if (TempData["Errored"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            @Html.Raw(TempData["Errored"])
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default box box-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Vui lòng nhập đầy đủ các trường có dấu <span class="color-red">(*)</span></h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Add", "Products", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", @id = "add-new-product" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Thêm mới
+                            </button>
+                            <span class="btn btn-danger" onclick="gotoUrl('@Url.RouteUrl("AdminListProduct")')"><i class="fa fa-close"></i> Hủy bỏ</span>
+                        </div>
+                    </div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin sản phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#image_product" aria-controls="home" role="tab" data-toggle="tab">Hình ảnh sản phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Thông tin mô tả</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#product_addphoto" aria-controls="product_addphoto" role="tab" data-toggle="tab">Thêm ảnh sản phẩm</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top: 10px;">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.cat_id, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-8">
+                                    @Html.HiddenFor(m => m.cat_id)
+                                    @{ Html.RenderAction("_lstOptionCatPartial", "Products"); }
+                                    @Html.ValidationMessageFor(model => model.cat_id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.product_name, htmlAttributes: new { @class = "form-control", placeholder = "Nhập tên sản phẩm." })
+                                    @Html.ValidationMessageFor(model => model.product_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_des, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.TextAreaFor(m => m.product_des, htmlAttributes: new { @class = "form-control", placeholder = "Nhập tả sản phẩm.", rows = 10 })
+                                    @Html.ValidationMessageFor(model => model.product_des, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_new_type, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-3">
+                                    <select class="form-control" name="product_new_type" id="product_new_type" data-val="true" data-val-required="Chọn kiểu bài viết" aria-required="true" aria-describedby="product_new_type-error" aria-invalid="true">
+                                        <option value="">Chọn kiểu bài viết</option>
+                                        <option value="1">Bài viết thường</option>
+                                        <option value="2">Bài viết nổi bật</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.product_new_type, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_price_public, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.product_price_public, htmlAttributes: new { @class = "form-control", placeholder = "Nhập giá sản phẩm.", type = "number" })
+                                    @*@Html.ValidationMessageFor(model => model.product_price_public, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="image_product" role="tabpanel" class="tab-pane">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.product_photo, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <div id="divproduct_photo" class="upanh">
+                                        <a class="closed"><i class="fa fa-close fa-2x"></i></a>
+                                        @Html.HiddenFor(m => m.product_photo)
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                    <div id="dzproduct_photo" class="dropzone undropzone">
+                                    </div>
+                                    <span class="help-block">
+                                        Nên chọn hình có kích thước 1x1, 500x500px, 400x310px
+                                        và chọn hình ảnh có dung lượng không vượt quá 12 Mb.
+                                    </span>
+                                    @*@Html.ValidationMessageFor(model => model.product_photo, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.product_photo2, new { @class = "col-md-4 control-label" })
+                                <div class="col-md-6">
+                                    <div id="divproduct_photo2" class="upanh" style="width: 100%;">
+                                        <a class="closed"><i class="fa fa-close fa-2x"></i></a>
+                                        @Html.HiddenFor(m => m.product_photo2)
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                    <div id="dzproduct_photo2" class="dropzone undropzone">
+                                    </div>
+                                    <span class="help-block">
+                                        Nên chọn hình có kích thước 16:9, 1920x790px và
+                                        chọn hình ảnh có dung lượng không vượt quá 12 Mb.
+                                    </span>
+                                    @*@Html.ValidationMessageFor(model => model.product_photo2, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </div>
+                        @*Noi dung*@
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(m => m.product_content, new { @class = "form-control", @rows = "5" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="product_addphoto" class="tab-pane">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <p>Vui lòng thêm sản phẩm trước khi thêm ảnh</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label>@Html.CheckBoxFor(m => m.status) Đăng sản phẩm lên.</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Thêm mới
+                            </button>
+                            <span class="btn btn-danger" onclick="gotoUrl('@Url.RouteUrl("AdminListProduct")')"><i class="fa fa-close"></i> Hủy bỏ</span>
+                        </div>
+                    </div>
+
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dropzonescripts")
+    
+    <script>
+
+        $.validator.setDefaults({
+            ignore: ""
+        });
+
+        $(document).ready(function () {
+           
+            // danh mục bài viết
+            $('#cat_op_parent').on('change', function () {
+                if (document.getElementById('cat_op_parent').value !== "") {
+                    document.getElementById('cat_id').value = document.getElementById('cat_op_parent').value;
+                    $('#add-new-product').submit();
+                } else {
+                    document.getElementById('cat_id').value = "";
+                    $('#add-new-product').submit();
+                }
+            })
+
+            // upload
+            Dropzone.autoDiscover = false;
+            UploadImage('/Products/SaveImage', '#dzproduct_photo', '#divproduct_photo', '#product_photo', 5);
+            UploadImage('/Products/SaveImageBig', '#dzproduct_photo2', '#divproduct_photo2', '#product_photo2', 5);
+            $('.closed').click(function (e) {
+                e.preventDefault();
+                if ($(this).siblings('input').val() !== "") {
+                    if (confirm("Bạn chắc chắn muốn xóa ảnh?")) {
+                        $(this).parent('.upanh').css('background-image', 'url("/Content/img/no-image.png")');
+                        $(this).siblings('input').val('');
+                    }
+                }
+            });
+
+            CKEDITOR.replace('product_content', {
+                removeButtons: 'Save',
+                height: '500px'
+            })
+
+        })
+
+
+    </script>
+
+}

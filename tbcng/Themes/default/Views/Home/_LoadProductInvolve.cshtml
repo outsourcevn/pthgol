@@ -1,0 +1,53 @@
+﻿@model List<tbcng.Models.product>
+@using tbcng.Helpers;
+
+<!--Our Agent Warp Start-->
+<section class="kf_our_agent_bg">
+    <div class="container">
+        <!--Heading Wrap Start-->
+        <div class="kf_heading_1">
+            <h3>Sản phẩm quan tâm</h3>
+            <span class="kf_property_line"></span>
+        </div>
+        <!--Heading Wrap End-->
+        <!--Agent List Wrap Start-->
+        <div class="kf_agent_slider owl-carousel owl-theme">
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="item">
+                        <div class="kf_agent_wrap">
+                            <figure>
+                                <img src="@item.product_photo" alt="@item.product_name">
+                                <figcaption>
+                                    <span class="kf_listing_overlay"></span>
+                                </figcaption>
+                            </figure>
+                            <div class="kf_agent_des">
+                                <h6><a href="@string.Format("/san-pham/{0}/{1}-{2}", item.cat.cat_url, configs.unicodeToNoMark(@item.product_name), @item.product_id)">@item.product_name</a></h6>
+                                <span class="kf_property_line"></span>
+                                <span style="display: block;">
+                                    Giá: 
+                                    @if (item.product_price_public != null && item.product_price_public > 0)
+                                    {
+                                        <text>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public)</text> <b>đồng.</b>
+                                    }
+                                    else
+                                    {
+                                        <text>Thỏa thuận</text>
+                                    }
+                                    @*@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public) <b>đồng.</b>*@
+                                </span>
+                            </div>
+                        </div>
+                    </div>                    
+                }
+            }
+            
+        </div>
+        <!--Agent List Wrap End-->
+
+    </div>
+</section>
+<!--Our Agent Warp End-->

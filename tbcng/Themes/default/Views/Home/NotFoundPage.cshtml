@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "404 - Không tìm thấy trang";
+}
+
+@section MainBanner {
+    <!--Sub Banner Wrap Start-->
+    <div class="kf_property_sub_banner">
+        <div class="container">
+            <div class="kf_sub_banner_hdg">
+                <h3>@Html.Raw(ViewBag.Title)</h3>
+            </div>
+            <div class="kf_property_breadcrumb">
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="/404" class="bb1_p0_m010">@Html.Raw(ViewBag.Title)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--Sub Banner Wrap End-->
+}
+
+<!--404 Page Wrap Start-->
+<section>
+    <div class="container">
+        <div class="kf_404_wrap">
+            <h2>4</h2>
+            <figure>
+                <img class="fa fa-spin" src="~/images/error-01.png" alt="">
+                <figcaption class="kf_error_text">
+                    <h3>Error</h3>
+                </figcaption>
+            </figure>
+            <h2 class="kf_rotate_404">4</h2>
+        </div>
+        <div class="kf_not_found_wrap">
+            <h2>oops</h2>
+            <h4 style="text-transform: none;"><span id="url_page"></span> không tìm thấy.</h4>
+        </div>
+    </div>
+</section>
+<!--404 Page Wrap End-->
+<!--Go Back Wrap Start-->
+<section class="kf_go_back_bg">
+    <div class="container">
+        <div class="kf_go_back_wrap">
+            <h3>Trang của bạn không tìm thấy.</h3>
+            <a href="/">Quay trở lại trang chủ</a>
+        </div>
+    </div>
+</section>
+<!--Go Back Wrap End-->
+
+@section Scripts {
+    <script>
+        if ($('#url_page').length) {
+            document.getElementById("url_page").innerHTML = document.URL.toString();
+        }
+    </script>    
+}

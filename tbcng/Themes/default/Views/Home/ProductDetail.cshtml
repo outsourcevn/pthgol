@@ -1,0 +1,263 @@
+﻿@using tbcng.Helpers;
+@using tbcng.Models;
+@model product
+
+@{
+    ViewBag.Title = "Sản phẩm ";
+    string url_imgproduct = "";
+    string product_des = "";
+    if (Model != null)
+    {
+        if (Model.product_name != null)
+        {
+            ViewBag.Title += Model.product_name;
+        }
+        if (Model.product_photo != null)
+        {
+            url_imgproduct += Model.product_photo;
+        }
+        if (Model.product_des != null)
+        {
+            product_des += Model.product_des;
+        }
+    }
+}
+
+@{
+    string url = Request.Url.Authority + HttpContext.Current.Request.RawUrl.ToString();
+    string host = Request.Url.Authority;
+    if (Request.ServerVariables["HTTPS"] == "on")
+    {
+        url = "https://" + url;
+        host = "https://" + host;
+    }
+    else
+    {
+        url = "http://" + url;
+        host = "http://" + host;
+        
+    }
+}
+
+@section Styles {
+    <link href="~/Scripts/fcb/jquery.fancybox.css" rel="stylesheet" />
+<link href="~/Themes/default/Content/sld/flexslider.css" rel="stylesheet" />
+<link href="~/Themes/default/Content/StyleSheet1.css" rel="stylesheet" />
+}
+
+@section scripts2 {
+    <script src="~/Themes/default/Content/js/jquery.js"></script>
+}
+
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=1786487814945420";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+@section metatags {
+    <meta name="description" content="@Html.Raw(product_des)">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="index,follow,noodp">
+    <meta property="fb:app_id" content="1786487814945420" />
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="Chi tiết sản phẩm">
+    <meta property="og:url" content="@url">
+    <meta property="og:title" content="@Html.Raw(ViewBag.Title)">
+    <meta property="og:description" content="@Html.Raw(product_des)">
+    <meta property="og:image" itemprop="thumbnailUrl" content="@host@url_imgproduct">
+}
+
+@section MainBanner {
+    @{Html.RenderAction("LoadProductNewHot");}
+}
+
+@if (Model != null)
+{
+   
+    <!--Sub Banner Wrap Start-->
+    <div class="kf_property_sub_banner">
+        <div class="container">
+            @*<div class="kf_sub_banner_hdg">
+                <h3>@Html.Raw(ViewBag.Title)</h3>
+            </div>*@
+            <div class="kf_property_breadcrumb" style="width: 100%;">
+                <ul style="width: 100%; float: left;">
+                    <li><a href="#">Danh mục</a></li>
+                    @if (Model.cat.cat1.cat1 != null)
+                    {
+                        if (Model.cat.cat1.cat1.cat_parent_id != null)
+                        {
+                            <li><a href="/danh-muc/@Model.cat.cat1.cat1.cat_url-@Model.cat.cat1.cat1.cat_id">@Model.cat.cat1.cat1.cat_name</a></li>
+                        }
+                    }
+                    @if (Model.cat.cat1 != null)
+                    {
+                        if (Model.cat.cat1.cat_parent_id != null)
+                        {
+                            <li><a href="/danh-muc/@Model.cat.cat1.cat_url-@Model.cat.cat1.cat_id">@Model.cat.cat1.cat_name</a></li>
+
+                        }
+                    }
+                    <li><a href="/danh-muc/@Model.cat.cat_url-@Model.cat_id" class="bb1_p0_m010">@Model.cat.cat_name</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+    <!--Sub Banner Wrap End-->
+
+}
+
+
+<!--Property Detail Wrap Start-->
+<section class="kf_property_detail_bg" style="padding-top: 20px;">
+    <div class="container">
+        <div class="row">
+            <!--Property Detail Description Wrap Start-->
+            <div class="col-md-9">
+
+                <div class="kf_detail_information">
+                    @if (Model != null)
+                    {
+                        <!--kf_property_detail_uptwon strat-->
+                        <div class="kf_property_detail_uptwon" style="border-bottom: 0;">
+                            <h3>@Model.product_name</h3>
+
+                            <div class="kf_chitietvanphong">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#ct_ttct" aria-controls="ct_ttct" role="tab" data-toggle="tab">Thông tin chi tiết</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="ct_ttct">
+                                        <div class="kf_blog_listing_wrap">
+
+                                            <div class="kf_blog_listing_des">
+
+                                                <ul class="kf_blog_listing_meta">
+                                                    <li><i class="fa fa-calendar"></i> Ngày đăng: <a href="#">@string.Format("{0:dd-MM-yyyy HH:mm tt}", Model.updated_date)</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-5">
+
+                                                    <ul class="kf_listing_slider">
+                                                        <li>
+                                                            <a class="lightgallery" href="@Model.product_photo">
+                                                                <img src="@Model.product_photo" alt="@Model.product_photo">
+                                                            </a>
+                                                        </li>
+                                                        @if (Model.product_img.Count > 0)
+                                                        {
+                                                            foreach (var item in @Model.product_img)
+                                                            {
+                                                                <li>
+                                                                    <a class="lightgallery" href="@item.img_url">
+                                                                        <img src="@item.img_url" alt="@item.img_alt">
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        }
+
+                                                    </ul>
+                                                    <div class="kf_blog_listing_pager">
+                                                        <a data-slide-index="0" href=""><img style="width: 60px; height: 50px;" src="@Model.product_photo" alt="@Model.product_name" /></a>
+                                                        @if (Model.product_img.Count > 0)
+                                                        {
+                                                            int i = 1;
+                                                            foreach (var item in @Model.product_img)
+                                                            {
+                                                                <a data-slide-index="@i" href=""><img style="width: 60px; height: 50px;" src="@item.img_url" alt="@item.img_alt" /></a>
+                                                                i++;
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="kf_detail_information">
+                                                        <h5 style="margin-bottom: 20px;">
+                                                            Giá:
+                                                            @if (Model.product_price_public != null && Model.product_price_public > 0)
+                                                            {
+                                                                <text>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", Model.product_price_public)</text> <b>đồng.</b>
+                                                            }
+                                                            else
+                                                            {
+                                                                <text>Thỏa thuận</text>
+	                                                        }    
+                                                            
+                                                        </h5>
+                                                        @*<p>@Html.Raw(@Model.product_des)</p>*@
+                                                        <div>
+                                                            @Html.Raw(Model.product_content)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="kf_comment_list_wrap">
+                                            <h5>Bình luận sản phẩm</h5>
+
+                                            <div id="cmt_vaphong">
+                                                <div class="fb-comments" data-href="@url" data-numposts="5"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    <!--kf_property_detail_uptwon end-->
+                    }
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+@{Html.RenderAction("LoadProductInvolve", "Home", new { id = @Model.product_id });}
+
+<!--Property Detail Wrap End-->
+@section Scripts {
+    <script src="~/Scripts/jquery.mousewheel.min.js"></script>
+    <script src="~/Scripts/fcb/jquery.fancybox.js"></script>
+    <script src="~/Themes/default/Content/js/owl.carousel.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $(".lightgallery").fancybox();          
+        })
+
+    </script>
+
+<script src="~/Themes/default/Content/sld/jquery.flexslider-min.js"></script>
+<script>
+    $(window).load(function () {
+        $('.flexslider').flexslider({
+            animation: "slide",
+            controlNav: false,
+            directionNav: true
+        });
+    });
+</script>
+
+
+
+}

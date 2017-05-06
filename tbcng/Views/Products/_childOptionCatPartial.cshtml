@@ -1,0 +1,19 @@
+﻿@using tbcng.Models
+@model LstCat
+@foreach (var item in Model.LstCats)
+{
+    if (item != null)
+    {
+        if (item.LstCats.Count > 0)
+        {
+            <optgroup label="@item.CatName">
+                @Html.Partial("_childOptionCatPartial", item)
+            </optgroup>
+        }
+        else
+        {
+            <option value="@item.CatId">@item.CatName</option>
+        }
+
+    }
+}

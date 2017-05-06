@@ -1,0 +1,510 @@
+﻿@using tbcng.Models
+@model ProductVM
+@{
+    ViewBag.Title = "Sửa sản phẩm";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/dropzonescss")
+    <style>
+        #hinhanh_sp .dz-preview {
+            display: inline-block!important;
+        }
+    </style>
+
+}
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+@section PageTitleHeader {
+    <div class="page-header">
+        <h3><i class="fa fa-product-hunt fa-2x fa-color-red"></i> Sửa sản phẩm: @ViewBag.TenCat</h3>
+    </div>
+    @if (TempData["Updated"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            @Html.Raw(TempData["Updated"])
+        </div>
+    }
+    @if (TempData["Errored"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            @Html.Raw(TempData["Errored"])
+        </div>
+    }
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default box box-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Vui lòng nhập đầy đủ các trường có dấu <span class="color-red">(*)</span></h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Edit", "Products", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", @id = "add-edit-product" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.product_id)
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-edit"></i> Cập nhật sản phẩm
+                            </button>
+                            <span class="btn btn-danger" onclick="gotoUrl('@Url.RouteUrl("AdminDeleteProduct", new { id = Model.product_id })')"><i class="fa fa-trash"></i> Xóa sản phẩm</span>
+                            @if (Model.status == false)
+                            {
+                                <span class="btn btn-info" onclick="gotoUrl('@Url.RouteUrl("AdminRestoreProduct", new { id = Model.product_id })')"><i class="fa fa-info"></i> Khôi phục sản phẩm</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin sản phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#image_product" aria-controls="home" role="tab" data-toggle="tab">Hình ảnh sản phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Thông tin mô tả</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#product_addphoto" aria-controls="product_addphoto" role="tab" data-toggle="tab">Thêm ảnh sản phẩm</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" style="margin-top: 10px;">
+                        
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.cat_id, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-8">
+                                    @Html.HiddenFor(m => m.cat_id)
+                                    @{ Html.RenderAction("_lstOptionCatPartial", "Products"); }
+                                    @Html.ValidationMessageFor(model => model.cat_id, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @if (Model.cat_id != null)
+                            {
+                                <script>
+                                    $(document).ready(function () {
+                                        setTimeout(function () {
+                                            document.getElementById('cat_op_parent').value = '@Model.cat_id';
+                                        }, 500)
+                                    })
+                                </script>
+                            }
+                            
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.product_name, htmlAttributes: new { @class = "form-control", placeholder = "Nhập tên sản phẩm." })
+                                    @Html.ValidationMessageFor(model => model.product_name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_des, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.TextAreaFor(m => m.product_des, htmlAttributes: new { @class = "form-control", placeholder = "Nhập tả sản phẩm.", rows = 10 })
+                                    @Html.ValidationMessageFor(model => model.product_des, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_new_type, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-3">
+                                    <select class="form-control" name="product_new_type" id="product_new_type" data-val="true" data-val-required="Chọn kiểu bài viết" aria-required="true" aria-describedby="product_new_type-error" aria-invalid="true">
+                                        <option value="">Chọn kiểu bài viết</option>
+                                        <option value="1">Bài viết thường</option>
+                                        <option value="2">Bài viết nổi bật</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(model => model.product_new_type, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @if (Model.product_new_type != null)
+                            {
+                                <script>
+                                    $(document).ready(function () {
+                                        setTimeout(function () {
+                                            document.getElementById('product_new_type').value = '@Model.product_new_type';
+                                        }, 500)
+                                    })
+                                </script>
+                            }
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.product_price_public, htmlAttributes: new { @class = "control-label col-md-4" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(m => m.product_price_public, htmlAttributes: new { @class = "form-control", placeholder = "Nhập giá sản phẩm.", type = "number" })
+                                    @*@Html.ValidationMessageFor(model => model.product_price_public, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="image_product" role="tabpanel" class="tab-pane">
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.product_photo, new { @class = "col-md-4 control-label" })
+                                @*<label for="product_photo" class="col-md-4 control-label">Ảnh đại diện</label>*@
+                                <div class="col-md-6">
+                                    <div id="divproduct_photo" class="upanh">
+                                        <a class="closed"><i class="fa fa-close fa-2x"></i></a>
+                                        @Html.HiddenFor(m => m.product_photo)
+                                        @*<input type="hidden" id="product_photo" name="product_photo" />*@
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                    <div id="dzproduct_photo" class="dropzone undropzone">
+                                    </div>
+                                    <span class="help-block">
+                                        Nên chọn hình có kích thước 1x1, 500x500px, 400x310px
+                                        và chọn hình ảnh có dung lượng không vượt quá 12 Mb.
+                                    </span>
+                                    @*@Html.ValidationMessageFor(model => model.product_photo, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.product_photo2, new { @class = "col-md-4 control-label" })
+                                @*<label for="product_photo2" class="control-label col-md-4">Ảnh trình diễn</label>*@
+                                <div class="col-md-6">
+                                    <div id="divproduct_photo2" class="upanh" style="width: 100%;">
+                                        <a class="closed"><i class="fa fa-close fa-2x"></i></a>
+                                        @Html.HiddenFor(m => m.product_photo2)
+                                        @*<input type="hidden" name="product_photo2" id="product_photo2" />*@
+                                        <i class="fa fa-plus fa-3x"></i>
+                                    </div>
+                                    <div id="dzproduct_photo2" class="dropzone undropzone">
+                                    </div>
+                                    <span class="help-block">
+                                        Nên chọn hình có kích thước 16:9, 1920x790px và
+                                        chọn hình ảnh có dung lượng không vượt quá 12 Mb.
+                                    </span>
+                                    @*@Html.ValidationMessageFor(model => model.product_photo2, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </div>
+                        @*Noi dung*@
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(m => m.product_content, new { @class = "form-control", @rows = "5" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="product_addphoto" class="tab-pane">
+                            @{Html.RenderAction("LoadPhotoProduct", "Products", new { id = @Model.product_id });}
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input type="hidden" id="img_url" name="img_url" />
+                                    <div id="hinhanh_sp" class="dropzone">
+                                        <div class="dz-default dz-message" data-dz-message>
+                                            <span>Chọn ảnh sản phẩm</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                <div class="col-md-6">
+                                    <label>Tiêu đề ảnh</label>
+                                    <input class="form-control" id="img_title" name="img_title" placeholder="Tiêu đề ảnh" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Alt ảnh</label>
+                                    <input class="form-control" id="img_alt" name="img_alt" placeholder="alt ảnh" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <span class="btn btn-primary" id="ThemHinhAnh">Thêm ảnh sản phẩm</span>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <label>@Html.CheckBoxFor(m => m.status) Đăng sản phẩm lên.</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary">
+                                <i class="fa fa-edit"></i> Cập nhật sản phẩm
+                            </button>
+                            <span class="btn btn-danger" onclick="gotoUrl('@Url.RouteUrl("AdminDeleteProduct", new { id = Model.product_id })')"><i class="fa fa-trash"></i> Xóa sản phẩm</span>
+                            @if (Model.status == false)
+                            {
+                                <span class="btn btn-info" onclick="gotoUrl('@Url.RouteUrl("AdminRestoreProduct", new { id = Model.product_id })')"><i class="fa fa-info"></i> Khôi phục sản phẩm</span>
+                            }
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/dropzonescripts")
+    <script src="~/Content/admin/vendor/chosen/chosen.jquery.min.js"></script>
+    <script src="~/Content/admin/js/custom.js"></script>
+
+    <script>
+
+        $.validator.setDefaults({
+            ignore: ""
+        });
+        $(document).ready(function () {
+
+            // cap nhat anh san pham khi chon thay doi hinh anh
+            @*$('#product_photo').on('change', function () {
+                var urlanh = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Products/updateanh1",
+                    data: {id: @Model.product_id, anh_url: urlanh },
+                    dataType: "json",
+                    success: function (result) { 
+                        if(result == 1) {alert("Đã cập nhật ảnh!")} },
+                    error: function (error) {
+                        console.log("Đang cập nhật.");
+                    }
+                });
+            })
+
+            $('#product_photo2').on('change', function () {
+                var urlanh = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Products/updateanh2",
+                    data: {id: @Model.product_id, anh_url: urlanh },
+                    dataType: "json",
+                    success: function (result) { 
+                        if(result == 1) {alert("Đã cập nhật ảnh!")} },
+                    error: function (error) {
+                        console.log("Đang cập nhật.");
+                    }
+                });
+            })*@
+
+            
+
+            // danh mục bài viết
+            $('#cat_op_parent').on('change', function () {
+                if (document.getElementById('cat_op_parent').value !== "") {
+                    document.getElementById('cat_id').value = document.getElementById('cat_op_parent').value;
+                    $('#add-new-product').submit();
+                } else {
+                    document.getElementById('cat_id').value = "";
+                    $('#add-new-product').submit();
+                }
+            })
+
+            $('#product_photo').val() !== "" ? $('#divproduct_photo').css('background-image', 'url("' + $('#product_photo').val() + '")') : false;
+            $('#product_photo2').val() !== "" ? $('#divproduct_photo2').css('background-image', 'url("' + $('#product_photo2').val() + '")') : false;            
+            Dropzone.autoDiscover = false;
+            //UploadImage('/Products/SaveImage', '#dzproduct_photo', '#divproduct_photo', '#product_photo', 5);
+            //UploadImage('/Products/SaveImageBig', '#dzproduct_photo2', '#divproduct_photo2', '#product_photo2', 5);
+
+            var myUpAnh1 = new Dropzone("#dzproduct_photo", {
+                url: "/Products/SaveImage",
+                addRemoveLinks: true,
+                maxFiles: 1,
+                maxFilesize: 5,
+                uploadMultiple: true,
+                acceptedFiles: "image/*",
+                clickable: '#divproduct_photo>i',
+                dictFallbackMessage: "Trình duyệt của bạn không hỗ trợ kéo thả tệp để tải lên.",
+                dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+                dictFileTooBig: "Tệp có dung lượng quá lớn ({{filesize}}MiB). Dung lượng cho phép: {{maxFilesize}}MiB.",
+                dictInvalidFileType: "Tệp bạn chọn không được phép tải lên.",
+                dictResponseError: "Server responded with {{statusCode}} code.",
+                success: function (file, response) {
+                    var imgPath = response.Message;
+                    if (imgPath !== "") {
+                        $('#product_photo').val(imgPath);
+                        $('#divproduct_photo').css('background-image', 'url("' + imgPath + '")');
+                        $.ajax({
+                            type: 'POST',
+                            url: "/Products/updateanh1",
+                            data: {id: @Model.product_id, anh_url: imgPath },
+                            dataType: "json",
+                            success: function (result) { 
+                                if(result == 1) {alert("Đã cập nhật ảnh sản phẩm!")} },
+                            error: function (error) {
+                                console.log("Đang cập nhật.");
+                            }
+                        });
+                    }
+                    this.removeFile(file);
+                },
+                error: function (file, response) {
+                    alert(response);
+                    this.removeFile(file);
+                },
+                init: function () {
+                    this.on("thumbnail", function (file) {
+                        $('#divproduct_photo').append('<div class="loaded">'
+                        + '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'
+                        + '</div>');
+                    })
+                },
+                complete: function () {
+                    $('#divproduct_photo').children('.loaded').remove();
+                },
+                HiddenFilesPath: 'body'
+            });
+
+            var myUpAnh2 = new Dropzone("#dzproduct_photo2", {
+                url: "/Products/SaveImageBig",
+                addRemoveLinks: true,
+                maxFiles: 1,
+                maxFilesize: 5,
+                uploadMultiple: true,
+                acceptedFiles: "image/*",
+                clickable: '#divproduct_photo2>i',
+                dictFallbackMessage: "Trình duyệt của bạn không hỗ trợ kéo thả tệp để tải lên.",
+                dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+                dictFileTooBig: "Tệp có dung lượng quá lớn ({{filesize}}MiB). Dung lượng cho phép: {{maxFilesize}}MiB.",
+                dictInvalidFileType: "Tệp bạn chọn không được phép tải lên.",
+                dictResponseError: "Server responded with {{statusCode}} code.",
+                success: function (file, response) {
+                    var imgPath = response.Message;
+                    if (imgPath !== "") {
+                        $('#product_photo2').val(imgPath);
+                        $('#divproduct_photo2').css('background-image', 'url("' + imgPath + '")');
+                        $.ajax({
+                            type: 'POST',
+                            url: "/Products/updateanh2",
+                            data: {id: @Model.product_id, anh_url: imgPath },
+                            dataType: "json",
+                            success: function (result) { 
+                                if(result == 1) {alert("Đã cập nhật ảnh sản phẩm!")} },
+                            error: function (error) {
+                                console.log("Đang cập nhật.");
+                            }
+                        });
+                    }
+                    this.removeFile(file);
+                },
+                error: function (file, response) {
+                    alert(response);
+                    this.removeFile(file);
+                },
+                init: function () {
+                    this.on("thumbnail", function (file) {
+                        $('#divproduct_photo2').append('<div class="loaded">'
+                        + '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'
+                        + '</div>');
+                    })
+                },
+                complete: function () {
+                    $('#divproduct_photo2').children('.loaded').remove();
+                },
+                HiddenFilesPath: 'body'
+            });
+
+            $('.closed').click(function (e) {
+                e.preventDefault();
+                if ($(this).siblings('input').val() !== "") {
+                    if (confirm("Bạn chắc chắn muốn xóa ảnh?")) {
+                        $(this).parent('.upanh').css('background-image', 'url("/Content/img/no-image.png")');
+                        $(this).siblings('input').val('');
+                    }
+                }
+            });
+
+            CKEDITOR.replace('product_content', {
+                removeButtons: 'Save',
+                height: '500px'
+            })
+
+
+            var upanhvanphong = new Dropzone("div#hinhanh_sp", {
+                url: "/Products/tailennhieuanh",
+                addRemoveLinks: true,
+                init: function() {
+                    this.on("sending", function(file, xhr, formData){
+                        formData.append("product_id", @Model.product_id)
+                    })
+                },
+                maxFiles: 50,
+                maxFilesize: 5,
+                uploadMultiple: true,
+                acceptedFiles: "image/*",
+                dictFallbackMessage: "Trình duyệt của bạn không hỗ trợ kéo thả tệp để tải lên.",
+                dictFallbackText: "Please use the fallback form below to upload your files like in the olden days.",
+                dictFileTooBig: "Tệp có dung lượng quá lớn ({{filesize}}MiB). Dung lượng cho phép: {{maxFilesize}}MiB.",
+                dictInvalidFileType: "Tệp bạn chọn không được phép tải lên.",
+                dictResponseError: "Đã xảy ra lỗi {{statusCode}}.",
+                dictCancelUpload: "Hủy tải lên",
+                dictCancelUploadConfirmation: "Bạn chắc chắn muốn hủy tải lên?",
+                dictRemoveFile: "Loại bỏ tệp tin",
+                dictMaxFilesExceeded: "Bạn không thể tải lên quá 1 hình.",
+                success: function (file, response) {
+                    var imgPath = response.Message;
+                    if (imgPath == 1) {
+                        //$("#img_url").val(imgPath);
+                        file.previewElement.classList.add("dz-success");
+                    }else {
+                        this.removeFile(file);
+                    }
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                    $(file.previewElement).find('.dz-error-message').text(response);
+                    //alert(response);
+                },
+                HiddenFilesPath: 'body'
+            });
+
+            //$('#ThemHinhAnh').on('click', function (e) {
+            //    if (document.getElementById("img_url").value == "") {
+            //        alert("Vui lòng chọn ảnh tải lên!");
+            //        return;
+            //    }
+            //    var img_url = document.getElementById("img_url").value;
+            //    var product_id = document.getElementById("product_id").value;
+            //    var img_title = document.getElementById("img_title").value;
+            //    var img_alt = document.getElementById("img_alt").value;
+
+            //    var url_upanh = "/products/upanhsanpham?img_url=" + img_url + "&product_id=" + product_id;
+            //    if (img_title !== "") {
+            //        url_upanh += "&img_title=" + img_title;
+            //    }
+            //    if (img_alt !== "") {
+            //        url_upanh += "&img_alt=" + img_alt;
+            //    }
+            //    window.location.href = url_upanh;
+
+            //    e.preventDefault();
+            //})
+
+        })
+
+    </script>
+}

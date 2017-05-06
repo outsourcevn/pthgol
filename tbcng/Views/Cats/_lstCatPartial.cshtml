@@ -1,0 +1,7 @@
+﻿@using tbcng.Models
+@model LstCat
+<select class="form-control width-200" id="cat_parent">
+    <option value="">--Chọn danh mục cha--</option>
+    <option value="1">--Danh mục cha--</option>
+    @Html.Partial("_childCatPartial", @Model)
+</select>

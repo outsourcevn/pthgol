@@ -1,0 +1,45 @@
+﻿.flex-caption {
+    width: 100%;
+    padding: 2%;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+    font-size: 14px;
+    line-height: 18px;
+    position: absolute;
+}
+
+    .flex-caption a {
+        display: block;
+        color: #fff;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    .flex-caption p {
+        color: #fff;
+    }
+
+@media(min-width: 763px) {
+    .kf_main_navigation > ul > li > ul#menu_1 {
+        top: 100%;
+        opacity: 1;
+        visibility: visible;
+        width: 285px;
+        border-bottom: 0;
+    }
+}
+
+#menu_1 li a {
+    padding: 9px 10px;
+}
+
+.flexslider {
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+
+.kf_banner_wrap {
+    background: #f6f6f6;
+}

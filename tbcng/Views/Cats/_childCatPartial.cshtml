@@ -1,0 +1,19 @@
+﻿@using tbcng.Models
+@model LstCat
+@foreach (var item in Model.LstCats)
+{
+    if (item != null)
+    {
+        <option value="@item.CatId" class="@if (item.LstCats.Count > 0) {@Html.DisplayName("font-w-bold")} else {}">
+            @if (item.LstCats.Count > 0)
+            {@Html.DisplayName("--")}
+            else { }@item.CatName
+        </option>
+    
+        if (item.LstCats.Count > 0)
+        {
+            @Html.Partial("_childCatPartial", item)
+        }
+        
+    }
+}

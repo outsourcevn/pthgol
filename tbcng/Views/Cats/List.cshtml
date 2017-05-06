@@ -1,0 +1,163 @@
+﻿@model PagedList.IPagedList<tbcng.Models.cat>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh mục bài viết";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/admin/vendor/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h3>@ViewBag.Title <span class="btn btn-primary pull-right" onclick="gotoUrl('@Url.RouteUrl("AdminAddCat")')"><i class="fa fa-plus"></i> Thêm mới menu</span></h3>
+        </div>
+        @if (TempData["Deleted"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                @Html.Raw(TempData["Deleted"])
+            </div>
+        }
+
+        @if (TempData["Updated"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                @Html.Raw(TempData["Updated"])
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default box box-primary">
+            <div class="panel-heading">
+                @using (Html.BeginForm("List", "Cats", FormMethod.Get, new { @class = "form-inline", role = "form", @id = "search-cats", onsubmit = "return validate()" }))
+                {
+                    <div class="form-group">
+                        <label for="searchQuery" class="control-label">Tìm kiếm: </label>
+                        @Html.TextBox("search", "", new { @class = "form-control", placeholder = "Nhập tên danh mục" })
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary"><i class="fa fa-search"></i>Tìm kiếm</button>
+                    </div>
+                }
+            </div>
+
+            <script>
+                function validate() {
+                    if (document.getElementById("search").value === "") {
+                        alert('Vui lòng nhập từ khóa tìm kiếm');
+                        return false;
+                    } else {
+                        return true;
+                    };
+                }
+            </script>
+
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table_order_stt" id="table-cats">
+                        <thead>
+                            <tr>
+                                <th class="no-sort" style="width: 50px; text-align: center;">Số TT</th>
+                                <th style="width: 200px;">Tên danh mục</th>
+                                <th style="width: 200px;">Danh mục cha</th>
+                                <th>Vị trí</th>
+                                <th style="width: 144px;" class="no-sort"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td style="text-align: center;"></td>
+                                            <td>@item.cat_name</td>
+                                            <td>
+                                                @if (item.cat1 != null)
+                                                {
+                                                    if (item.cat1.cat_name == "danhmuc")
+                                                    { <text>là danh mục cha</text> }
+                                                    else
+                                                    { @item.cat1.cat_name }
+                                                }
+                                            </td>
+                                            <td>@item.cat_pos</td>
+
+                                            <td>
+                                                <span class="btn btn-primary" onclick="gotoUrl('@Url.RouteUrl("AdminEditCat", new { id = item.cat_id })')"><i class="fa fa-edit"></i> Sửa</span>
+                                                <span class="btn btn-danger" onclick="gotoUrl('@Url.RouteUrl("AdminDeleteCat", new { id = item.cat_id })')"><i class="fa fa-trash"></i> Xóa</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6">
+                                            Chưa có danh mục nào
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6">
+                                        Không có danh mục
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model != null)
+                {
+                    @Html.PagedListPager(Model, page => Url.RouteUrl("AdminListCat", new { search = ViewBag.search, pg = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Content/admin/vendor/datatable/jquery.dataTables.min.js"></script>
+    <script src="~/Content/admin/vendor/datatable/dataTables.bootstrap.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#table-cats').DataTable({
+                paging: false,
+                "oLanguage": {
+                    "sEmptyTable": "Không tìm thấy danh mục nào.",
+                    "sLoadingRecords": "Vui lòng - chờ...",
+                    "sSearch": "Tìm kiếm nhanh: ",
+                    "sZeroRecords": "Không tìm thấy danh mục nào.",
+                    "sInfo": ""
+                },
+                "order": [],
+                columnDefs: [
+                    { targets: 'no-sort', orderable: false }
+                ]
+            });
+        });
+
+    </script>
+}

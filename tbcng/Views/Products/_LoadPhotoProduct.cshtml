@@ -1,0 +1,43 @@
+﻿@model List<tbcng.Models.product_img>
+@if (Model != null)
+{
+    if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Hình ảnh</th>
+                        <th>Title</th>
+                        <th>Alt</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.img_id</td>
+                            <td><img width="100" height="100" src="@item.img_url" /></td>
+                            <td>@item.img_title</td>
+                            <td>@item.img_alt</td>
+                            <td><a class="btn btn-danger remove_anh" href="#" onclick="delete_photo(@item.img_id);">Xóa ảnh</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }    
+}
+
+<script>
+    function delete_photo(id) {        
+        if (confirm('Bạn chắc chắn muốn xóa ảnh này?')) {
+            var anh_xoa = "/products/xoa_anh?id=" + id;
+            window.location.href = anh_xoa;
+            return true;
+        }
+        return false;
+    }
+</script>

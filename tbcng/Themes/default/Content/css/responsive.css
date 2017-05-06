@@ -1,0 +1,961 @@
+/*
+=================================================
+				UP FROM 1400PX
+=================================================
+*/ 
+@media (min-width: 1421px) {
+  /*Home Page Css*/
+  /*Home 2 Style*/
+  /* Navigation Wrap CSS */
+  .dl-menuwrapper{
+	  display:none;
+  }
+}
+/*============	Media Between Start ============ */
+@media screen and (min-width: 1321px) and (max-width: 1420px) {
+	/* Navigation Wrap CSS */
+	.dl-menuwrapper{
+		display:none;
+	}
+	/*Home Page Css*/
+	.kf_schedule_wrap{
+		margin-left:-430px;	
+	}
+	.kf_leased_property{
+		padding:100px 0 0;	
+	}
+	/*Banner CSS*/
+	.kf_banner_mega_kingx{
+		margin:0 0 0 -360px;
+		padding:35px 25px;	
+	}
+	.kf_mega_detail{
+		padding:15px 10px;	
+	}
+	.kf_banner_mega_kingx > h4{
+		margin:0px 0px 15px;	
+	}
+	.kf_banner_mega_kingx > p{
+		margin-bottom:15px;	
+	}
+	.kf_total_price{
+		margin:23px 0;	
+	}
+	
+	/*Home 2 Style*/
+}
+/*============	Media Between Start ============ */
+@media screen and (min-width: 1200px) and (max-width: 1320px) {
+	/* Navigation Wrap CSS */
+	.dl-menuwrapper{
+		display:none;
+	}
+	/*Home Page Css*/
+	.kf_schedule_wrap{
+		margin-left:-440px;		
+	}
+	.kf_banner_mega_kingx{
+		padding:25px 25px;
+	}
+	.kf_mega_detail{
+		padding:15px 10px;	
+	}
+	.kf_total_price{
+		margin:10px 0;	
+	}
+}
+
+/*============	Media Between Start ============ */
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+	/* Navigation Wrap CSS */
+	.dl-menuwrapper{
+		display:none;
+	}
+	/*Home Page Css*/
+	.kf_banner_mega_kingx{
+		display:none;	
+	}
+	.kf_logo{
+		width:170px;	
+	}
+	.kf_main_navigation{
+		width:58%;	
+	}
+	.kf_main_navigation ul li a{
+		padding:19px 8px;	
+	}
+	.kf_callus i{
+		font-size:56px;	
+	}
+	
+	.kf_recent_property_des > p{
+		display:none;	
+	}
+	/*Blog Listing Css*/
+	.kf_envote_wrap{
+		top:45px;
+		left:45px;
+		bottom:45px;
+		right:45px;	
+	}
+	/*Property Listing Css*/
+	.kf_property_view{
+		margin-left:15px;	
+	}
+	/* Property Listing 2 Css */
+	.kf_property_caption{
+		width:68%;
+	}
+	.kf_property_place > h5{
+		float:right;
+	}
+	/* Blog Listing 03 Css */
+	.kf_property_img_03{
+		width:100%;
+		margin:0px 0px 15px;
+	}
+	.kf_property_img_03 figure{
+		width:100%;
+	}
+	.kf_listing_03_des{
+		float:left;
+		width:100%;
+		padding:0px;
+	}
+	/*Property Detail Page CSS*/
+	.kf_property_detail_img_row a{
+		width:24.3%;	
+	}
+	.kf_property_detail_bed a{
+		padding:20px 0px;	
+	}
+	.kf_rent_label{
+		left:-63px;
+		top:25px;	
+	}
+	/*Aside Bar Wrap CSS*/
+	.kf_aside_fea_properties ul li{
+		margin:0 4px 5px 0;	
+	}
+	/*Property Listing 04 CSS*/
+	.kf_listing_03_des{
+		padding-left:20px;
+		padding-right:20px;	
+	}
+	/*Team Detail Css*/
+	.kf_member_contact_detail ul li{
+		width:43%;	
+	}
+	.member_contact_des h5{
+		font-size:16px;	
+	}
+	/*Contact us Page Css*/
+	.kf_content_us_icon a{
+		font-size:15px;	
+	}
+	.kf_with_us_social{
+		margin-bottom:15px;	
+	}
+	/* Home Page 2 */
+	.kf_hdr2_search input[type="text"]{
+		width:170px;
+	}
+}
+
+/*============	Media 768Px Start ============ */ 
+@media (min-width: 768px) and (max-width: 990px) {
+	/*Home Page Css*/
+	.kf_top_social_icon ul li a{
+		padding:12px 10px;	
+	}
+	.kf_list_free a,
+	.kf_opening_time p{
+		font-size:12px;	
+	}
+	.kf_main_navigation{
+		display:none;	
+	}
+	.kf_schedule_wrap{
+		margin-left:-282px;
+		margin-top:-140px;
+	}
+	.kf_num_counter_bg{
+		padding-bottom:40px;	
+	}
+	.kf_num_count_wrap{
+		margin-bottom:30px;	
+	}
+	.kf_footer_bg{
+		padding-bottom:30px;	
+	}
+	.kf_foo_contact,
+	.widget{
+		margin-bottom:30px;	
+	}
+	.kf_twitter_logo{
+		margin-top:10px;	
+	}
+	/*Home 2 Style*/
+	.kf_banner_mega_kingx{
+		display:none;	
+	}
+	.kf_aboutus_video_bg{
+		padding-bottom:40px;	
+	}
+	.kf_property_services_wrap{
+		margin-bottom:30px;	
+	}
+	/*About Us Page*/
+	.kf_aboutus_video_bg{
+		padding-bottom:40px;	
+	}
+	.kf_aboutus_video_wrap{
+		margin-bottom:30px;	
+	}
+	.kf_know_property_des h2{
+		font-size:30px;	
+	}
+	.kf_know_property_des h3{
+		font-size:25px;	
+	}
+	.kf_testimonial_wrap{
+		margin-bottom:60px;	
+	}
+	.kf_testimonial_wrap .bx-wrapper .bx-controls-direction a{
+		bottom:-40px;	
+	}
+	.kf_blog_listing_list{
+		margin-bottom:30px;	
+	}
+	/* Property Listing 2 Css */
+	.kf_property_caption{
+		width:68%;
+	}
+	.kf_property_place > h5{
+		float:right;
+	}
+	.kf_property_dolar li a{
+		font-size:12px;
+	}
+	.kf_property_dolar li i{
+		margin-right:6px;
+	}
+	/*Property Listing Page Css*/
+	.kf_property_meta h5{
+		margin-bottom:15px;	
+	}
+	.kf_property_meta h5,
+	.kf_view_type,
+	.kf_property_view,
+	.kf_property_view .chosen-container-single .chosen-single,
+	.kf_property_view .chosen-container-single{
+		width:100% !important;	
+	}
+	.kf_property_view{
+		margin-left:0px;
+		margin-bottom:10px;	
+	}
+	/* Blog Listing 03 Css */
+	.kf_property_img_03{
+		width:100%;
+		margin:0px 0px 15px;
+	}
+	.kf_property_img_03 figure{
+		width:100%;
+	}
+	.kf_listing_03_des{
+		float:left;
+		width:100%;
+		padding:0px;
+	}
+	/*Property Detail Page CSS*/
+	.kf_property_detail_img_row a{
+		width:24.4%;	
+	}
+	.kf_property_detail_Essentail{
+		margin-bottom:10px;	
+	}
+	.kf_property_detail_link{
+		padding-bottom:30px;	
+	}
+	.kf_property_detail_agent,
+	.kf_property_detail_real{
+		margin-bottom:15px;	
+	}
+	.kf_rent_label{
+		left:-103px;
+		top:45px;	
+	}
+	.kf_property_detail_bed a{
+		padding:22px 0px;	
+	}
+	/*Property Listing 04 CSS*/
+	.kf_listing_03_des{
+		padding-left:20px;
+		padding-right:20px;	
+	}
+	/*Team Detail Page CSS*/
+	.kf_team_detail_img{
+		margin-bottom:20px;	
+	}
+	.kf_member_contact_detail ul li{
+		width:100%;
+		margin-left:30px;	
+	}
+	/*Submit Property Css*/
+	.kf_submit_property_post{
+		margin-bottom:15px;	
+	}
+	/*Price Table Page CSS*/
+	.kf_price_table{
+		margin-bottom:20px;	
+	}
+	/*404 Page Css*/
+	.kf_not_found_wrap{
+		margin-top:-85px;	
+	}
+	.kf_404_wrap h2{
+		font-size:340px;	
+	}
+	/*Contact us Page Css*/
+	.kf_content_us_icon a{
+		font-size:15px;	
+	}
+	.kf_with_us_maap{
+		margin-bottom:20px;	
+	}
+	/*Team Carousl Css*/
+	.kf_our_agent_bg{
+		padding-bottom:110px;	
+	}
+	.kf_agent_slider.owl-theme .owl-controls .owl-buttons div{
+		bottom:-30px;
+		left:0px;
+		right:0px;
+		margin:auto;
+		top:auto;	
+	}
+	/* Home Page 2 Css */
+	.top_navi_caption{
+		width:100%;
+		margin-top:10px;
+	}
+	.top_navi_caption ul{
+		width:100%;
+	}
+	.top_navi_caption ul li{
+		width:33.3%;
+		padding:0px;
+	}
+	.kf_hdr2_navigation .dl-menuwrapper{
+		float:left;
+		margin-top:15px;
+		margin-left:50px;
+		margin-right:0px;
+	}
+}
+
+/*============ Media 767Px Start ============ */
+@media (max-width: 767px) {
+	/*Home Page Css*/
+	.kf_top_bar{
+		text-align:center;	
+	}
+	.kf_opening_time{
+		margin-bottom:10px;	
+	}
+	.kf_opening_time,
+	.kf_list_free,
+	.kf_top_social_icon,
+	.kf_top_social_icon ul{
+		width:100%;	
+	}
+	/*.kf_main_navigation{
+		display:none;	
+	}*/
+	.kf_logo_nav_wrap{
+		text-align:center;	
+	}
+	.kf_logo,
+	.kf_callus{
+		width:100%;
+		margin:0px 0px 5px 0px;	
+	}
+	.kf_callus{
+		margin-bottom:0px;
+		padding-left:0px;	
+	}
+	.kf_callus::before{
+		display:none;	
+	}
+	.kf_banner_mega_kingx{
+		display:none;	
+	}
+	.kf_property_services_wrap{
+		margin-bottom:30px;	
+	}
+	.our_services_bg,
+	.kf_num_counter_bg{
+		padding-bottom:40px;	
+	}
+	.kf_recent_property_des{
+		padding:22px 20px;	
+	}
+	.kf_leased_property{
+		width:100%;
+		padding:100px 0 0;
+	}
+	.kf_num_count_wrap{
+		margin-bottom:30px;	
+	}
+	.kf_twitter_logo,
+	.kf_twitter_des{
+		width:100%;	
+	}
+	.kf_twitter_msg{
+		padding-right:0px;
+		text-align:center;	
+	}
+	/*Team Carousl Css*/
+	.kf_our_agent_bg{
+		padding-bottom:110px;	
+	}
+	.kf_agent_slider.owl-theme .owl-controls .owl-buttons div{
+		bottom:-30px;
+		left:0px;
+		right:0px;
+		margin:auto;
+		top:auto;	
+	}
+	.kf_foo_contact,
+	.widget{
+		margin-bottom:30px;	
+	}
+	.kf_footer_bg{
+		padding-bottom:35px;	
+	}
+	.kf_copyright_element ul li{
+		margin-bottom:10px;	
+	}
+	.kf_copy_right{
+		padding-bottom:15px;	
+	}
+	/*Home 2 Style*/
+	.kf_schedule_wrap{
+		display:none;	
+	}
+	.kf_advance_search_bg{
+		margin:0px;
+		padding-top:70px;	
+	}
+	.kf_search_tab_wrap ul li{
+		width:47%;
+		margin-bottom:5px;	
+	}
+	.kf_advacnce_search_form{
+		width:95.5%;
+		padding:30px 20px 15px;
+		margin-top:-6px;	
+	}
+	.kf_range_slider .slider-range{
+		width:77%;	
+	}
+	.kf_rent_label{
+		top:73px;
+		left:-165px;	
+	}
+	/*About Us Page*/
+	.kf_sub_banner_hdg{
+		margin-bottom:15px;	
+	}
+	.kf_sub_banner_hdg,
+	.kf_property_breadcrumb{
+		width:100%;
+		text-align:center;
+		float:none;
+		display:inline-block;
+	}
+	.kf_property_breadcrumb ul{
+		width:100%;	
+	}
+	.kf_aboutus_video_bg{
+		padding-bottom:40px;	
+	}
+	.kf_aboutus_video_wrap{
+		margin-bottom:30px;	
+	}
+	.kf_know_property_des{
+		text-align:center	
+	}
+	.kf_know_property_img{
+		display:none;	
+	}
+	.kf_know_property_des h2{
+		font-size:25px;	
+	}
+	.kf_know_property_des h3{
+		font-size:20px;	
+	}
+	.kf_testimonial_wrap{
+		margin-bottom:60px;	
+	}
+	.kf_testimonial_wrap .bx-wrapper .bx-controls-direction a{
+		bottom:-40px;	
+	}
+	.kf_core_value_des figure{
+		width:100%;
+		margin:0px 0px 15px;	
+	}
+	.kf_core_img_des{
+		width:100%;
+		float:left;
+		padding:0px;	
+	}
+	.kf_aboutus_video_des,
+	.kf_core_img_des{
+		text-align:center;	
+	}
+	ul.kf_aboutus_list li{
+		text-align:left;	
+	}
+	/*Blog Listing Css*/
+	.kf_envote_wrap{
+		top:15px;
+		left:15px;
+		bottom:15px;
+		right:15px;	
+	}
+	.kf_envote_wrap{
+		padding:30px 25px;	
+	}
+	.kf_blog_listing_wrap .bx-wrapper .bx-controls-direction a{
+		top:50%;	
+	}
+	.kf_blog_listing_list{
+		margin-bottom:30px;	
+	}
+	.kf_blog_listing_des h5{
+		font-size:15px;	
+	}
+	.kf_blog_listing_pager,
+	.kf_envote_wrap{
+		display:none;	
+	}
+	/*Blog Listing 2 Css*/
+	.kf_blog2_date{
+		margin-bottom:15px;	
+	}
+	.kf_listing2_blog{
+		float:left;
+		width:100%;
+		padding:0px;	
+	}
+	.kf_listing2_blog h4{
+		font-size:16px;	
+	}
+	ul.kf_blog_social_icon{
+		width:100%;
+		text-align:center	
+	}
+	.kf_listing2_blog_des .bx-wrapper .bx-controls-direction a{
+		top:45%;	
+	}
+	/*Blog Detail 1 CSS*/
+	.kf_comment_wrap figure{
+		width:100%;
+		margin:0px 0pxm 25px;		
+	}
+	.kf_comment_wrap figure{
+		width:auto;
+	}
+	.kf_comment_des{
+		float:left;
+		width:100%;
+		padding:0px;	
+	}
+	.kf_commet_field textarea{
+		margin-bottom:25px;	
+	}
+	.kf_post_comment_wrap{
+		margin-bottom:30px;	
+	}
+	/*Property Listing Page Css*/
+	.kf_property_meta h5{
+		margin-bottom:15px;	
+	}
+	.kf_property_meta h5,
+	.kf_view_type,
+	.kf_property_view,
+	.kf_property_view .chosen-container-single .chosen-single,
+	.kf_property_view .chosen-container-single{
+		width:100% !important;	
+	}
+	.kf_property_view{
+		margin-left:0px;
+		margin-bottom:10px;	
+	}
+	/* Blog Listing 2 Css */
+	.kf_property_img{
+		width:100%;
+		margin-bottom:15px;
+	}
+	.kf_property_place{
+		float:left;
+		width:100%;
+		padding:0px;
+	}
+	.kf_property_caption{
+		width:70%;
+	}
+	.kf_property_place > h5{
+		float:right;
+	}
+	.kf_property_dolar li a{
+		font-size:13px;
+	}
+	/* Blog Listing 03 Css */
+	.kf_property_img_03{
+		width:100%;
+		margin:0px 0px 15px;
+	}
+	.kf_property_img_03 figure{
+		width:100%;
+	}
+	.kf_listing_03_des{
+		float:left;
+		width:100%;
+		padding:0px;
+	}
+	/*Aside Bar Wrap CSS*/
+	.kf_property_detail_img_row a{
+		width:24%;	
+	}
+	.kf_property_detail_bed{
+		display:none;	
+	}
+	.kf_property_detail_Essentail{
+		padding-bottom:10px;	
+	}
+	.kf_property_detail_link{
+		padding-bottom:30px;	
+	}
+	.kf_property_detail_agent{
+		margin-bottom:15px;	
+	}
+	.kf_property_detail_real{
+		margin-bottom:15px;	
+	}
+	/*Property Listing 04 CSS*/
+	.kf_listing_03_des{
+		padding-left:20px;
+		padding-right:20px;	
+	}
+	/*Team Detail Page CSS*/
+	.kf_team_detail_img{
+		margin-bottom:20px;	
+	}
+	.kf_member_contact_detail ul li{
+		width:100%;
+		margin-left:30px;	
+	}
+	.member_contact_des h5{
+		font-size:16px;	
+	}
+	/*Submit Property Css*/
+	.kf_submit_property_post{
+		margin-bottom:15px;	
+	}
+	.kf_search_form ..chosen-container{
+		width:100%;	
+	}
+	ul.kf_submit_property_newsletter{
+		margin-bottom:15px;	
+	}
+	ul.kf_submit_property_newsletter,
+	.kf_submit_property_button{
+		width:100%;
+	}
+	/*Price Table Page CSS*/
+	.kf_price_table{
+		margin-bottom:20px;	
+	}
+	/*404 Page Css*/
+	.kf_404_wrap{
+		margin-top:-60px;	
+	}
+	.kf_not_found_wrap{
+		margin-top:-55px;	
+	}
+	.kf_404_wrap h2{
+		font-size:280px;	
+	}
+	.kf_404_wrap figure{
+		top:-95px;	
+	}
+	.kf_404_wrap figure img{
+		width:180px;	
+	}
+	.kf_error_text h3{
+		font-size:20px;	
+	}
+	.kf_404_wrap h2{
+		line-height:normal;	
+	}
+	/*Comming Soon PAge Css*/
+	.kf_logo a img{
+		width:auto;	
+	}
+	.kf_comming_soon_wrap h1{
+		font-size:50px;	
+	}
+	.kf_comming_soon_wrap p{
+		font-size:16px;	
+	}
+	.kf_comming_counter ul li{
+		width:200px;
+		height:200px;
+		margin-bottom:15px;
+		padding-top:40px;	
+	}
+	.kf_comming_counter ul li:nth-child(3){
+		margin-left:0px;	
+	}
+	.kf_cooming_soon_form{
+		width:100%;	
+	}
+	/*Login Page Css*/
+	.kf_login_colum{
+		width:100%;	
+	}
+	.kf_login_social_icon ul li{
+		margin-right:15px;	
+	}
+	/*Contact us Page Css*/
+	.kf_with_us_maap{
+		margin-bottom:20px;	
+	}
+	/* DL MEnu CSS */
+	.kf_callus{
+		margin-bottom:10px;
+	}
+	.kf_phone_num{
+		padding-top:0px;
+		padding-left:10px;
+	}
+	.dl-menuwrapper{
+		margin-top:0px;
+	}
+	.dl-menuwrapper{
+		float:left;
+		width:100%;
+		text-align:center;
+	}
+	.kf_callus{
+		text-align:center;
+	}
+	.kf_callus i,
+	.kf_phone_num{
+		float:none;
+		display:inline-block;
+	}
+	.dl-menuwrapper .dl-menu{
+		left:0px;
+		right:0px;
+		margin:auto;
+	}
+	/* Header 2 CSS */
+	.kf_logo{
+		text-align:center;
+	}
+	.kf_hdr2_search{
+		width:100%;
+		text-align:center;
+		margin-bottom:10px;
+	}
+	.top_navi_caption,
+	.top_navi_caption ul{
+		width:100%;
+	}
+	.top_navi_caption ul li{
+		padding:0px;
+		width:33.3%;
+	}
+	.kf_hdr2_search input[type="text"]{
+		width:100%;
+	}
+	.kf_hdr2_navigation{
+		padding:20px 0px;
+	}
+	.kf_menu_scl_icon,
+	.kf_menu_scl_icon ul{
+		width:100%;
+		padding-top:0px;
+		text-align:center;
+	}
+	.kf_menu_scl_icon ul li{
+		float:none;
+		display:inline-block;
+	}
+	
+}
+
+/*============ Media 480Px Star ============ */
+@media (max-width: 480px) {
+	/*Home Page Css*/
+	/*Home 2 Style*/
+	.kf_advacnce_search_form{
+		width:97%;	
+	}
+	.kf_rent_label{
+		left:-115px;
+		top:25px;	
+	}
+	/*About Us Page*/
+	ul.kf_aboutus_list li{
+		width:100%;	
+	}
+	.kf_video_icon{
+		margin:-30px 0 0;	
+	}
+	.kf_testimonial_name{
+		text-align:center;	
+	}
+	.kf_testimonial_slide figure{
+		width:100%;	
+		margin-bottom:15px;
+		text-align:center;
+	}
+	.kf_testimonial_slide figure img{
+		display:inline-block;
+		width:auto;
+		height:auto;	
+	}
+	.kf_testimonial_name{
+		width:100%;
+		padding:0px;	
+	}
+	.kf_testimonial_slide_des{
+		text-align:center;
+		padding:20px 0px;	
+	}
+	.kf_core_value_wrap ul li{
+		width:48%;	
+	}
+	/*Blog Detail 2*/
+	.kf_detail_img{
+		width:30%;
+		margin-left:6px;	
+	}
+	/* Blog Listing 2 Css */
+	.kf_property_caption{
+		width:100%;
+	}
+	.kf_property_dolar li{
+		width:100%;
+		margin-bottom:8px;
+	}
+	/* Blog Listing 03 Css */
+	.kf_property_caption{
+		width:100%;
+	}
+	/*Property Listing 03 CSS*/
+	.kf_listing_total{
+		width:100%;
+		margin-bottom:10px;	
+	}
+	/*Property Detail Page Css*/
+	#property_detail_pager{
+		display:none;	
+	}
+	.kf_property_detail_uptwon h3{
+		font-size:25px;	
+	}
+	.kf_property_detail_map ul li{
+		width:100%;
+		margin-right:0px;
+		margin-bottom:15px;	
+	}
+	/*Property Listing 04 CSS*/
+	.kf_listing_04_wrap ul.kf_foo_listing_meta li{
+		width:100%;	
+		border-left:0px;
+		padding-left:0px;
+		margin-bottom:8px;
+	}
+	.kf_listing_03_des .kf_property_caption{
+		width:100%;	
+	}
+	.kf_listing_03_des ul.kf_recent_rating{
+		width:100%;	
+	}
+	.kf_listing_03_des ul.kf_recent_rating li{
+		float:left;	
+	}
+	/*Team Detail CSS*/
+	.kf_team_detail_des ul.kf_recent_rating{
+		width:100%;	
+	}
+	/*404 Page Css*/
+	.kf_404_wrap{
+		margin-top:-30px;	
+	}
+	.kf_not_found_wrap{
+		margin-top:-55px;	
+	}
+	.kf_404_wrap h2{
+		font-size:100px;	
+	}
+	.kf_404_wrap figure{
+		top:-36px;	
+	}
+	.kf_404_wrap figure img{
+		width:80px;	
+	}
+	.kf_error_text h3{
+		font-size:10px;	
+	}
+	.kf_error_text{
+		margin:-4px 0px 0px;	
+	}
+	.kf_not_found_wrap{
+		margin-top:-25px;	
+	}
+	/*Comming Soon Page CSS*/
+	/*Contact us Page Css*/
+	.kf_content_us_icon a{
+		font-size:15px;	
+	}
+	/* Header 2 CSS */
+	.top_navi_caption ul li{
+		padding:0px;
+		width:100%;
+		margin-bottom:20px;
+	}
+	
+}
+/*============ Media 320Px Star ============ */
+@media (max-width: 320px) {
+	/*Home Page Css*/
+	.kf_recent_property_des > p{
+		display:none;	
+	}
+	.kf_rent_label{
+		left:-85px;
+		top:48px;	
+	}
+	/*Home 2 Style*/
+	/*Comming Soon Page CSS*/
+	.kf_comming_counter ul li{
+		width:120px;
+		height:120px;
+		margin-bottom:15px;
+		padding-top:20px;	
+	}
+	.kf_comming_counter ul.countdown li span{
+		font-size:40px;
+		line-height:45px;	
+	}
+	.kf_comming_counter ul li:nth-child(3){
+		margin-left:0px;	
+	}
+}

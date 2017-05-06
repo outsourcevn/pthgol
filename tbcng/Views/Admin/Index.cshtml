@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Trang quản trị taxi nội bài";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section PageTitleHeader {
+    <div class="page-header">
+        <h3><i class="fa fa-dashboard fa-2x fa-color-red"></i> @ViewBag.Title</h3>
+    </div>
+}
+
+
+<div class="row">
+  
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-list fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.SoDanhMuc<span> Danh mục</span></div>
+                        <div>Quản lý danh mục</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/admin/cat/list">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem chi tiết</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-product-hunt fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.SoSanPham<span> Sản phẩm</span></div>
+                        <div>Quản lý sản phẩm!</div>
+                    </div>
+                </div>
+            </div>
+            <a href="/admin/product/list">
+                <div class="panel-footer">
+                    <span class="pull-left">Xem chi tiết</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+</div>

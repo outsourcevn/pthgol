@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Thiết bị công nghiệp";
+}
+
+@{
+    string url = Request.Url.Authority;
+    if (Request.ServerVariables["HTTPS"] == "on")
+    {
+        url = "https://" + url;
+    }
+    else
+    {
+        url = "http://" + url;
+    }
+}
+
+@section metatags {
+    <meta name="description" content="Thiết bị công nghiệp">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="index,follow,noodp">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="Trang chủ">
+    <meta property="og:url" content="@url">
+    <meta property="og:title" content="Thiết bị công nghiệp">
+    <meta property="og:description" content="Thiết bị công nghiệp">
+    <meta property="og:image" itemprop="thumbnailUrl" content="">
+}
+
+<link href="~/Themes/default/Content/sld/flexslider.css" rel="stylesheet" />
+<link href="~/Themes/default/Content/StyleSheet1.css" rel="stylesheet" />
+
+@section MainBanner {
+    @{Html.RenderAction("LoadProductNewHot");}
+}
+
+@*@{Html.RenderAction("LoadProductNew");}*@
+
+@{Html.RenderAction("LoadMultiProductCat");}
+
+
+@section scripts {
+        
+<script src="~/Themes/default/Content/sld/jquery.flexslider-min.js"></script>
+    <script>
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: true
+            });
+        });
+    </script>
+}

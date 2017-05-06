@@ -1,0 +1,157 @@
+﻿@model PagedList.IPagedList<tbcng.Models.product>
+@using PagedList.Mvc
+@using tbcng.Helpers
+@{
+
+    string Danhmuc = "Danh mục ";
+    string url_danhmuc = "";
+    string id_danhmuc = "";
+    if (ViewBag.TenDanhMuc != null)
+    {
+        Danhmuc += ViewBag.TenDanhMuc;
+    }
+    ViewBag.Title = Danhmuc;
+    if (ViewBag.URLDanhMuc != null)
+    {
+        url_danhmuc += ViewBag.URLDanhMuc;
+    }
+    if (ViewBag.IdDanhMuc != null)
+    {
+        id_danhmuc += ViewBag.IdDanhMuc;
+    }
+}
+
+@{
+    string url = Request.Url.Authority + HttpContext.Current.Request.RawUrl.ToString();
+    if (Request.ServerVariables["HTTPS"] == "on")
+    {
+        url = "https://" + url;
+    }
+    else
+    {
+        url = "http://" + url;
+    }
+}
+
+<link href="~/Themes/default/Content/sld/flexslider.css" rel="stylesheet" />
+<link href="~/Themes/default/Content/StyleSheet1.css" rel="stylesheet" />
+
+
+@section metatags {
+    <meta name="description" content="@Html.Raw(Danhmuc)">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="index,follow,noodp">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="danh mục sản phẩm">
+    <meta property="og:url" content="@Html.Raw(url)">
+    <meta property="og:title" content="@Html.Raw(Danhmuc)">
+    <meta property="og:description" content="@Html.Raw(Danhmuc)">
+    <meta property="og:image" itemprop="thumbnailUrl" content="">
+}
+
+@section MainBanner {
+    @{Html.RenderAction("LoadProductNewHot");}
+}
+
+ <!--Sub Banner Wrap Start-->
+<div class="kf_property_sub_banner">
+    <div class="container">
+        <div class="kf_sub_banner_hdg">
+            <h3>@Html.Raw(ViewBag.Title)</h3>
+        </div>
+        <div class="kf_property_breadcrumb">
+            <ul>
+                <li><a href="#">Danh mục</a></li>
+                <li><a href="/danh-muc/@url_danhmuc-@id_danhmuc" class="bb1_p0_m010">@Danhmuc</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--Sub Banner Wrap End-->
+
+@*@{Html.RenderAction("LoadInfoCat", "Home", new { id = id_danhmuc });}*@
+
+<!--Property Listing 01 Wrap Start-->
+<section class="kf_property_lissting_bg" style="padding-top: 10px;">
+    <div class="container">
+
+        <!--Property Meta Wrap End-->
+        <!--Section Wrap Start-->
+        <div class="row">
+            <!--Property Listing 02 List Wrap Start-->
+            @if (Model != null)
+            {
+                if (Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+
+                        var link_url = string.Format("/san-pham/{0}/{1}-{2}", item.cat.cat_url, configs.unicodeToNoMark(@item.product_name), @item.product_id);
+                        <div class="col-md-4 col-md-6 item_sp_height_fix">
+                            <div class="kf_property_listing_wrap">
+                                <figure>
+                                    <img src="@item.product_photo" alt="@item.product_name">
+                                    <figcaption class="kf_listing_detail">
+                                        <span class="kf_listing_overlay"></span>
+                                        <a class="kf_md_btn kf_link_1" href="@link_url">Xem sản phẩm</a>
+                                    </figcaption>
+                                </figure>
+                                <div class="kf_property_listing_des">
+                                    <h5><a href="@link_url" class="item_sp_height_fix_2">@item.product_name</a></h5>
+                                    <h5>
+                                        Giá: 
+                                        @*@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public) <b>đồng.</b>*@
+                                        @if (item.product_price_public != null && item.product_price_public > 0)
+                                        {
+                                            <text>@string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:#,###}", item.product_price_public)</text> <b>đồng.</b>
+                                        }
+                                        else
+                                        {
+                                            <text>Thỏa thuận</text>
+                                        }
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="kf_listing_outer_wrap">
+                        <p>Chưa có sản phẩm nào.</p>
+                    </div>
+
+                }
+            }
+
+            <!--Property Listing 02 List Wrap End-->
+
+        </div>
+        <!--Section Wrap End-->
+        <!--pagination-container-->
+        <div class="row">
+            <div class="col-md-12">
+                @if (Model != null)
+                {
+                    @Html.PagedListPager(Model, page => Url.RouteUrl("danhmucsanpham", new { id = ViewBag.IdDanhMuc, pg = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                }
+            </div>
+        </div>
+        <!--pagination-container-->
+    </div>
+</section>
+<!--Property Listing 01 Wrap End-->
+@section scripts {
+
+    <script src="~/Themes/default/Content/sld/jquery.flexslider-min.js"></script>
+    <script>
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                controlNav: false,
+                directionNav: true
+            });
+        });
+    </script>
+}

@@ -1,0 +1,20 @@
+﻿@model tbcng.Models.DanhMuc
+<ul id="menu_1" class="dl-submenu">
+
+    @foreach (var item in Model.DanhMucs)
+    {
+        if (item != null)
+        {
+            <li class="menu-item kode-parent-menu">
+                <a href="/danh-muc/@item.CatUrl-@item.CatId">
+                    @item.CatName @if (item.DanhMucs.Count > 0)
+                    {<i class='fa fa-angle-down'></i>}
+                </a>
+                @if (item.DanhMucs.Count > 0)
+                {
+                    @Html.Partial("_PartialChildMenu", item)
+                }
+            </li>
+        }
+    }
+</ul>
