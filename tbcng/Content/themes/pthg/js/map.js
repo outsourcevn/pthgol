@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
                     zoom: 11,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -89,7 +89,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -105,7 +105,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });
@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -143,7 +143,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });
@@ -165,7 +165,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -181,7 +181,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });
@@ -203,7 +203,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -219,7 +219,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });
@@ -241,7 +241,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -257,7 +257,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });
@@ -279,7 +279,7 @@ jQuery(document).ready(function($) {
                     zoom: 12,
 
                     // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(42.6700, -71.9400), // New York
+                    center: new google.maps.LatLng(105.8472903, 21.008665), // New York
 
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
@@ -295,7 +295,7 @@ jQuery(document).ready(function($) {
 
                 // Let's also add a marker while we're at it
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(42.6700, -71.9400),
+                    position: new google.maps.LatLng(105.8472903, 21.008665),
                     map: map,
                     title: 'Snazzy!'
                 });

@@ -1762,7 +1762,7 @@ ul ul,ol ol{
 .cp-services-section_v2{
 	float: left;
 	width: 100%;
-	background: url(../images/services-bg-img1.jpg) no-repeat;
+	/*background: url(../images/services-bg-img1.jpg) no-repeat;*/
 	background-size: cover;
 	position: relative;
 	z-index: 11;
@@ -1774,7 +1774,7 @@ ul ul,ol ol{
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.86);
+	/*background-color: rgba(0,0,0,0.86);*/
 	z-index: -1;
 }
 .cp-services-section_v2 .cp-services-item{
