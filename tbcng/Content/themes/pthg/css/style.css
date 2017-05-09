@@ -5675,7 +5675,7 @@ animate-round
 .cp-copyright-row{
 	float: left;
 	width: 100%;
-	padding: 28px 0;
+	/*padding: 28px 0;*/
 }
 .cp-copyright-row p{
 	font-family: 'Roboto', sans-serif;
@@ -5705,14 +5705,14 @@ animate-round
 }
 #cp-footer_v2 .widget-search{
  	background-color: #424242;
- 	padding-top: 110px;
+ 	/*padding-top: 110px;*/
 }
 #cp-rider-repair #cp-footer_v2 .widget-about .cp-social-links li a{
 	background-color: #2f2725;
 	color: #fff;
 }
 #cp-footer_v2 .widget-about{
-	padding-top: 110px;
+	/*padding-top: 110px;*/
 }
 .cp-footer-map{
 	float: left;

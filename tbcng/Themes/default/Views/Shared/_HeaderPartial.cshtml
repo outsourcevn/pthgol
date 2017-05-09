@@ -1,101 +1,217 @@
-﻿<!--Header 3 Wrap Start-->
-<header class="header2">
-    <!--Logo & Ui Element Wrap Start-->
-    <div class="kf_hdr2_logo_bar" style="background-color: #0066B1;">
-        <!--container start-->
+﻿<!-- Header Start -->
+<header class="cp-header" id="cp_header-v2">
+    <div id="cp-slide-menu" class="cp_side-navigation">
+        <ul class="navbar-nav">
+            <li id="close"><a href="#"><i class="fa fa-close"></i></a></li>
+            <li class="dropdown">
+                <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trang chủ <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html">Rider With Video</a></li>
+                    <li><a href="index-rider-slider.html">Rider With Slider</a></li>
+                    <li><a href="index-shop.html">Rider Shop</a></li>
+                    <li><a href="index-repair-shop.html">Rider Repair Shop</a></li>
+                    <li><a href="index-store.html">Rider Single Store</a></li>
+                </ul>
+            </li>
+            <li><a href="about.html">Giới thiệu</a></li>
+            <li class="dropdown">
+                <a href="contact.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Giới thiệu <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="product.html">Products</a></li>
+                    <li><a href="product-detail.html">Product Detail</a></li>
+                    <li><a href="product-sidebar.html">Products with Sidebar</a></li>
+                    <li><a href="product-listing.html">Products listing</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="cart-empty.html">Cart Empty</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="contact.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dịch vụ <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="team1.html">Our instructor 1</a></li>
+                    <li><a href="team2.html">Our instructor 2</a></li>
+                    <li><a href="team-details.html">Instructor Detail</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="events.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="event-list.html">Event List</a></li>
+                    <li><a href="event-grid.html">Event Grid</a></li>
+                    <li><a href="event-box.html">Event Box</a></li>
+                    <li><a href="event-calendar.html">Event Calendar</a></li>
+                    <li><a href="event-sidebar.html">Past Events</a></li>
+                    <li><a href="event-upcoming.html">Upcoming Events</a></li>
+                    <li><a href="events-details.html">Event Details Page</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="blog-post.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="blog-details.html">Blog Detail</a></li>
+                    <li><a href="blog-full.html">Blog Full Width</a></li>
+                    <li><a href="blog-full-detail.html">Blog Full Width Detail</a></li>
+                    <li><a href="blog-medium.html">Blog Medium</a></li>
+                    <li><a href="blog-grid.html">Blog Grid Page</a></li>
+                    <li><a href="blog-masonary.html">Blog Masonary</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ <i class="fa fa-angle-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="p404-1.html">404-1</a></li>
+                    <li><a href="p404-2.html">404-2</a></li>
+                    <li><a href="gallery-1.html">Gallery one column</a></li>
+                    <li><a href="gallery-2.html">Gallery two column</a></li>
+                    <li><a href="gallery-3.html">Gallery three column</a></li>
+                    <li><a href="gallery-4.html">Gallery four column</a></li>
+                    <li><a href="gallery-masonary.html">Gallery masonary</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- Navigation Row Start -->
+    <div class="cp-navigation-row">
         <div class="container">
-            <!--top_navi_logo start-->
-            <div class="kf_hdr2_logo_wrap">
-                <!--Logo Wrap Start-->
-                <div class="kf_logo">
-                    <a href="/"><img src="~/images/logo.png" alt="" style="width: 185px; margin-bottom: 4px;"></a>
-                    @*<a href="/">Thiết bị công nghiệp</a>*@
-                </div>
-                <!--Logo Wrap End-->
-                @*<div class="kf_hdr2_search">
-                        <input type="text" placeholder="Nhập từ khóa tìm kiếm..." id="search_header_input" name="search_header_input">
-                        <a href="#" style="position: absolute; top: 8px;" id="search_header_btn"><i class="fa fa-search"></i></a>
-                    </div>*@
-                <!--top_navi_caption start-->
-                <div class="top_navi_caption nav navbar-right">
-                    <ul>
-                        <li>
-                            <div class="top_navi_circal">
-                                <div class="top_navi_kode">
-                                    <h3>HOTLINE: 0979.776.427</h3>
+            <div class="cp-sidemenu-btn">
+                <div id="push" class="cp-sidemenu"><a href="#"><i class="fa fa-align-justify"></i></a></div>
+            </div>
+            <div class="cp-nav-holder">
+                <strong class="cp-logo">
+                    <a href="index.html"><img src="images/cp-logo2.png" alt=""></a>
+                </strong>
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Menu</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trang chủ <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="index.html">Rider With Video</a></li>
+                                    <li><a href="index-rider-slider.html">Rider With Slider</a></li>
+                                    <li><a href="index-shop.html">Rider Shop</a></li>
+                                    <li><a href="index-repair-shop.html">Rider Repair Shop</a></li>
+                                    <li><a href="index-store.html">Rider Single Store</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="about.html">Giới thiệu</a></li>
+                            <li class="dropdown">
+                                <a href="contact.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dịch vụ <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="team1.html">Our instructor 1</a></li>
+                                    <li><a href="team2.html">Our instructor 2</a></li>
+                                    <li><a href="team-details.html">Instructor Detail</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="events.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <span class="caret"></span></a>
+                                <div class="cp-mega-menu mega-event">
+                                    <ul class="dropdown-menu">
+                                        <li><a href="event-list.html">Event List</a></li>
+                                        <li><a href="event-grid.html">Event Grid</a></li>
+                                        <li><a href="event-box.html">Event Box</a></li>
+                                        <li><a href="event-calendar.html">Event Calendar</a></li>
+                                        <li><a href="event-sidebar.html">Past Events</a></li>
+                                        <li><a href="event-upcoming.html">Upcoming Events</a></li>
+                                        <li><a href="events-details.html">Event Details Page</a></li>
+                                    </ul>
                                 </div>
+                            </li>
+                            <li class="dropdown">
+                                <a href="blog-post.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <span class="caret"></span></a>
+                                <div class="cp-mega-menu mega-blog">
+                                    <ul class="dropdown-menu">
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="blog-details.html">Blog Detail</a></li>
+                                        <li><a href="blog-full.html">Blog Full Width</a></li>
+                                        <li><a href="blog-full-detail.html">Blog Full Width Detail</a></li>
+                                        <li><a href="blog-medium.html">Blog Medium</a></li>
+                                        <li><a href="blog-grid.html">Blog Grid Page</a></li>
+                                        <li><a href="blog-masonary.html">Blog Masonary</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ <span class="caret"></span></a>
+                                <div class="cp-mega-menu mega-col-2">
+                                    <ul class="dropdown-menu">
+                                        <li><a href="p404-1.html">404-1</a></li>
+                                        <li><a href="p404-2.html">404-2</a></li>
+                                        <li><a href="gallery-1.html">Gallery one column</a></li>
+                                        <li><a href="gallery-2.html">Gallery two column</a></li>
+                                        <li><a href="gallery-3.html">Gallery three column</a></li>
+                                        <li><a href="gallery-4.html">Gallery four column</a></li>
+                                        <li><a href="gallery-masonary.html">Gallery masonary</a></li>
+
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+                <!--Nav Right Holder Start-->
+                <div class="cp-nav-right">
+                    <ul>
+                        <li class="cp-cart-holder">
+                            <span class="icon-shopping-cart icomoon"></span>
+                            <span class="cart-item">2</span>
+                            <div class="cp-cart-inner">
+                                <ul class="cart-listed">
+                                    <li>
+                                        <img src="images/cart-img.jpg" alt="">
+                                        <div class="cart-text">
+                                            <strong>Primis in faucibus</strong>
+                                            <span>1 x$100.00</span>
+                                            <div class="cart-icons">
+                                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <img src="images/cart-img.jpg" alt="">
+                                        <div class="cart-text">
+                                            <strong>Primis in faucibus</strong>
+                                            <span>1 x$100.00</span>
+                                            <div class="cart-icons">
+                                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
+                        <li class="cp-search-holder">
+                            <button id="trigger-overlay" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </li>
                     </ul>
-                </div>
-                <div id="google_translate_element" style="position: absolute; top: 0; right: 0; margin-right: 114px;"></div>
-
-                <!--top_navi_caption end-->
+                </div><!--Nav Right Holder End-->
             </div>
-            <!--top_navi_logo end-->
         </div>
-        <!--container end-->
+    </div><!--Navigation Row End-->
+    <!--Search Bar Holder Start-->
+    <div class="overlay overlay-contentscale">
+        <button type="button" class="overlay-close">Close</button>
+        <!--Search Bar Inner Start-->
+        <div class="cp-search-inner">
+            <form method="get">
+                <input type="text" placeholder="Enter your search" required="required">
+                <button class="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div><!--Search Bar Inner End-->
     </div>
-    <!--Logo & Ui Element Wrap End-->
-    <!--Navigation & Social Icon Wrap Start-->
-    <div class="kf_hdr2_navigation" style="background: #468DBB;">
-        <!--container start-->
-        <div class="container">
-            <!--law_navigation_list start-->
-            <div class="kf_hdr2_nav_list">
-                <!--law_navigtion start-->
-                @*@{Html.RenderAction("LoadMenu", "Home");}*@
-                <div class="kf_main_navigation" >
-                    <ul>
-                        @*<li><a href="/">Trang chủ</a></li>*@
-                        <li>
-                            <a href="#">Danh mục sản phẩm</a>
-                            @{ Html.RenderAction("_MenuLeftPartial", "Home"); }
-                        </li>
+    <!--Search Bar Holder End-->
 
-                    </ul>                 
-                </div>
-                <!--law_navigtion end-->
-                <!--law_navigation_social_icon start-->
-                <div class="kf_menu_scl_icon">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google"></i></a></li>
-                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                    </ul>
-                </div>
-                <!--law_navigation_social_icon end-->
-                <!--DL Menu Start-->
-                @*@{Html.RenderAction("LoadMenuMobile", "Home"); }*@
-                <div id="kode-responsive-navigation" class="dl-menuwrapper">
-                    <button class="dl-trigger">Open Menu</button>
-                    <ul class="dl-menu">
-                        <li>
-                            <a href="/">Trang chủ</a>
-                        </li>
-                        <li class="menu-item kode-parent-menu">
-                            <a href="#">Danh mục sản phẩm</a>
-                            @{ Html.RenderAction("_MenuLeftPartial", "Home"); }
-                        </li>
-                    </ul>
-
-                </div>
-                <!--DL Menu END-->
-
-            </div>
-            <!--law_navigation_list end-->
-        </div>
-        <!--container end-->
-    </div>
-    <!--Navigation & Social Icon Wrap Start-->
 </header>
-<!--Header 3 Wrap End-->
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({ pageLanguage: 'vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-88780415-1' }, 'google_translate_element');
-    }
-
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+<!-- Header End --> 
