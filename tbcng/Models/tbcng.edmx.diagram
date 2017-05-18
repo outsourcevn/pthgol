@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd96a95f502a4c3ebbcd2260a6ba05e4" Name="Diagram1">
+        <EntityTypeShape EntityType="tbcngModel.cat" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.product_img" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.product_order" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.product" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.Role" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.UserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.UserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tbcngModel.User" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="tbcngModel.FK_cats_cats" ManuallyRouted="false" />
+        <AssociationConnector Association="tbcngModel.FK_products_cats" ManuallyRouted="false" />
+        <AssociationConnector Association="tbcngModel.FK_product_img_products" ManuallyRouted="false" />
+        <AssociationConnector Association="tbcngModel.FK_dbo_UserClaims_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="tbcngModel.FK_dbo_UserLogins_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="tbcngModel.UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -67,7 +67,18 @@ namespace tbcng.Models
         [Required(ErrorMessage = "Vui lòng nhập {0}")]
         public Nullable<int> cat_id { get; set; }
         [Display(Name = "Mô tả sản phẩm")]
-        public string product_des { get; set; }
+        public string product_des { get; set; }        
+        [Display(Name = "Chiều dài(cm)")]
+        [Required(ErrorMessage = "Vui lòng nhập {0}")]
+        public double? w { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập {0}")]
+        [Display(Name = "Chiều rộng(cm)")]
+        public double? l { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập {0}")]
+        [Display(Name = "Chiều cao(cm)")]
+        public double? h { get; set; }        
+        [Display(Name = "Cân nặng(g)")]
+        public double? g { get; set; }
     }
 
     public class DanhMuc

@@ -16,7 +16,7 @@ namespace tbcng.Models
     public partial class thietbicnEntities : DbContext
     {
         public thietbicnEntities()
-            : base("name=thietbicnEntities")
+            : base("name=tbcngEntities")
         {
         }
     
@@ -27,6 +27,7 @@ namespace tbcng.Models
     
         public virtual DbSet<cat> cats { get; set; }
         public virtual DbSet<product_img> product_img { get; set; }
+        public virtual DbSet<product_order> product_order { get; set; }
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserClaim> UserClaims { get; set; }

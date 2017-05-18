@@ -24,14 +24,32 @@ namespace tbcng.Controllers
 
             return View();
         }
+        public ActionResult Service()
+        {
+            ViewBag.Message = "Your application description page.";
 
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
+        public class itemContact
+        {
+            public string fullname3 { get; set; }
+            public string email3 { get; set; }
+            public string subject3 { get; set; }
+            public string comment3 { get; set; }
 
+        }
+        public ActionResult SubmitContact(itemContact item)
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult NotFoundPage(string aspxerrorpath)
         {
             if (!string.IsNullOrEmpty(aspxerrorpath))

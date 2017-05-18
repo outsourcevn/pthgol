@@ -164,6 +164,28 @@
                                 <div class="col-md-12">
                                     @Html.TextAreaFor(m => m.product_content, new { @class = "form-control", @rows = "5" })
                                 </div>
+                                <div class="col-md-12">
+                                    <span class="control-label col-md-4">Chiều dài(đơn vị cm)</span>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.l, htmlAttributes: new { @class = "form-control", placeholder = "Nhập chiều dài sản phẩm.", type = "number" })
+                                        @Html.ValidationMessageFor(model => model.l, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="control-label col-md-4">Chiều cao(đơn vị cm)</span>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.h, htmlAttributes: new { @class = "form-control", placeholder = "Nhập chiều cao sản phẩm.", type = "number" })
+                                        @Html.ValidationMessageFor(model => model.h, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="control-label col-md-4">Chiều rộng(đơn vị cm)</span>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.w, htmlAttributes: new { @class = "form-control", placeholder = "Nhập chiều rộng sản phẩm.", type = "number" })
+                                        @Html.ValidationMessageFor(model => model.w, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="control-label col-md-4">Cân nặng(g)</span>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.g, htmlAttributes: new { @class = "form-control", placeholder = "Nhập cân nặng sản phẩm.", type = "number" })
+                                        @Html.ValidationMessageFor(model => model.g, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

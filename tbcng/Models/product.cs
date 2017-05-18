@@ -29,9 +29,17 @@ namespace tbcng.Models
         public string product_photo2 { get; set; }
         public string product_content { get; set; }
         public Nullable<System.DateTime> updated_date { get; set; }
+        public Nullable<System.DateTime> edit_date { get; set; }
         public Nullable<System.DateTime> deleted_date { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<int> cat_id { get; set; }
+        public Nullable<int> orderby { get; set; }
+        public Nullable<double> w { get; set; }
+        public Nullable<double> h { get; set; }
+        public Nullable<double> l { get; set; }
+        public Nullable<double> g { get; set; }
+        public string code { get; set; }
+        public string color { get; set; }
     
         public virtual cat cat { get; set; }
         public virtual ICollection<product_img> product_img { get; set; }

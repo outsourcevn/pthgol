@@ -15,7 +15,7 @@ using System.Drawing.Imaging;
 
 namespace tbcng.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "Administrator")]
     public class ProductsController : Controller
     {
         private thietbicnEntities db = new thietbicnEntities();
@@ -73,6 +73,10 @@ namespace tbcng.Controllers
                 _new.status = model.status;
                 _new.updated_date = DateTime.Now;
                 _new.product_des = model.product_des ?? null;
+                _new.g=model.g;
+                _new.h=model.h;
+                _new.l=model.l;
+                _new.w = model.w;
                 db.products.Add(_new);
                 
                 await db.SaveChangesAsync();
@@ -146,7 +150,11 @@ namespace tbcng.Controllers
                 product_price_public = _model.product_price_public,
                 //product_type = _model.product_type,
                 status = (bool)_model.status,
-                product_des = _model.product_des
+                product_des = _model.product_des,
+                g=_model.g,
+                h=_model.h,
+                l=_model.l,
+                w=_model.w
             };
 
             ViewBag.TenCat = _model.product_name;
@@ -179,6 +187,10 @@ namespace tbcng.Controllers
                     _model.status = model.status;
                     _model.updated_date = DateTime.Now;
                     _model.product_des = model.product_des;
+                    _model.g = model.g;
+                    _model.h = model.h;
+                    _model.l = model.l;
+                    _model.w = model.w;
                     db.Entry(_model).State = System.Data.Entity.EntityState.Modified;
                     await db.SaveChangesAsync();
                     TempData["Updated"] = "Cập nhật sản phẩm thành công";

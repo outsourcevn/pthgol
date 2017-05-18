@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="thietbicnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="tbcngModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cats">
           <Key>
             <PropertyRef Name="cat_id" />
@@ -25,6 +25,24 @@
           <Property Name="img_alt" Type="nvarchar" MaxLength="250" />
           <Property Name="product_id" Type="bigint" />
         </EntityType>
+        <EntityType Name="product_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="customer_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_address" Type="nvarchar" MaxLength="151" />
+          <Property Name="lon" Type="float" />
+          <Property Name="lat" Type="float" />
+          <Property Name="product_id" Type="bigint" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="251" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="product_price" Type="float" />
+          <Property Name="product_total" Type="float" />
+          <Property Name="date_time" Type="datetime" />
+        </EntityType>
         <EntityType Name="products">
           <Key>
             <PropertyRef Name="product_id" />
@@ -39,9 +57,17 @@
           <Property Name="product_photo2" Type="nvarchar" MaxLength="250" />
           <Property Name="product_content" Type="ntext" />
           <Property Name="updated_date" Type="datetime" />
+          <Property Name="edit_date" Type="datetime" />
           <Property Name="deleted_date" Type="datetime" />
           <Property Name="status" Type="bit" />
           <Property Name="cat_id" Type="int" />
+          <Property Name="orderby" Type="int" />
+          <Property Name="w" Type="float" />
+          <Property Name="h" Type="float" />
+          <Property Name="l" Type="float" />
+          <Property Name="g" Type="float" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -186,9 +212,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="thietbicnModelStoreContainer">
+        <EntityContainer Name="tbcngModelStoreContainer">
           <EntitySet Name="cats" EntityType="Self.cats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_img" EntityType="Self.product_img" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_order" EntityType="Self.product_order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
@@ -228,7 +255,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="thietbicnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="tbcngModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="cat">
           <Key>
             <PropertyRef Name="cat_id" />
@@ -253,6 +280,24 @@
           <Property Name="product_id" Type="Int64" />
           <NavigationProperty Name="product" Relationship="Self.FK_product_img_products" FromRole="product_img" ToRole="products" />
         </EntityType>
+        <EntityType Name="product_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_address" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="lon" Type="Double" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="product_id" Type="Int64" />
+          <Property Name="product_name" Type="String" MaxLength="251" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="product_price" Type="Double" />
+          <Property Name="product_total" Type="Double" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="product_id" />
@@ -267,9 +312,17 @@
           <Property Name="product_photo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="updated_date" Type="DateTime" Precision="3" />
+          <Property Name="edit_date" Type="DateTime" Precision="3" />
           <Property Name="deleted_date" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Boolean" />
           <Property Name="cat_id" Type="Int32" />
+          <Property Name="orderby" Type="Int32" />
+          <Property Name="w" Type="Double" />
+          <Property Name="h" Type="Double" />
+          <Property Name="l" Type="Double" />
+          <Property Name="g" Type="Double" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cat" Relationship="Self.FK_products_cats" FromRole="products" ToRole="cats" />
           <NavigationProperty Name="product_img" Relationship="Self.FK_product_img_products" FromRole="products" ToRole="product_img" />
         </EntityType>
@@ -390,9 +443,10 @@
           <End Role="Roles" Type="Self.Role" Multiplicity="*" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="thietbicnEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="tbcngEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cats" EntityType="Self.cat" />
           <EntitySet Name="product_img" EntityType="Self.product_img" />
+          <EntitySet Name="product_order" EntityType="Self.product_order" />
           <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
@@ -428,9 +482,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="thietbicnModelStoreContainer" CdmEntityContainer="thietbicnEntities">
+        <EntityContainerMapping StorageEntityContainer="tbcngModelStoreContainer" CdmEntityContainer="tbcngEntities">
           <EntitySetMapping Name="cats">
-            <EntityTypeMapping TypeName="thietbicnModel.cat">
+            <EntityTypeMapping TypeName="tbcngModel.cat">
               <MappingFragment StoreEntitySet="cats">
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="cat_name" ColumnName="cat_name" />
@@ -441,7 +495,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="product_img">
-            <EntityTypeMapping TypeName="thietbicnModel.product_img">
+            <EntityTypeMapping TypeName="tbcngModel.product_img">
               <MappingFragment StoreEntitySet="product_img">
                 <ScalarProperty Name="img_id" ColumnName="img_id" />
                 <ScalarProperty Name="img_url" ColumnName="img_url" />
@@ -451,8 +505,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="product_order">
+            <EntityTypeMapping TypeName="tbcngModel.product_order">
+              <MappingFragment StoreEntitySet="product_order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
+                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
+                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="product_total" ColumnName="product_total" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="thietbicnModel.product">
+            <EntityTypeMapping TypeName="tbcngModel.product">
               <MappingFragment StoreEntitySet="products">
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
@@ -464,14 +537,22 @@
                 <ScalarProperty Name="product_photo2" ColumnName="product_photo2" />
                 <ScalarProperty Name="product_content" ColumnName="product_content" />
                 <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="edit_date" ColumnName="edit_date" />
                 <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="w" ColumnName="w" />
+                <ScalarProperty Name="h" ColumnName="h" />
+                <ScalarProperty Name="l" ColumnName="l" />
+                <ScalarProperty Name="g" ColumnName="g" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="color" ColumnName="color" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="thietbicnModel.Role">
+            <EntityTypeMapping TypeName="tbcngModel.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -479,7 +560,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserClaims">
-            <EntityTypeMapping TypeName="thietbicnModel.UserClaim">
+            <EntityTypeMapping TypeName="tbcngModel.UserClaim">
               <MappingFragment StoreEntitySet="UserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -489,7 +570,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
-            <EntityTypeMapping TypeName="thietbicnModel.UserLogin">
+            <EntityTypeMapping TypeName="tbcngModel.UserLogin">
               <MappingFragment StoreEntitySet="UserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -498,7 +579,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="thietbicnModel.User">
+            <EntityTypeMapping TypeName="tbcngModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -515,7 +596,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="UserRoles" TypeName="thietbicnModel.UserRoles" StoreEntitySet="UserRoles">
+          <AssociationSetMapping Name="UserRoles" TypeName="tbcngModel.UserRoles" StoreEntitySet="UserRoles">
             <EndProperty Name="Roles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
