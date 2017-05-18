@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tbcngModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tbcngModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cats">
           <Key>
             <PropertyRef Name="cat_id" />
@@ -68,6 +68,7 @@
           <Property Name="g" Type="float" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
           <Property Name="color" Type="nvarchar" MaxLength="50" />
+          <Property Name="lang" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -251,8 +252,7 @@
             <End Role="products" EntitySet="products" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tbcngModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -267,7 +267,7 @@
           <Property Name="cat_parent_id" Type="Int32" />
           <NavigationProperty Name="cats1" Relationship="Self.FK_cats_cats" FromRole="cats" ToRole="cats1" />
           <NavigationProperty Name="cat1" Relationship="Self.FK_cats_cats" FromRole="cats1" ToRole="cats" />
-          <NavigationProperty Name="products" Relationship="Self.FK_products_cats" FromRole="cats" ToRole="products" />
+          <NavigationProperty Name="products" Relationship="tbcngModel.FK_products_cats" FromRole="cat" ToRole="product" />
         </EntityType>
         <EntityType Name="product_img">
           <Key>
@@ -278,7 +278,7 @@
           <Property Name="img_title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="img_alt" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="product_id" Type="Int64" />
-          <NavigationProperty Name="product" Relationship="Self.FK_product_img_products" FromRole="product_img" ToRole="products" />
+          <NavigationProperty Name="product" Relationship="tbcngModel.FK_product_img_products" FromRole="product_img" ToRole="product" />
         </EntityType>
         <EntityType Name="product_order">
           <Key>
@@ -297,34 +297,6 @@
           <Property Name="product_price" Type="Double" />
           <Property Name="product_total" Type="Double" />
           <Property Name="date_time" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="product">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="product_des" Type="String" MaxLength="555" FixedLength="false" Unicode="true" />
-          <Property Name="product_type" Type="Int32" />
-          <Property Name="product_new_type" Type="Int32" />
-          <Property Name="product_price_public" Type="Int32" />
-          <Property Name="product_photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="product_photo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="updated_date" Type="DateTime" Precision="3" />
-          <Property Name="edit_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted_date" Type="DateTime" Precision="3" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="cat_id" Type="Int32" />
-          <Property Name="orderby" Type="Int32" />
-          <Property Name="w" Type="Double" />
-          <Property Name="h" Type="Double" />
-          <Property Name="l" Type="Double" />
-          <Property Name="g" Type="Double" />
-          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="cat" Relationship="Self.FK_products_cats" FromRole="products" ToRole="cats" />
-          <NavigationProperty Name="product_img" Relationship="Self.FK_product_img_products" FromRole="products" ToRole="product_img" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -387,30 +359,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_products_cats">
-          <End Role="cats" Type="Self.cat" Multiplicity="0..1" />
-          <End Role="products" Type="Self.product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cats">
-              <PropertyRef Name="cat_id" />
-            </Principal>
-            <Dependent Role="products">
-              <PropertyRef Name="cat_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_product_img_products">
-          <End Role="products" Type="Self.product" Multiplicity="0..1" />
-          <End Role="product_img" Type="Self.product_img" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="products">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="product_img">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
           <End Role="Users" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -447,7 +395,6 @@
           <EntitySet Name="cats" EntityType="Self.cat" />
           <EntitySet Name="product_img" EntityType="Self.product_img" />
           <EntitySet Name="product_order" EntityType="Self.product_order" />
-          <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
@@ -455,14 +402,6 @@
           <AssociationSet Name="FK_cats_cats" Association="Self.FK_cats_cats">
             <End Role="cats" EntitySet="cats" />
             <End Role="cats1" EntitySet="cats" />
-          </AssociationSet>
-          <AssociationSet Name="FK_products_cats" Association="Self.FK_products_cats">
-            <End Role="cats" EntitySet="cats" />
-            <End Role="products" EntitySet="products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_product_img_products" Association="Self.FK_product_img_products">
-            <End Role="products" EntitySet="products" />
-            <End Role="product_img" EntitySet="product_img" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="Self.FK_dbo_UserClaims_dbo_Users_UserId">
             <End Role="Users" EntitySet="Users" />
@@ -476,7 +415,69 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="products" EntityType="tbcngModel.product" />
+          <AssociationSet Name="FK_products_cats" Association="tbcngModel.FK_products_cats">
+            <End Role="cat" EntitySet="cats" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_img_products" Association="tbcngModel.FK_product_img_products">
+            <End Role="product" EntitySet="products" />
+            <End Role="product_img" EntitySet="product_img" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="product_des" Type="String" MaxLength="555" FixedLength="false" Unicode="true" />
+          <Property Name="product_type" Type="Int32" />
+          <Property Name="product_new_type" Type="Int32" />
+          <Property Name="product_price_public" Type="Int32" />
+          <Property Name="product_photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="product_photo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="updated_date" Type="DateTime" Precision="3" />
+          <Property Name="edit_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="orderby" Type="Int32" />
+          <Property Name="w" Type="Double" />
+          <Property Name="h" Type="Double" />
+          <Property Name="l" Type="Double" />
+          <Property Name="g" Type="Double" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cat" Relationship="tbcngModel.FK_products_cats" FromRole="product" ToRole="cat" />
+          <NavigationProperty Name="product_img" Relationship="tbcngModel.FK_product_img_products" FromRole="product" ToRole="product_img" />
+        </EntityType>
+        <Association Name="FK_products_cats">
+          <End Type="tbcngModel.cat" Role="cat" Multiplicity="0..1" />
+          <End Type="tbcngModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cat">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_img_products">
+          <End Type="tbcngModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="tbcngModel.product_img" Role="product_img" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="product_img">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -521,33 +522,6 @@
                 <ScalarProperty Name="product_price" ColumnName="product_price" />
                 <ScalarProperty Name="product_total" ColumnName="product_total" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="tbcngModel.product">
-              <MappingFragment StoreEntitySet="products">
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_des" ColumnName="product_des" />
-                <ScalarProperty Name="product_type" ColumnName="product_type" />
-                <ScalarProperty Name="product_new_type" ColumnName="product_new_type" />
-                <ScalarProperty Name="product_price_public" ColumnName="product_price_public" />
-                <ScalarProperty Name="product_photo" ColumnName="product_photo" />
-                <ScalarProperty Name="product_photo2" ColumnName="product_photo2" />
-                <ScalarProperty Name="product_content" ColumnName="product_content" />
-                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
-                <ScalarProperty Name="edit_date" ColumnName="edit_date" />
-                <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-                <ScalarProperty Name="orderby" ColumnName="orderby" />
-                <ScalarProperty Name="w" ColumnName="w" />
-                <ScalarProperty Name="h" ColumnName="h" />
-                <ScalarProperty Name="l" ColumnName="l" />
-                <ScalarProperty Name="g" ColumnName="g" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="color" ColumnName="color" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -604,6 +578,34 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="tbcngModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="g" ColumnName="g" />
+                <ScalarProperty Name="l" ColumnName="l" />
+                <ScalarProperty Name="h" ColumnName="h" />
+                <ScalarProperty Name="w" ColumnName="w" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />
+                <ScalarProperty Name="edit_date" ColumnName="edit_date" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="product_content" ColumnName="product_content" />
+                <ScalarProperty Name="product_photo2" ColumnName="product_photo2" />
+                <ScalarProperty Name="product_photo" ColumnName="product_photo" />
+                <ScalarProperty Name="product_price_public" ColumnName="product_price_public" />
+                <ScalarProperty Name="product_new_type" ColumnName="product_new_type" />
+                <ScalarProperty Name="product_type" ColumnName="product_type" />
+                <ScalarProperty Name="product_des" ColumnName="product_des" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

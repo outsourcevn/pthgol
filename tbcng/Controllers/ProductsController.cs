@@ -41,7 +41,34 @@ namespace tbcng.Controllers
             data = data.OrderBy(x => x.updated_date);
             return View(data.ToList().ToPagedList(pageNumber, pageSize));
         }
+        // GET: Products
+        public ActionResult Grid(int? pg, string search,int? order)
+        {
+            int pageSize = 25;
+            if (pg == null) pg = 1;
+            int pageNumber = (pg ?? 1);
+            ViewBag.pg = pg;
+            var data = db.products.Select(x => x);
+            if (data == null)
+            {
+                return View(data);
+            }
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim();
+                data = data.Where(x => x.product_name.ToLower().Contains(search));
+                ViewBag.search = search;
+            }
+            if (order == null) order = 4;
+            if (order == 1) data = data.OrderBy(x => x.product_price_public);
+            else if (order == 2) data = data.OrderByDescending(x => x.product_price_public);
+            else if (order == 3) data = data.OrderBy(x => x.product_id);
+            else if (order == 4) data = data.OrderByDescending(x => x.product_id);
 
+            ViewBag.search = search;
+            ViewBag.order = order;
+            return View(data.ToList().ToPagedList(pageNumber, pageSize));
+        }
         // GET: Cats
         public ActionResult Add()
         {
@@ -77,6 +104,7 @@ namespace tbcng.Controllers
                 _new.h=model.h;
                 _new.l=model.l;
                 _new.w = model.w;
+                _new.lang = model.lang;
                 db.products.Add(_new);
                 
                 await db.SaveChangesAsync();
@@ -154,7 +182,8 @@ namespace tbcng.Controllers
                 g=_model.g,
                 h=_model.h,
                 l=_model.l,
-                w=_model.w
+                w=_model.w,
+                lang=_model.lang,
             };
 
             ViewBag.TenCat = _model.product_name;
@@ -191,6 +220,7 @@ namespace tbcng.Controllers
                     _model.h = model.h;
                     _model.l = model.l;
                     _model.w = model.w;
+                    _model.lang = model.lang;
                     db.Entry(_model).State = System.Data.Entity.EntityState.Modified;
                     await db.SaveChangesAsync();
                     TempData["Updated"] = "Cập nhật sản phẩm thành công";

@@ -82,7 +82,13 @@
                                     @Html.ValidationMessageFor(model => model.cat_id, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.lang, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
+                                <div class="col-md-8">
+                                    <select id="lang" name="lang"><option value="vn" selected>Việt Nam</option><option value="en">Tiếng Anh</option></select>
+                                    @Html.ValidationMessageFor(model => model.lang, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.product_name, htmlAttributes: new { @class = "control-label col-md-4 required-after" })
                                 <div class="col-md-6">

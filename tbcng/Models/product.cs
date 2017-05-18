@@ -40,6 +40,7 @@ namespace tbcng.Models
         public Nullable<double> g { get; set; }
         public string code { get; set; }
         public string color { get; set; }
+        public string lang { get; set; }
     
         public virtual cat cat { get; set; }
         public virtual ICollection<product_img> product_img { get; set; }

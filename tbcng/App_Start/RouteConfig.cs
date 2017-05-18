@@ -13,7 +13,21 @@ namespace tbcng
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+               "gioi thieu",
+               "gioi-thieu",
+               new { controller = "Home", action = "About" }
+             );
+            routes.MapRoute(
+               "dich vu",
+               "dich-vu",
+               new { controller = "Home", action = "Service" }
+             );
+            //routes.MapRoute(
+            //   "san pham",
+            //   "san-pham",
+            //   new { controller = "Products", action = "Grid" }
+            // );
             routes.MapRoute(
                "Admin",
                "admin",
