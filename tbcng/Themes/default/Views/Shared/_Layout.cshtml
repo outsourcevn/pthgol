@@ -39,10 +39,10 @@
     <![endif]-->
 
     <!--Jquery Library-->
-        @RenderSection("styles", false)
+        @*@RenderSection("styles", false)*@
         <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     @*<script src="@Url.Content("~/Themes/default/Content/js/jquery.js")"></script>*@
-    @RenderSection("scripts2", required: false)
+    @*@RenderSection("scripts2", required: false)*@
 </head>
 
 <body>
@@ -88,8 +88,8 @@
     <!--Map JavaScript-->
     <!--Custom JavaScript-->
     <script src="@Url.Content("~/Themes/default/Content/js/custom.js")"></script>
-    @RenderSection("scripts", required: false)*@
-    @Html.Partial("_script_googleanalystic")
+    @RenderSection("scripts", required: false)
+    @Html.Partial("_script_googleanalystic")*@
     <!---JQuery-1.11.3.js-->
     <script src="/Content/themes/pthg/js/jquery-1.11.3.min.js"></script>
     <!---Bootstrap.js-->

@@ -235,7 +235,20 @@ namespace tbcng.Controllers
             return RedirectToRoute("AdminListProduct");
 
         }
-
+        public ActionResult Detail(long? id)
+        {
+            if (id == null || id == 0)
+            {
+                return RedirectToAction("Grid");
+            }
+            product _model = db.products.Find(id);
+            if (_model == null)
+            {
+                return View();
+            }
+            ViewBag.cat = db.cats.Find(_model.cat_id).cat_name;
+            return View(_model);
+        }
         public ActionResult Delete(long? id)
         {
             if (id == null || id == 0)
@@ -510,7 +523,30 @@ namespace tbcng.Controllers
             var model = db.products.Find(id).product_img.ToList();
             return PartialView("_LoadPhotoProduct", model);
         }
-
+        public ActionResult LoadPhotoProduct2(long? id)
+        {
+            var model = db.products.Find(id).product_img.ToList();
+            return PartialView("_LoadPhotoProduct2", model);
+        }
+        public ActionResult LoadRelateProduct(int? cat_id,long? product_id)
+        {
+            var model = (from q in db.products where q.cat_id==cat_id && q.product_id!=product_id select q).OrderByDescending(o=>o.product_id).ToList();
+            return PartialView("LoadRelateProduct", model);
+        }
+        public ActionResult LoadCart()
+        {
+            try {
+                string session = Helpers.configs.getCookie("session");
+                var model = (from q in db.product_order where q.session == session select q).OrderBy(o => o.id).ToList();
+                ViewBag.count = model.Count;
+                return PartialView("LoadCart", model);
+            }
+            catch
+            {
+                ViewBag.count = 0;
+                return PartialView("LoadCart", null);
+            }
+        }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
         //{
         //    try

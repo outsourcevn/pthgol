@@ -39,7 +39,7 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="tab-01">
                         <div class="row">
                             @foreach (var item in Model) {
-                                var link = "/product/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) +"/"+ tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
                             <div class="col-md-4 col-sm-4">
                                 <!--Product Item Start-->
                                 <div class="cp-pro-item">
@@ -64,7 +64,7 @@
                         <div class="row">
                             @foreach (var item in Model)
                             {
-                                var link = "/product/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                var link = "//san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
                                 <div class="col-md-12 col-sm-12">
                                     <!--Product Item Start-->
                                     <div class="cp-pro-item cp-pro-list-item">

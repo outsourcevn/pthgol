@@ -1,0 +1,27 @@
+﻿@model List<tbcng.Models.product_img>
+@if (Model != null)
+{
+    int count=0;
+    if (Model.Count > 0)
+    {
+
+        <div class="cp-product-slider2 pretty-gallery">
+            <ul class="bxslider" id="cp_product-slider">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@item.img_url" alt="" style="max-height:600px;"/>
+                        <a href="@item.img_url" data-rel="prettyPhoto"><i class="fa fa-arrows"></i></a>
+                    </li>
+                }
+            </ul>
+            <div id="bx-pager">
+                @foreach (var item in Model)
+                {
+                    count++;
+                    <a data-slide-index="@count" href=""><img src="@item.img_url" alt="" /></a>
+                }
+            </div>
+        </div>
+    }
+}

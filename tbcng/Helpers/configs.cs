@@ -6,11 +6,12 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-
+using tbcng.Models;
 namespace tbcng.Helpers
 {
     public static class configs
     {
+        private static thietbicnEntities db = new thietbicnEntities();
         public static bool Sendmail(string from, string pass, string to, string mailHost, int mailPort, bool mailEnableSsl, int MailTimeout, string topic, string content)
         {
             try
@@ -47,7 +48,18 @@ namespace tbcng.Helpers
             }
             return true;
         }
-
+        public static string getcatname(int? catid)
+        {
+            try
+            {
+                cat ct = db.cats.Find(catid);
+                return ct.cat_name;
+            }
+            catch
+            {
+                return "chi-tiet";
+            }
+        }
         public const int ImageMinimumBytes = 512;
         public static bool IsImage(HttpPostedFileBase postedFile)
         {
@@ -154,6 +166,25 @@ namespace tbcng.Helpers
                 sw.Close();
             }
         }
+        public static void setCookie(string field, string value)
+        {
+            HttpCookie MyCookie = new HttpCookie(field);
+            MyCookie.Value = value;
+            MyCookie.Expires = DateTime.Now.AddDays(365);
+            HttpContext.Current.Response.Cookies.Add(MyCookie);
+            //Response.Cookies.Add(MyCookie);   
 
+        }
+        public static string getCookie(string v)
+        {
+            try
+            {
+                return HttpContext.Current.Request.Cookies[v].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
     }
 }

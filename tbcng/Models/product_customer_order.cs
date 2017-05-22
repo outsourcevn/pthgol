@@ -12,18 +12,12 @@ namespace tbcng.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class product_order
+    public partial class product_customer_order
     {
         public long id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public Nullable<long> product_id { get; set; }
-        public string product_name { get; set; }
-        public string product_photos { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<double> product_price { get; set; }
-        public Nullable<double> product_total { get; set; }
-        public Nullable<System.DateTime> date_time { get; set; }
-        public string session { get; set; }
-        public Nullable<int> status { get; set; }
+        public Nullable<long> order_id { get; set; }
+        public Nullable<long> ship_fee { get; set; }
+        public Nullable<long> total_fee { get; set; }
     }
 }

@@ -209,43 +209,52 @@
     <Compile Include="Helpers\configs.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\cat.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\product.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_customer_order.cs">
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\product_img.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_order.cs">
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbcngModel.Context.cs">
+    <Compile Include="Models\tbcng.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>tbcngModel.Context.tt</DependentUpon>
+      <DependentUpon>tbcng.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbcngModel.cs">
+    <Compile Include="Models\tbcng.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbcngModel.Designer.cs">
+    <Compile Include="Models\tbcng.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>tbcngModel.edmx</DependentUpon>
+      <DependentUpon>tbcng.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\tbcngViewModel.cs" />
     <Compile Include="Models\User.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserClaim.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserLogin.cs">
-      <DependentUpon>tbcngModel.tt</DependentUpon>
+      <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -361,6 +370,385 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\themes\pthg\about.html" />
+    <Content Include="Content\themes\pthg\blog-details.html" />
+    <Content Include="Content\themes\pthg\blog-full-detail.html" />
+    <Content Include="Content\themes\pthg\blog-full.html" />
+    <Content Include="Content\themes\pthg\blog-grid.html" />
+    <Content Include="Content\themes\pthg\blog-masonary.html" />
+    <Content Include="Content\themes\pthg\blog-medium.html" />
+    <Content Include="Content\themes\pthg\blog.html" />
+    <Content Include="Content\themes\pthg\cart-empty.html" />
+    <Content Include="Content\themes\pthg\cart.html" />
+    <Content Include="Content\themes\pthg\checkout.html" />
+    <Content Include="Content\themes\pthg\contact-v2.html" />
+    <Content Include="Content\themes\pthg\contact.html" />
+    <Content Include="Content\themes\pthg\css\bootstrap.css" />
+    <Content Include="Content\themes\pthg\css\font-awesome.min.css" />
+    <Content Include="Content\themes\pthg\css\fullcalendar.css" />
+    <Content Include="Content\themes\pthg\css\icomoon.css" />
+    <Content Include="Content\themes\pthg\css\jquery-ui.css" />
+    <Content Include="Content\themes\pthg\css\jquery.bxslider.css" />
+    <Content Include="Content\themes\pthg\css\jquery.circliful.css" />
+    <Content Include="Content\themes\pthg\css\owl.carousel.css" />
+    <Content Include="Content\themes\pthg\css\prettyPhoto.css" />
+    <Content Include="Content\themes\pthg\css\responsive.css" />
+    <Content Include="Content\themes\pthg\css\style.css" />
+    <Content Include="Content\themes\pthg\css\theme-color.css" />
+    <Content Include="Content\themes\pthg\css\video-player.css" />
+    <Content Include="Content\themes\pthg\event-box.html" />
+    <Content Include="Content\themes\pthg\event-calendar.html" />
+    <Content Include="Content\themes\pthg\event-grid.html" />
+    <Content Include="Content\themes\pthg\event-list.html" />
+    <Content Include="Content\themes\pthg\event-sidebar.html" />
+    <Content Include="Content\themes\pthg\event-upcoming.html" />
+    <Content Include="Content\themes\pthg\events-details.html" />
+    <Content Include="Content\themes\pthg\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\themes\pthg\fonts\icomoon.svg" />
+    <Content Include="Content\themes\pthg\gallery-1.html" />
+    <Content Include="Content\themes\pthg\gallery-2.html" />
+    <Content Include="Content\themes\pthg\gallery-3.html" />
+    <Content Include="Content\themes\pthg\gallery-4.html" />
+    <Content Include="Content\themes\pthg\gallery-masonary.html" />
+    <Content Include="Content\themes\pthg\images\about-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\about-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\about-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\about-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\arrow-btn.png" />
+    <Content Include="Content\themes\pthg\images\author-sm-img.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner-video-img.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner1-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner1-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner1-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner2-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner2-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner2-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner2-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner3-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner3-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner3-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner4-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\banner4-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\header.png" />
+    <Content Include="Content\themes\pthg\images\banner\inner-bg-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\inner-bg-img-contact.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\inner-bg-img-error1.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\PCX_chupdauphanh_578_1.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\PCX_doitrongtaylai_578_1.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\PCX_guongchieuhau_578_1.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\PCX_keptaylai_578_1.jpg" />
+    <Content Include="Content\themes\pthg\images\banner\PCX_tayphanh_578.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-detail-inner-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-detail-inner-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-lrg-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img-h1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img-lrg-01.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img-sm1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-md-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-masonary-md-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img7.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-md-img8.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-07.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-08.jpg" />
+    <Content Include="Content\themes\pthg\images\blog-sm-img-09.jpg" />
+    <Content Include="Content\themes\pthg\images\cart-icon-img.png" />
+    <Content Include="Content\themes\pthg\images\cart-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\cart-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\cart-img.jpg" />
+    <Content Include="Content\themes\pthg\images\checkout-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\circle-img.png" />
+    <Content Include="Content\themes\pthg\images\client-logo1.png" />
+    <Content Include="Content\themes\pthg\images\client-logo2.png" />
+    <Content Include="Content\themes\pthg\images\client-logo3.png" />
+    <Content Include="Content\themes\pthg\images\client-logo4.png" />
+    <Content Include="Content\themes\pthg\images\client-logo5.png" />
+    <Content Include="Content\themes\pthg\images\comments-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\comments-sm-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\comments-sm-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\controls.png" />
+    <Content Include="Content\themes\pthg\images\counter-bg-img.jpg" />
+    <Content Include="Content\themes\pthg\images\cp-logo.png" />
+    <Content Include="Content\themes\pthg\images\cp-logo1.png" />
+    <Content Include="Content\themes\pthg\images\cp-logo2.png" />
+    <Content Include="Content\themes\pthg\images\cp-logo3.png" />
+    <Content Include="Content\themes\pthg\images\cross.png" />
+    <Content Include="Content\themes\pthg\images\error-img1.png" />
+    <Content Include="Content\themes\pthg\images\error-img2.png" />
+    <Content Include="Content\themes\pthg\images\event-md-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img10.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img11.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img12.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img7.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img8.jpg" />
+    <Content Include="Content\themes\pthg\images\event-md-img9.jpg" />
+    <Content Include="Content\themes\pthg\images\event-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img10.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img11.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img7.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img8.jpg" />
+    <Content Include="Content\themes\pthg\images\events-sm-img9.jpg" />
+    <Content Include="Content\themes\pthg\images\feature-sm1.jpg" />
+    <Content Include="Content\themes\pthg\images\feature-sm2.jpg" />
+    <Content Include="Content\themes\pthg\images\feature-sm3.jpg" />
+    <Content Include="Content\themes\pthg\images\feature-sm4.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\flickr-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-lrg-h1.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-lrg-h2.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-lrg-w1.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery-masonary-lrg-w2.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery1-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery1-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery1-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery1-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-07.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery2-img-08.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-07.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-08.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-09.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-10.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-11.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery3-img-12.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-07.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-08.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-09.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-10.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-11.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-12.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-13.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-14.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-15.jpg" />
+    <Content Include="Content\themes\pthg\images\gallery4-img-16.jpg" />
+    <Content Include="Content\themes\pthg\images\get-toch-img.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-07.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-08.jpg" />
+    <Content Include="Content\themes\pthg\images\instagram-sm-img-09.jpg" />
+    <Content Include="Content\themes\pthg\images\like-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\like-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\like-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-lrg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-lrg-md-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-md-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\masonary-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\mega-blog-img.jpg" />
+    <Content Include="Content\themes\pthg\images\mega-col2-img.jpg" />
+    <Content Include="Content\themes\pthg\images\mega-cyecle-img.jpg" />
+    <Content Include="Content\themes\pthg\images\mega-event-img.jpg" />
+    <Content Include="Content\themes\pthg\images\money-img1.png" />
+    <Content Include="Content\themes\pthg\images\money-img2.png" />
+    <Content Include="Content\themes\pthg\images\money-img3.png" />
+    <Content Include="Content\themes\pthg\images\money-img4.png" />
+    <Content Include="Content\themes\pthg\images\our-opening-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\parallax-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\pop-up-img.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-04.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-05.jpg" />
+    <Content Include="Content\themes\pthg\images\portfolio-img-06.jpg" />
+    <Content Include="Content\themes\pthg\images\post-sm-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\post-sm-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\post-sm-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\post-sm-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\sprite.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\themes\pthg\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\themes\pthg\images\pricing-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\pro-slider-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\pro-slider-pager1.jpg" />
+    <Content Include="Content\themes\pthg\images\pro-slider-pager2.jpg" />
+    <Content Include="Content\themes\pthg\images\pro-slider-pager3.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img7.jpg" />
+    <Content Include="Content\themes\pthg\images\product-img8.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-sm-01.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-sm-02.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-sm-03.jpg" />
+    <Content Include="Content\themes\pthg\images\product-slider-sm-04.jpg" />
+    <Content Include="Content\themes\pthg\images\recent-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\recent-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\recent-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\reviewer-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\service-thumb1.jpg" />
+    <Content Include="Content\themes\pthg\images\services-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\services-img-01.jpg" />
+    <Content Include="Content\themes\pthg\images\services-img-02.jpg" />
+    <Content Include="Content\themes\pthg\images\services-img-03.jpg" />
+    <Content Include="Content\themes\pthg\images\sidebar-slider-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\sportec_background_home_3.jpg" />
+    <Content Include="Content\themes\pthg\images\team-detail-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img10.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img11.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img12.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img13.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img14.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img15.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img7.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img8.jpg" />
+    <Content Include="Content\themes\pthg\images\team-thumb-img9.jpg" />
+    <Content Include="Content\themes\pthg\images\testimonial-bg-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\testimonial-thumb1.jpg" />
+    <Content Include="Content\themes\pthg\images\Untitled-1.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img1.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img2.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img3.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img4.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img5.jpg" />
+    <Content Include="Content\themes\pthg\images\viewer-gallery-img6.jpg" />
+    <Content Include="Content\themes\pthg\images\widget-banner.jpg" />
+    <Content Include="Content\themes\pthg\index-repair-shop.html" />
+    <Content Include="Content\themes\pthg\index-rider-slider.html" />
+    <Content Include="Content\themes\pthg\index-shop.html" />
+    <Content Include="Content\themes\pthg\index-store.html" />
+    <Content Include="Content\themes\pthg\index.html" />
+    <Content Include="Content\themes\pthg\js\bootstrap.min.js" />
+    <Content Include="Content\themes\pthg\js\countdown-kinetic.js" />
+    <Content Include="Content\themes\pthg\js\custom.js" />
+    <Content Include="Content\themes\pthg\js\fullcalendar.min.js" />
+    <Content Include="Content\themes\pthg\js\isotope.pkgd.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery-1.11.3.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery-ui.js" />
+    <Content Include="Content\themes\pthg\js\jquery.bxslider.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery.circliful.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery.countdown.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery.counterup.min.js" />
+    <Content Include="Content\themes\pthg\js\jquery.final-countdown.js" />
+    <Content Include="Content\themes\pthg\js\jquery.isotope.js" />
+    <Content Include="Content\themes\pthg\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\themes\pthg\js\jquery.spinner.js" />
+    <Content Include="Content\themes\pthg\js\map.js" />
+    <Content Include="Content\themes\pthg\js\migrate.js" />
+    <Content Include="Content\themes\pthg\js\modernizr.custom.js" />
+    <Content Include="Content\themes\pthg\js\moment.min.js" />
+    <Content Include="Content\themes\pthg\js\owl.carousel.min.js" />
+    <Content Include="Content\themes\pthg\js\search-script.js" />
+    <Content Include="Content\themes\pthg\js\video-player.js" />
+    <Content Include="Content\themes\pthg\p404-1.html" />
+    <Content Include="Content\themes\pthg\p404-2.html" />
+    <Content Include="Content\themes\pthg\product-detail.html" />
+    <Content Include="Content\themes\pthg\product-listing.html" />
+    <Content Include="Content\themes\pthg\product-sidebar.html" />
+    <Content Include="Content\themes\pthg\product.html" />
+    <Content Include="Content\themes\pthg\team-details.html" />
+    <Content Include="Content\themes\pthg\team1.html" />
+    <Content Include="Content\themes\pthg\team2.html" />
+    <Content Include="Content\themes\pthg\video\Bicycle-race1.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -385,6 +773,16 @@
     <Content Include="images\logo.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo5.png" />
+    <Content Include="Models\tbcng.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tbcng.edmx</DependentUpon>
+      <LastGenOutput>tbcng.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\tbcng.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>tbcng.edmx</DependentUpon>
+      <LastGenOutput>tbcng.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
@@ -772,23 +1170,6 @@
     <Content Include="Scripts\dropzone\dropzone.js" />
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
-    <EntityDeploy Include="Models\tbcngModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>tbcngModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\tbcngModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tbcngModel.edmx</DependentUpon>
-      <LastGenOutput>tbcngModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tbcngModel.edmx.diagram">
-      <DependentUpon>tbcngModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\tbcngModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tbcngModel.edmx</DependentUpon>
-      <LastGenOutput>tbcngModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\admin\icomoon\fonts\icomoon.eot" />
     <Content Include="Content\admin\icomoon\fonts\icomoon.ttf" />
     <Content Include="Content\admin\icomoon\fonts\icomoon.woff" />
@@ -804,6 +1185,27 @@
     <Content Include="Content\admin\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\admin\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\admin\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\themes\pthg\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\themes\pthg\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\themes\pthg\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\themes\pthg\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\themes\pthg\fonts\FontAwesome.otf" />
+    <Content Include="Content\themes\pthg\fonts\icomoon.eot" />
+    <Content Include="Content\themes\pthg\fonts\icomoon.ttf" />
+    <Content Include="Content\themes\pthg\fonts\icomoon.woff" />
+    <Content Include="Content\themes\pthg\form.php" />
+    <Content Include="Content\themes\pthg\form2.php" />
+    <Content Include="Content\themes\pthg\form3.php" />
+    <Content Include="Content\themes\pthg\form4.php" />
+    <Content Include="Content\themes\pthg\video\Bicycle -race.webm" />
+    <Content Include="Content\themes\pthg\video\Bicycle-race1.ogv" />
+    <EntityDeploy Include="Models\tbcng.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>tbcng.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\tbcng.edmx.diagram">
+      <DependentUpon>tbcng.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\pubweb.pubxml" />
     <Content Include="Scripts\ckeditor\CHANGES.md" />
     <Content Include="Scripts\ckeditor\LICENSE.md" />
@@ -1013,6 +1415,12 @@
     <Content Include="Themes\default\Content\sld\fonts\flexslider-icon.eot" />
     <Content Include="Themes\default\Content\sld\fonts\flexslider-icon.ttf" />
     <Content Include="Themes\default\Content\sld\fonts\flexslider-icon.woff" />
+    <Content Include="Views\Home\Service.cshtml" />
+    <Content Include="Views\Products\Grid.cshtml" />
+    <Content Include="Views\Products\Detail.cshtml" />
+    <Content Include="Views\Products\_LoadPhotoProduct2.cshtml" />
+    <Content Include="Views\Products\LoadRelateProduct.cshtml" />
+    <Content Include="Views\Products\LoadCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

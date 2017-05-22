@@ -96,6 +96,11 @@ namespace tbcng
             "admin/product/list",
             new { controller = "Products", action = "List" }
           );
+            routes.MapRoute(
+            "san pham chi tiet",
+            "san-pham/{cat}/{title}-{id}",
+            new { controller = "Products", action = "Detail",cat= UrlParameter.Optional,title = UrlParameter.Optional, id = UrlParameter.Optional }
+          );
 
             #region 404 Notfound
             // 404 not found
