@@ -2,31 +2,28 @@
 @if (Model != null)
 {
     int count = 0;
-    
-
         <ul>
             <li class="cp-cart-holder">
                 <span class="icon-shopping-cart icomoon"></span>
                 @if (Model.Count > 0)
                 {
-                    <span class="cart-item">@ViewBag.count</span>
+                    <span class="cart-item" id="totalcartitems">@ViewBag.count</span>
                     <div class="cp-cart-inner">
                             <ul class="cart-listed" id="cart-listed">
                                 @foreach (var item in Model) { 
-                                <li>
-                                    <img src="@item.product_photos" alt="">
-                                    <div class="cart-text">
-                                        <strong>@item.product_name</strong>
-                                        <span>@item.quantity x @item.product_price</span>
-                                        <div class="cart-icons">
-                                            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                            <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <li>
+                                        <img src="@item.product_photos" alt="">
+                                        <div class="cart-text">
+                                            <strong>@item.product_name</strong>
+                                            <span>@item.quantity x @item.product_price</span>
+                                            <div class="cart-icons">
+                                                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>                            
+                                    </li>                            
                                 }
                             </ul>
-                   
                     </div>
                 }
             </li>

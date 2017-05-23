@@ -711,6 +711,40 @@ jQuery(document).ready(function($) {
   });
 
 });
-
-
+//Huynv add, thêm vào giỏ hàng
+function addToCart(product_id) {
+    $.ajax({
+        url: '/Products/addToCart',
+        type: 'POST',
+        datatype: 'text',
+        data: "product_id=" + product_id,
+        success: function (data) {
+            if (data != "0") {
+                alert(data);
+                var obj = JSON.parse(data);
+                alert(obj.product_photos);
+                //add item
+                var item="<li>";
+                item += "<img src=\"" + obj.product_photos + "\" alt=\"\">";
+                item+="<div class=\"cart-text\">";
+                item += "<strong>" + obj.product_name + "</strong>";
+                item += "<span>" + obj.quantity + "x" + obj.product_price + "</span>";
+                item+="<div class=\"cart-icons\">";
+                item+="<a href=\"#\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a>";
+                item+="<a href=\"#\"><i class=\"fa fa-times\" aria-hidden=\"true\"></i></a>";
+                item+="</div>";
+                item+="</div>";
+                item+= "</li>";
+                $("#cart-listed").append(item);
+                //alert(item);
+                var total = parseInt($("#totalcartitems").html());
+                total++;
+                $("#totalcartitems").html(total);
+            };
+        },
+        error: function (jqXHR, exception) {
+            alert(exception.toString());
+        }
+    });
+}
 

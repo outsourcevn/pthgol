@@ -51,7 +51,7 @@
                                         <span class="small">@item.product_des </span>
                                         <span class="pro-price">@String.Format("{0:n0}", @item.product_price_public)</span>
                                         <ul class="cp-pro-meta">
-                                            <li class="pro-cart"><a href="#"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                            <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
                                             <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
@@ -109,3 +109,11 @@
 </div>
 <!-- Main Content End --> 
 
+<script>
+    var text = "{\"name\":\"John\", \"age\":\"function () {return 30;}\", \"city\":\"New York\"}";
+    alert(text);
+    var obj = JSON.parse(text);
+    obj.age = eval("(" + obj.age + ")");
+
+    alert(obj.name);
+</script>

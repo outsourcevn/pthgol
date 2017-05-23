@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using Newtonsoft.Json;
 namespace tbcng.Controllers
 {
     //[Authorize(Roles = "Administrator")]
@@ -537,7 +537,7 @@ namespace tbcng.Controllers
         {
             try {
                 string session = Helpers.configs.getCookie("session");
-                var model = (from q in db.product_order where q.session == session select q).OrderBy(o => o.id).ToList();
+                var model = (from q in db.product_order where q.session == session select q).OrderBy(o => o.id).ToList();//Đoạn này cần dùng query sql
                 ViewBag.count = model.Count;
                 return PartialView("LoadCart", model);
             }
@@ -545,6 +545,38 @@ namespace tbcng.Controllers
             {
                 ViewBag.count = 0;
                 return PartialView("LoadCart", null);
+            }
+        }
+        public string addToCart(long? product_id)
+        {
+            try
+            {
+                string session = Helpers.configs.getCookie("session");
+                if (session == "")
+                {
+                    session=Guid.NewGuid().ToString();
+                    Helpers.configs.setCookie("session",session);
+                }
+                product pr=db.products.Find(product_id);
+                product_order po = new product_order();
+                po.customer_id = null;
+                po.date_time = DateTime.Now;
+                po.product_id = product_id;
+                po.product_name = pr.product_name;
+                po.product_photos = pr.product_photo;
+                po.product_price = pr.product_price_public;
+                po.product_total = pr.product_price_public*1;
+                po.quantity = 1;
+                po.session = session;
+                po.status = 0;
+                db.product_order.Add(po);
+                db.SaveChanges();
+                string rs = "{\"product_photos\":\"" + pr.product_photo + "\", \"product_name\":\"" + pr.product_name + "\", \"quantity\":\"" + 1 + "\", \"product_price\":\"" + pr.product_price_public + "\"}";
+                return rs;//JsonConvert.SerializeObject(rs);
+            }
+            catch
+            {
+                return "Lỗi";
             }
         }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
