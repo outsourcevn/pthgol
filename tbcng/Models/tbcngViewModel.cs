@@ -20,7 +20,13 @@ namespace tbcng.Models
         [Display(Name = "Danh mục cha")]
         public int? cat_parent_id { get; set; }
     }
-
+    public class itemCart
+    {
+        public string product_name { get; set; }
+        public string product_photos { get; set; }
+        public double? product_price { get; set; }
+        public int quantity { get; set; }
+    }
     public class LstCat
     {
         public int CatId { get; set; }

@@ -579,6 +579,33 @@ namespace tbcng.Controllers
                 return "Lỗi";
             }
         }
+        public string removeCartItem(long? id){
+            try{
+                db.Database.ExecuteSqlCommand("delete from product_order where id=" + id);
+                return "1";
+            }
+            catch
+            {
+                return "0";
+            }
+        }
+        
+        public ActionResult Cart()
+        {
+            string session = Helpers.configs.getCookie("session");
+            if (session == "")
+            {
+                session = Guid.NewGuid().ToString();
+                Helpers.configs.setCookie("session", session);
+            }
+            string query="select product_name,product_photos,product_price,sum(quantity) as quantity from ";
+                   query+="(";
+                   query+=" select product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='"+session+"' ";
+                   query += ") as A group by product_name,product_photos,product_price";
+                   var list = db.Database.SqlQuery<itemCart>(query).ToList();
+                   ViewBag.list = list;
+            return View();
+        }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
         //{
         //    try

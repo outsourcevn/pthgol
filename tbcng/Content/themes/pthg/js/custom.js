@@ -747,4 +747,23 @@ function addToCart(product_id) {
         }
     });
 }
-
+//Huynv add, thêm vào giỏ hàng
+function removeCartItem(id) {
+    $.ajax({
+        url: '/Products/removeCartItem',
+        type: 'POST',
+        datatype: 'text',
+        data: "id=" + id,
+        success: function (data) {
+            if (data == "1") {
+                $("#cartitem_" + id).hide();
+                var total = parseInt($("#totalcartitems").html());
+                total--;
+                if (total>=0) $("#totalcartitems").html(total);
+            };
+        },
+        error: function (jqXHR, exception) {
+            alert(exception.toString());
+        }
+    });
+}

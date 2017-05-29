@@ -97,6 +97,20 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="ship">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="g_from" Type="int" />
+          <Property Name="g_to" Type="int" />
+          <Property Name="in_city" Type="int" />
+          <Property Name="e_100" Type="int" />
+          <Property Name="e_300" Type="int" />
+          <Property Name="m_300" Type="int" />
+          <Property Name="hn_dn" Type="int" />
+          <Property Name="hn_hcm" Type="int" />
+        </EntityType>
         <EntityType Name="UserClaims">
           <Key>
             <PropertyRef Name="Id" />
@@ -241,6 +255,7 @@
           <EntitySet Name="product_order" EntityType="Self.product_order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ship" EntityType="Self.ship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClaims" EntityType="Self.UserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
@@ -430,6 +445,7 @@
           <EntitySet Name="customers" EntityType="tbcngModel.customer" />
           <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
           <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
+          <EntitySet Name="ships" EntityType="tbcngModel.ship" />
         </EntityContainer>
         <EntityType Name="product">
           <Key>
@@ -521,6 +537,20 @@
           <Property Name="date_time" Type="DateTime" Precision="3" />
           <Property Name="session" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ship">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="g_from" Type="Int32" />
+          <Property Name="g_to" Type="Int32" />
+          <Property Name="in_city" Type="Int32" />
+          <Property Name="e_100" Type="Int32" />
+          <Property Name="e_300" Type="Int32" />
+          <Property Name="m_300" Type="Int32" />
+          <Property Name="hn_dn" Type="Int32" />
+          <Property Name="hn_hcm" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -668,6 +698,21 @@
                 <ScalarProperty Name="product_name" ColumnName="product_name" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ships">
+            <EntityTypeMapping TypeName="tbcngModel.ship">
+              <MappingFragment StoreEntitySet="ship">
+                <ScalarProperty Name="hn_hcm" ColumnName="hn_hcm" />
+                <ScalarProperty Name="hn_dn" ColumnName="hn_dn" />
+                <ScalarProperty Name="m_300" ColumnName="m_300" />
+                <ScalarProperty Name="e_300" ColumnName="e_300" />
+                <ScalarProperty Name="e_100" ColumnName="e_100" />
+                <ScalarProperty Name="in_city" ColumnName="in_city" />
+                <ScalarProperty Name="g_to" ColumnName="g_to" />
+                <ScalarProperty Name="g_from" ColumnName="g_from" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
