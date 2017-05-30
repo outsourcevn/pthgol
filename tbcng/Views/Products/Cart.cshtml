@@ -14,6 +14,11 @@
 <script type="text/javascript" src="http://www.teamdf.com/jquery-plugins/resources/javascripts/docs.js"></script>
 <link rel="stylesheet" href="http://www.teamdf.com/jquery-plugins/resources/stylesheets/prettify.css" />
 <link rel="stylesheet" href="http://www.teamdf.com/jquery-plugins/resources/stylesheets/docs.css" />*@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLPSKQ4QV4xGiQjnZDUecx-UEr3D0QePY&libraries=places&region=vn&language=vi" type="text/javascript"></script>
+<script src="/Scripts/jquery.geocomplete.min.js"></script>
+<div id="map-canvas" style="display: none;">
+    Bản đồ
+</div>
 <script type="text/javascript" src="/Scripts/jquery.number.min.js"></script>
 <div class="cp-inner-banner2" style="height:50px;">
     <div class="container2">
@@ -30,7 +35,7 @@
 <!-- Main Content Start -->
 <section class="cp-main-content">
     <!--Product Section Start-->
-    <section class="cp-product-section_v2 pd-tb100">
+    <section class="cp-product-section_v2 pd-tb100" style="padding-bottom: 0px;padding: 0px 0;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -56,6 +61,8 @@
                                 <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
                                         <input type="text" placeholder="địa chỉ nhận hàng" name="customer_address" id="customer_address">
+                                        <input name="lon" id="lon" type="hidden" value="@ViewBag.lon">
+                                        <input name="lat" id="lat" type="hidden" value="@ViewBag.lat">
                                     </div>
                                 </div>
                             </div>
@@ -214,4 +221,19 @@
             });
         }
     }
+    var options = {
+        map: "#map-canvas"
+    };
+    $("#customer_address").geocomplete(options)
+      .bind("geocode:result", function (event, result) {
+      $("#lat").val(result.geometry.location.lat());
+      $("#lon").val(result.geometry.location.lng());
+      //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+  })
+  .bind("geocode:error", function (event, status) {
+      $.log("ERROR: " + status);
+  })
+  .bind("geocode:multiple", function (event, results) {
+      $.log("Multiple: " + results.length + " results found");
+  });
 </script>
