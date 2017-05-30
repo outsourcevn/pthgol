@@ -747,7 +747,7 @@ function addToCart(product_id) {
         }
     });
 }
-//Huynv add, thêm vào giỏ hàng
+//Huynv add, bỏ vào giỏ hàng
 function removeCartItem(id) {
     $.ajax({
         url: '/Products/removeCartItem',

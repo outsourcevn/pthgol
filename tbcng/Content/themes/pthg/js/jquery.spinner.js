@@ -25,6 +25,7 @@
       .on('change.spinner', $.proxy(function(e){
         e.preventDefault();
         this.value(this.$el.val());
+        calculate();
       }, this))
       .on('keydown.spinner', $.proxy(function(e){
         var dir = {38: 'up', 40: 'down'}[e.which];
@@ -131,14 +132,15 @@
       this.delay(options.delay);
     }
     if(options.changed){
-      this.changed(options.changed);
+        this.changed(options.changed);
+        calculate();
     }
     if(options.changing){
       this.changing(options.changing);
     }
   };
 
-  Spinner.delay = 500;
+  Spinner.delay = 200;
 
   Spinner.prototype = {
     constructor: Spinner,
@@ -171,7 +173,8 @@
     },
 
     changed: function(fn){
-      this.bindHandler('changed.spinner', fn);
+        this.bindHandler('changed.spinner', fn);
+        calculate();
     },
 
     changing: function(fn){

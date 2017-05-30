@@ -2,9 +2,19 @@
     ViewBag.Title = "Cart";
     Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
     int count = 0;
+    int total_quantity = 0;
+    int total_val = 0;
 }
 <!---JQuery Spinner.js-->
 <script type="text/javascript" src="/Content/themes/pthg/js/jquery.spinner.js"></script>
+@*<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.js"></script>*@
+<script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
+@*<script type="text/javascript" src="http://www.teamdf.com/jquery-plugins/resources/javascripts/prettify.js"></script>
+<script type="text/javascript" src="http://www.teamdf.com/jquery-plugins/resources/javascripts/docs.js"></script>
+<link rel="stylesheet" href="http://www.teamdf.com/jquery-plugins/resources/stylesheets/prettify.css" />
+<link rel="stylesheet" href="http://www.teamdf.com/jquery-plugins/resources/stylesheets/docs.css" />*@
+<script type="text/javascript" src="/Scripts/jquery.number.min.js"></script>
 <div class="cp-inner-banner2" style="height:50px;">
     <div class="container2">
         <div class="cp-inner-banner-outer2" style="color:black;">
@@ -28,22 +38,22 @@
                     <div class="cp-form-box">
                         <h3>Thông tin khách hàng</h3>
                             <div class="row">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
-                                        <input type="text" placeholder="Họ Tên" name="customer_name" id="customer_name" >
+                                        <input type="text" placeholder="Họ Tên" name="customer_name" id="customer_name">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
-                                        <input type="text" placeholder="email" name="customer_email" id="customer_email" >
+                                        <input type="text" placeholder="email" name="customer_email" id="customer_email">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
                                         <input type="text" placeholder="số điện thoại" name="customer_phone" id="customer_phone">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
                                         <input type="text" placeholder="địa chỉ nhận hàng" name="customer_address" id="customer_address">
                                     </div>
@@ -65,6 +75,8 @@
             <!--Cart Table Row Start-->
             <div class="cart-table-row">
                 <div class="woocommerce">
+                    @if (ViewBag.list != null)
+                    { 
                     <form method="get">
                         <table class="cp-shop_table">
                             <thead>
@@ -81,9 +93,11 @@
                                 @foreach (var item in ViewBag.list) {
                                     double total = double.Parse(item.product_price.ToString()) * double.Parse(item.quantity.ToString());
                                     count++;
-                                    <tr class="cart_item">
+                                    total_quantity += item.quantity;
+                                    total_val += item.quantity * item.product_price;
+                                    <tr class="cart_item" id="row_@count">
                                         <td class="product-remove">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
+                                            <a href="#" onclick="removeCartProduct('@item.product_name',@count);"><i class="fa fa-trash"></i></a>
                                         </td>
                                         <td class="product-thumbnail">
                                             <a href="#"><img src="@item.product_photos" alt="" style="height:50px;width:50px;"></a>
@@ -94,9 +108,18 @@
                                         </td>
                                         <td class="product-quantity">
                                             <div class="input-append spinner" data-trigger="spinner">
-                                                <span class="spin-down" data-spin="down" onclick="calculate();"><i class="fa fa-minus"></i></span>
-                                                <input type="text" value="@item.quantity" data-rule="quantity" id="quantity_@count">
-                                                <span class="spin-up" data-spin="up" onclick="calculate();"><i class="fa fa-plus"></i></span>
+                                                @*<span class="spin-down" data-spin="down" ><i class="fa fa-minus" ></i></span>
+                                                <input type="text" value="@item.quantity" data-rule="quantity" id="quantity_@count" >
+                                                <span class="spin-up" data-spin="up" ><i class="fa fa-plus" ></i></span>*@
+                                                <select id="quantity_@count" onchange="calculate();">
+                                                    @for (var i = 1; i <= 100; i++)
+                                                    {
+                                                        <option value="@i">@i</option>
+                                                    }
+                                                </select>
+                                                <script>
+                                                    $("#quantity_@count").val(@item.quantity);
+                                                </script>
                                             </div>
                                         </td>
                                         <td class="product-subtotal" id="total_@count">
@@ -105,20 +128,28 @@
                                     </tr>
                                 }
                                 <tr class="cart_item">
-                                    <td class="product-thumbnail" colspan="3" id="quantity_final">
-
-                                    </td>
-                                    <td class="product-subtotal" id="total_final">
+                                    <td class="product-remove">
                                         
                                     </td>
+                                    <td class="product-thumbnail">
+                                        
+                                    </td>
+                                    <td class="product-price" id="price_@count">
+                                        Tổng số lượng:
+                                    </td>
+                                    <td class="product-thumbnail"  id="quantity_final" >
+                                        @String.Format("{0:n0}", @total_quantity)
+                                    </td>
+                                    <td class="product-subtotal" id="total_final" >@String.Format("{0:n0}", @total_val)</td>
                                 </tr>
                             </tbody>
                         </table>
                     </form>
+                    }
                     <!--Cart Bottom Holder Start-->
                     <div class="cp-cart-bottom">
                         @*<span class="icon-cart icomoon"></span>*@
-                        <h3>Có tổng số @ViewBag.total sản phẩm trong giỏ hàng</h3>
+                        <h3>Có tổng số @count sản phẩm với @total_quantity số lượng trong giỏ hàng</h3>
                         <a href="/" class="cp-btn-style1">Trang chủ</a>
                     </div><!--Cart Bottom Holder End-->
                 </div>
@@ -133,15 +164,54 @@
         var total_quantity=0;
         var total_money=0;
         for(var i=1;i<=count;i++){
-            var temp1=parseInt(document.getElementById("quantity_"+i).value);
-            alert(i+":"+temp1);
+            var temp1=parseInt(document.getElementById("quantity_"+i).value);            
+            //alert(i+":"+temp1);
             total_quantity+=temp1;
-            var temp2=parseInt(document.getElementById("price_"+i).innerHTML.replace(',',''))*temp1;
-            alert(i+":"+temp2);
-            total_money+=temp2;
+            var temp2=parseInt(document.getElementById("price_"+i).innerHTML.replace(/,/g,''));
+            var temp3=temp2*temp1;            
+            $("#total_"+i).html(formatDollar(temp3));
+            //alert(i+":"+temp2);
+            total_money+=temp3;
         }
-        $("#quantity_final").html(total_quantity);
-        $("#total_final").html(total_money);
-        alert(total_quantity+"-"+total_money);
+        //alert(total_quantity+"-"+total_money);
+        $("#quantity_final").html(formatDollar(total_quantity));
+        $("#total_final").html(formatDollar(total_money));
+        //$("#quantity_final").html().number(true,2);
+        //alert("12123".toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
+        //alert(formatDollar(total_money));
+        //$("#price_1").number( true, 2 );
+    }
+    //$("#spinner")
+    //  .spinner('delay', 200) //delay in ms
+    //  .spinner('changed', function(e, newVal, oldVal) {
+    //      // trigger lazed, depend on delay option.
+    //      calculate();
+    //  })
+    //  .spinner('changing', function(e, newVal, oldVal) {
+    //      // trigger immediately
+    //  });
+    function formatDollar(num) {
+        var p = num.toFixed(2).split(".");
+        return p[0].split("").reverse().reduce(function(acc, num, i, orig) {
+            return  num=="-" ? acc : num + (i && !(i % 3) ? "," : "") + acc;
+        }, "");// + "." + p[1]
+    }
+    function removeCartProduct(product_name,index){
+        if (confirm("Xác nhận xóa")==true){
+            $.ajax({
+                url: '/Products/removeCartProduct',
+                type: 'POST',
+                datatype: 'text',
+                data: "product_name=" + product_name,
+                success: function (data) {
+                    if (data == "1") {
+                        window.location.reload();
+                    };
+                },
+                error: function (jqXHR, exception) {
+                    alert(exception.toString());
+                }
+            });
+        }
     }
 </script>

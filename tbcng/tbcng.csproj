@@ -231,6 +231,9 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ship.cs">
+      <DependentUpon>tbcng.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbcng.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1421,6 +1424,7 @@
     <Content Include="Views\Products\_LoadPhotoProduct2.cshtml" />
     <Content Include="Views\Products\LoadRelateProduct.cshtml" />
     <Content Include="Views\Products\LoadCart.cshtml" />
+    <Content Include="Views\Products\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

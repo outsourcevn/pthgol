@@ -589,7 +589,25 @@ namespace tbcng.Controllers
                 return "0";
             }
         }
-        
+        [HttpPost]
+        public string removeCartProduct(string product_name)
+        {
+            try
+            {
+                string session = Helpers.configs.getCookie("session");
+                if (session == "")
+                {
+                    session = Guid.NewGuid().ToString();
+                    Helpers.configs.setCookie("session", session);
+                }
+                db.Database.ExecuteSqlCommand("delete from product_order where product_name=N'" + product_name + "' and session=N'" + session+"'");
+                return "1";
+            }
+            catch
+            {
+                return "0";
+            }
+        }
         public ActionResult Cart()
         {
             string session = Helpers.configs.getCookie("session");
@@ -598,12 +616,20 @@ namespace tbcng.Controllers
                 session = Guid.NewGuid().ToString();
                 Helpers.configs.setCookie("session", session);
             }
+            ViewBag.list = null;
+            try { 
             string query="select product_name,product_photos,product_price,sum(quantity) as quantity from ";
                    query+="(";
                    query+=" select product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='"+session+"' ";
                    query += ") as A group by product_name,product_photos,product_price";
                    var list = db.Database.SqlQuery<itemCart>(query).ToList();
                    ViewBag.list = list;
+            }
+            catch
+            {
+                ViewBag.list = null;
+            }
+
             return View();
         }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
