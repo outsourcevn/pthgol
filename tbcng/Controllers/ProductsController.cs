@@ -13,6 +13,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 namespace tbcng.Controllers
 {
     //[Authorize(Roles = "Administrator")]
@@ -590,7 +591,7 @@ namespace tbcng.Controllers
             }
         }
         [HttpPost]
-        public string removeCartProduct(string product_name)
+        public string removeCartProduct(long? product_id)
         {
             try
             {
@@ -600,7 +601,7 @@ namespace tbcng.Controllers
                     session = Guid.NewGuid().ToString();
                     Helpers.configs.setCookie("session", session);
                 }
-                db.Database.ExecuteSqlCommand("delete from product_order where product_name=N'" + product_name + "' and session=N'" + session+"'");
+                db.Database.ExecuteSqlCommand("delete from product_order where product_id=" + product_id + " and session=N'" + session + "'");
                 return "1";
             }
             catch
@@ -608,7 +609,7 @@ namespace tbcng.Controllers
                 return "0";
             }
         }
-        public ActionResult Cart()
+        public ActionResult Cart(string address,double? lon, double? lat)
         {
             string session = Helpers.configs.getCookie("session");
             if (session == "")
@@ -617,11 +618,14 @@ namespace tbcng.Controllers
                 Helpers.configs.setCookie("session", session);
             }
             ViewBag.list = null;
-            try { 
-            string query="select product_name,product_photos,product_price,sum(quantity) as quantity from ";
+            ViewBag.lon = 105.8194541;
+            ViewBag.lat = 21.0227431;
+            ViewBag.address = "";
+            try {
+                string query = "select product_id,product_name,product_photos,product_price,sum(quantity) as quantity from ";
                    query+="(";
-                   query+=" select product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='"+session+"' ";
-                   query += ") as A group by product_name,product_photos,product_price";
+                   query += " select product_id,product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='" + session + "' ";
+                   query += ") as A group by product_id,product_name,product_photos,product_price";
                    var list = db.Database.SqlQuery<itemCart>(query).ToList();
                    ViewBag.list = list;
             }
@@ -629,8 +633,192 @@ namespace tbcng.Controllers
             {
                 ViewBag.list = null;
             }
-
+            if (lon!=null) ViewBag.lon = lon;
+            if (lat != null) ViewBag.lat = lat;
+            if (address != null) ViewBag.address = address;
             return View();
+        }
+        //Class for "distance" and "duration" which has the "text" and "value" properties.
+        public class CepElementNode
+        {
+            public string text { get; set; }
+
+            public string value { get; set; }
+        }
+
+        //Class for "distance", "duration" and "status" nodes of "elements" node 
+        public class CepDataElement
+        {
+            public CepElementNode distance { get; set; }
+
+            public CepElementNode duration { get; set; }
+
+            public string status { get; set; }
+        }
+
+        //Class for "elements" node
+        public class CepDataRow
+        {
+            public List<CepDataElement> elements { get; set; }
+        }
+
+        //Class which wrap the json response
+        public class RequestCepViewModel
+        {
+            public List<string> destination_addresses { get; set; }
+
+            public List<string> origin_addresses { get; set; }
+
+            public List<CepDataRow> rows { get; set; }
+
+            public string status { get; set; }
+        }
+        public class itemallcart
+        {
+            public long product_id { get; set; }
+            public int? quantity { get; set; }
+        }
+        public string getPriceShip(double? lon1, double? lat1, double? lon2, double? lat2, int type, string data)
+        {
+            try
+            {
+                string address = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + lat1 + "," + lon1 + "&destinations=" + lat2 + "," + lon2 + "&mode=driving&key=AIzaSyDLPSKQ4QV4xGiQjnZDUecx-UEr3D0QePY";
+                string result = new System.Net.WebClient().DownloadString(address);
+                var viewModel = new JavaScriptSerializer().Deserialize<RequestCepViewModel>(result);
+                var dt = viewModel.rows[0].elements[0].distance.value;
+                int km = int.Parse(dt) / 1000;
+                dynamic thelist = JsonConvert.DeserializeObject<List<itemallcart>>(data);
+                double total_kg = 0;
+                foreach (var detail in thelist)
+                {
+                    long product_id = detail.product_id;
+                    int quantity = detail.quantity;
+                    if (product_id != -1)
+                    {
+                        var pr = db.products.Find(product_id);
+                        if (pr != null)
+                        {
+                            double tempkg = (double)((pr.l * pr.w * pr.h) / 6000);
+                            tempkg=tempkg*1000;// Đổi sang g
+                            tempkg=(double)(tempkg>pr.g?tempkg:pr.g);
+                            total_kg += tempkg * quantity;
+                        }
+                    }
+                }
+                if (type == 3)
+                {
+                    //Tìm cước sài gòn
+                    if (total_kg > 2000)
+                    {
+                        var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().hn_hcm;
+                        double bonus =(double)((total_kg - 2000) / 500 * q);
+                        var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().hn_hcm;
+                        double rs=(double)(q2 + bonus);
+                        return total_kg+"_"+rs;
+                    }
+                    else
+                    {
+                        var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().hn_hcm;
+                        double rs=(double)(q);
+                        return total_kg+"_"+rs;
+                    }
+
+                }
+                else
+                {
+                    //Nếu là gửi đi Đà Nẵng
+                    if (type == 2)
+                    {
+                        if (total_kg > 2000)
+                        {
+                            var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().hn_dn;
+                            double bonus =(double)((total_kg - 2000) / 500 * q);
+                            var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().hn_dn;
+                            double rs=(double)(q2 + bonus);
+                            return total_kg+"_"+rs;
+                        }
+                        else
+                        {
+                            var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().hn_dn;
+                            double rs=(double)(q);
+                            return total_kg+"_"+rs;
+                        }
+                    }
+                    else
+                        if (type == 1)
+                        {
+                            if (total_kg > 2000)
+                            {
+                                var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().in_city;
+                                double bonus =(double)((total_kg - 2000) / 500 * q);
+                                var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().in_city;
+                                double rs=(double)(q2 + bonus);
+                                return total_kg+"_"+rs;
+                            }
+                            else
+                            {
+                                var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().in_city;
+                                double rs=(double)(q);
+                                return total_kg+"_"+rs;
+                            }
+                        }
+                        else
+                        {
+                            int? price=0;
+                            if (km<=100){
+                                if (total_kg > 2000)
+                                {
+                                    var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().e_100;
+                                    double bonus =(double)((total_kg - 2000) / 500 * q);
+                                    var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().e_100;
+                                    double rs=(double)(q2 + bonus);
+                                    return total_kg+"_"+rs;
+                                }
+                                else
+                                {
+                                    var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().e_100;
+                                    double rs=(double)(q);
+                                    return total_kg+"_"+rs;
+                                }
+                            }else{
+                                if (km<=300){
+                                    if (total_kg > 2000)
+                                    {
+                                        var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().e_300;
+                                        double bonus =(double)((total_kg - 2000) / 500 * q);
+                                        var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().e_300;
+                                        double rs=(double)(q2 + bonus);
+                                        return total_kg+"_"+rs;
+                                    }
+                                    else
+                                    {
+                                        var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().e_300;
+                                        double rs=(double)(q);
+                                        return total_kg+"_"+rs;
+                                    }
+                                }else{
+                                    if (total_kg > 2000)
+                                    {
+                                        var q = db.ships.Where(o => o.g_from >= 2000 && o.g_to <= 1000000000).FirstOrDefault().m_300;
+                                        double bonus =(double)((total_kg - 2000) / 500 * q);
+                                        var q2 = db.ships.Where(o => o.g_from >= 1500 && o.g_to <= 2000).FirstOrDefault().m_300;
+                                        double rs=(double)(q2 + bonus);
+                                        return total_kg+"_"+rs;
+                                    }
+                                    else
+                                    {
+                                        var q = db.ships.Where(o => o.g_from <= (int)total_kg && o.g_to >= (int)total_kg).FirstOrDefault().m_300;
+                                        double rs=(double)(q);
+                                        return total_kg+"_"+rs;
+                                    }
+                                }
+                            }
+                        }
+                }
+                return "0_0";
+            }catch(Exception ex){
+                return "0_0";
+            }
         }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
         //{

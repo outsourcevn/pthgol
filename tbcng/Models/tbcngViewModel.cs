@@ -22,6 +22,7 @@ namespace tbcng.Models
     }
     public class itemCart
     {
+        public long? product_id { get; set; }
         public string product_name { get; set; }
         public string product_photos { get; set; }
         public double? product_price { get; set; }
