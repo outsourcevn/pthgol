@@ -624,7 +624,7 @@ namespace tbcng.Controllers
             try {
                 string query = "select product_id,product_name,product_photos,product_price,sum(quantity) as quantity from ";
                    query+="(";
-                   query += " select product_id,product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='" + session + "' ";
+                   query += " select product_id,product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='" + session + "' and status=0 ";
                    query += ") as A group by product_id,product_name,product_photos,product_price";
                    var list = db.Database.SqlQuery<itemCart>(query).ToList();
                    ViewBag.list = list;
@@ -636,6 +636,29 @@ namespace tbcng.Controllers
             if (lon!=null) ViewBag.lon = lon;
             if (lat != null) ViewBag.lat = lat;
             if (address != null) ViewBag.address = address;
+            ViewBag.session = session;
+            return View();
+        }
+        public ActionResult CartStep2(string session)
+        {
+            try
+            {
+                string query = "select product_id,product_name,product_photos,product_price,sum(quantity) as quantity from ";
+                query += "(";
+                query += " select product_id,product_name,product_photos,product_price,quantity from [phutunghoangia].[dbo].[product_order] where session='" + session + "' and status=1 ";
+                query += ") as A group by product_id,product_name,product_photos,product_price";
+                var list = db.Database.SqlQuery<itemCart>(query).ToList();
+                ViewBag.list = list;
+                var p = db.product_customer_order.Where(o => o.session == session).FirstOrDefault();
+                ViewBag.ordercode = p.id;
+                ViewBag.session = session;
+                ViewBag.ship_fee = p.ship_fee;
+                ViewBag.total = p.total;
+            }
+            catch
+            {
+                ViewBag.list = null;
+            }
             return View();
         }
         //Class for "distance" and "duration" which has the "text" and "value" properties.
@@ -677,6 +700,15 @@ namespace tbcng.Controllers
         {
             public long product_id { get; set; }
             public int? quantity { get; set; }
+        }
+        public class itemallcartall
+        {
+            public long product_id { get; set; }
+            public string product_photos { get; set; }
+            public string product_name { get; set; }
+            public float? product_price { get; set; }
+            public int quantity { get; set; }
+            public float product_total { get; set; }
         }
         public string getPriceShip(double? lon1, double? lat1, double? lon2, double? lat2, int type, string data)
         {
@@ -819,6 +851,68 @@ namespace tbcng.Controllers
             }catch(Exception ex){
                 return "0_0";
             }
+        }
+        [HttpPost]
+        public string submitOrder(string data, string session, float? g, long? ship_fee, long? total_fee, string customer_address, string customer_name, string customer_email, string customer_phone, double? lon, double? lat)
+        {
+             try
+             {
+                 customer ctm = new customer();
+                 ctm.customer_address = customer_address;
+                 ctm.customer_email = customer_email;
+                 ctm.customer_name = customer_name;
+                 ctm.customer_phone = customer_phone;
+                 ctm.lat = lat;
+                 ctm.lon = lon;
+                 db.customers.Add(ctm);
+                 db.SaveChanges();
+                 int customer_id=ctm.id;
+                 product_customer_order pco = new product_customer_order();
+                 pco.customer_id = customer_id;
+                 pco.g = g;
+                 pco.session = session;
+                 pco.ship_fee = ship_fee;
+                 pco.total_fee = total_fee;
+                 pco.total = ship_fee + total_fee;
+                 db.product_customer_order.Add(pco);
+                 db.SaveChanges();
+
+                 List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
+                 //double total_kg = 0;
+                 if (thelist.Count > 1) { 
+
+                     foreach (var detail in thelist)
+                     {
+                         long product_id = detail.product_id;
+                         if (product_id == -1) continue;                         
+                         string product_name = detail.product_name;
+                         string product_photos = detail.product_photos;
+                         int quantity = detail.quantity;
+                         float? product_price = detail.product_price;
+                         float product_total = detail.product_total;
+                         product_order po = new product_order();
+                         po.customer_id = customer_id;
+                         po.date_time = DateTime.Now;
+                         po.product_id = product_id;
+                         po.product_name = product_name;
+                         po.product_photos = product_photos;
+                         po.product_price = product_price;
+                         po.product_total = product_total;
+                         po.quantity = quantity;
+                         po.session = session;
+                         po.status = 1;
+                         db.product_order.Add(po);
+                         db.SaveChanges();
+                     }
+                     return session;
+                 }
+                 return "0";
+             }
+             catch (Exception ex)
+             {
+                 return "0";
+                 //configs.SaveTolog(ex.ToString());
+             }
         }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
         //{

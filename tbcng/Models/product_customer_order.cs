@@ -16,8 +16,10 @@ namespace tbcng.Models
     {
         public long id { get; set; }
         public Nullable<int> customer_id { get; set; }
-        public Nullable<long> order_id { get; set; }
+        public string session { get; set; }
+        public Nullable<double> g { get; set; }
         public Nullable<long> ship_fee { get; set; }
         public Nullable<long> total_fee { get; set; }
+        public Nullable<long> total { get; set; }
     }
 }

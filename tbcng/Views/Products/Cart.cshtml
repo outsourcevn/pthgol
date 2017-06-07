@@ -7,7 +7,7 @@
     string allCartItem="[{product_id:-1,quantity:-1}";
 }
 <!---JQuery Spinner.js-->
-<script type="text/javascript" src="/Content/themes/pthg/js/jquery.spinner.js"></script>
+@*<script type="text/javascript" src="/Content/themes/pthg/js/jquery.spinner.js"></script>*@
 @*<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="~/Scripts/jquery-1.12.4.js"></script>*@
 <script type="text/javascript" src="~/Scripts/jquery-1.12.4.min.js"></script>
@@ -82,6 +82,7 @@
                     @if (ViewBag.list != null)
                     { 
                     <form method="get">
+                        <input id="session" name="session" value="@ViewBag.session" type="hidden"/>
                         <table class="cp-shop_table">
                             <thead>
                                 <tr>
@@ -90,7 +91,6 @@
                                     <th class="product-price">Giá</th>
                                     <th class="product-quantity">Số lượng</th>
                                     <th class="product-subtotal">Tổng</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,9 +108,12 @@
                                         <td class="product-thumbnail">
                                             <a href="#"><img src="@item.product_photos" alt="" style="height:50px;width:50px;"></a>
                                             <span>@item.product_name</span>
+                                            <input name="product_photos_@count" id="product_photos_@count" type="hidden" value="@item.product_photos">
+                                            <input name="product_name_@count" id="product_name_@count" type="hidden" value="@item.product_name">
                                         </td>
                                         <td class="product-price" id="price_@count">
                                             @String.Format("{0:n0}", @item.product_price)
+                                            <input name="product_price_@count" id="product_price_@count" type="hidden" value="@item.product_price">
                                         </td>
                                         <td class="product-quantity">
                                             <div class="input-append spinner" data-trigger="spinner">
@@ -153,10 +156,18 @@
                                     <td class="product-remove"></td>
                                     <td class="product-thumbnail"></td>
                                     <td class="product-price">
-                                        Chi phí ship:(dựa trên địa chỉ nhận hàng, nhập chính xác địa chỉ nhận hàng)
+                                        <b>Chi phí ship</b>:(Nhập chính xác địa chỉ nhận hàng)
                                     </td>
-                                    <td class="product-thumbnail" id="ship_kg"></td>
+                                    <td class="product-thumbnail" id="ship_kg"><span style="color:red">Bạn chưa nhập địa chỉ nhận hàng</span></td>
                                     <td class="product-subtotal" id="ship_fee"></td>
+                                </tr>
+                                <tr class="cart_item">
+                                    <td class="product-remove"></td>
+                                    <td class="product-thumbnail"></td>
+                                    <td class="product-price">
+                                    </td>
+                                    <td class="product-thumbnail" ></td>
+                                    <td class="product-subtotal" id="all_fee"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -165,8 +176,8 @@
                     <!--Cart Bottom Holder Start-->
                     <div class="cp-cart-bottom">
                         @*<span class="icon-cart icomoon"></span>*@
-                        <h3>Có tổng số @count sản phẩm với @total_quantity số lượng trong giỏ hàng</h3>
-                        <a href="/" class="cp-btn-style1">Trang chủ</a>
+                        <h3 id="_total_quantity_">Có tổng số @count sản phẩm với @total_quantity số lượng trong giỏ hàng</h3>
+                        <a href="#" class="cp-btn-style1" onclick="submitOrder();">Đặt Hàng</a>
                     </div><!--Cart Bottom Holder End-->
                 </div>
             </div><!--Cart Table Row End-->
@@ -190,10 +201,10 @@
             $("#total_"+i).html(formatDollar(temp3));
             //alert(i+":"+temp2);
             total_money+=temp3;
-            var item = ",{product_id:"+ document.getElementById("product_id"+i).value+", quantity: "+document.getElementById("quantity_"+i).value+"}";
+            var item = ",{product_id:"+ document.getElementById("product_id_"+i).value+", quantity: "+document.getElementById("quantity_"+i).value+"}";
             allCartItem+=item;
         }
-        allCartItem+"]"
+        allCartItem+="]";
         $("#quantity_final").html(formatDollar(total_quantity));
         $("#total_final").html(formatDollar(total_money));
         var lon2=$("#lon").val();
@@ -203,15 +214,65 @@
             getPriceShip();
         }
     }
-    //$("#spinner")
-    //  .spinner('delay', 200) //delay in ms
-    //  .spinner('changed', function(e, newVal, oldVal) {
-    //      // trigger lazed, depend on delay option.
-    //      calculate();
-    //  })
-    //  .spinner('changing', function(e, newVal, oldVal) {
-    //      // trigger immediately
-    //  });
+    function submitOrder(){
+        var address= $("#customer_address").val();
+        var customer_name=$("#customer_name").val();
+        var customer_email=$("#customer_email").val();
+        var customer_phone=$("#customer_phone").val();
+        var lon=$("#lon").val();
+        var lat=$("#lat").val();
+        if (address=="" || lon==""){
+            document.getElementById("customer_address").focus();
+            return;
+        }
+        if (customer_name==""){
+            document.getElementById("customer_name").focus();
+            return;
+        }
+        if (customer_email==""){
+            document.getElementById("customer_email").focus();
+            return;
+        }
+        if (customer_phone==""){
+            document.getElementById("customer_phone").focus();
+            return;
+        }
+        var count=@count;
+        var total_quantity=0;
+        var total_money=0;
+        var session=document.getElementById("session").value;
+        var ship_kg=parseInt(document.getElementById("ship_kg").innerText);
+        var ship_fee=parseInt(document.getElementById("ship_fee").innerText);
+        allCartItem="[{product_id:-1,quantity:-1}";
+        for(var i=1;i<=count;i++){
+            var item1=parseInt(document.getElementById("product_id_"+i).value);
+            var item2=document.getElementById("product_photos_"+i).value;
+            var item3=document.getElementById("product_name_"+i).value;
+            var item4=parseInt(document.getElementById("product_price_"+i).value);
+            var item5=parseInt(document.getElementById("quantity_"+i).value);
+            var item6=parseInt(document.getElementById("total_"+i).innerText);
+            var item = ",{product_id:"+ item1+", product_photos: '"+item2+"', product_name: '"+item3+"', product_price: "+item4+", quantity: "+item5+", product_total: "+item6+"}";
+            allCartItem+=item;
+        }
+        allCartItem+="]";
+        if (confirm("Xác nhận đặt hàng")==true){
+            $.ajax({
+                url: '/Products/submitOrder',
+                type: 'POST',
+                datatype: 'text',
+                data: "data=" + allCartItem+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee+"&total_fee="+total_fee+"&customer_address="+customer_address+"&customer_name="+customer_name+"&customer_email="+customer_email+"&customer_phone="+customer_phone+"&lon="+lon+"&lat="+lat,
+                success: function (data) {
+                    if (data != "0") {
+                        window.location.href="/Products/CartStep2?session"+data;
+                        //window.location.reload();
+                    };
+                },
+                error: function (jqXHR, exception) {
+                    alert(exception.toString());
+                }
+            });
+        }
+    }
     function formatDollar(num) {
         var p = num.toFixed(2).split(".");
         return p[0].split("").reverse().reduce(function(acc, num, i, orig) {
@@ -252,8 +313,14 @@
             datatype: 'text',
             data: "lon1=105.8194541&lat1=21.0227431&lon2="+lon2+"&lat2="+lat2+"&type="+type+"&data="+allCartItem,
             success: function (data) {
-                if (data != "0") {
 
+                if (data != "0") {
+                    var rs=data.split("_");
+                    var kg=parseFloat(rs[0]);
+                    var price=parseFloat(rs[1]);
+                    //alert(price);
+                    $("#ship_kg").html(formatDollar(kg)+" g");
+                    $("#ship_fee").html(formatDollar(price)+" vnd");
                 };
             },
             error: function (jqXHR, exception) {
@@ -266,10 +333,10 @@
     };
     $("#customer_address").geocomplete(options)
       .bind("geocode:result", function (event, result) {
-      $("#lat").val(result.geometry.location.lat());
-      $("#lon").val(result.geometry.location.lng());
-      //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
-  })
+          $("#lat").val(result.geometry.location.lat());
+          $("#lon").val(result.geometry.location.lng());
+          //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+      })
   .bind("geocode:error", function (event, status) {
       $.log("ERROR: " + status);
   })

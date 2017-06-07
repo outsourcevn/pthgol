@@ -33,9 +33,11 @@
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="customer_id" Type="int" />
-          <Property Name="order_id" Type="bigint" />
+          <Property Name="session" Type="nvarchar" MaxLength="501" />
+          <Property Name="g" Type="float" />
           <Property Name="ship_fee" Type="bigint" />
           <Property Name="total_fee" Type="bigint" />
+          <Property Name="total" Type="bigint" />
         </EntityType>
         <EntityType Name="product_img">
           <Key>
@@ -443,9 +445,9 @@
             <End Role="product_img" EntitySet="product_img" />
           </AssociationSet>
           <EntitySet Name="customers" EntityType="tbcngModel.customer" />
-          <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
           <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
           <EntitySet Name="ships" EntityType="tbcngModel.ship" />
+          <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
         </EntityContainer>
         <EntityType Name="product">
           <Key>
@@ -512,16 +514,6 @@
           <Property Name="lon" Type="Double" />
           <Property Name="lat" Type="Double" />
         </EntityType>
-        <EntityType Name="product_customer_order">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_id" Type="Int32" />
-          <Property Name="order_id" Type="Int64" />
-          <Property Name="ship_fee" Type="Int64" />
-          <Property Name="total_fee" Type="Int64" />
-        </EntityType>
         <EntityType Name="product_order">
           <Key>
             <PropertyRef Name="id" />
@@ -551,6 +543,18 @@
           <Property Name="m_300" Type="Int32" />
           <Property Name="hn_dn" Type="Int32" />
           <Property Name="hn_hcm" Type="Int32" />
+        </EntityType>
+        <EntityType Name="product_customer_order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="session" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="g" Type="Double" />
+          <Property Name="ship_fee" Type="Int64" />
+          <Property Name="total_fee" Type="Int64" />
+          <Property Name="total" Type="Int64" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -674,17 +678,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="product_customer_order">
-            <EntityTypeMapping TypeName="tbcngModel.product_customer_order">
-              <MappingFragment StoreEntitySet="product_customer_order">
-                <ScalarProperty Name="total_fee" ColumnName="total_fee" />
-                <ScalarProperty Name="ship_fee" ColumnName="ship_fee" />
-                <ScalarProperty Name="order_id" ColumnName="order_id" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="product_order">
             <EntityTypeMapping TypeName="tbcngModel.product_order">
               <MappingFragment StoreEntitySet="product_order">
@@ -713,6 +706,19 @@
                 <ScalarProperty Name="in_city" ColumnName="in_city" />
                 <ScalarProperty Name="g_to" ColumnName="g_to" />
                 <ScalarProperty Name="g_from" ColumnName="g_from" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_customer_order">
+            <EntityTypeMapping TypeName="tbcngModel.product_customer_order">
+              <MappingFragment StoreEntitySet="product_customer_order">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="total_fee" ColumnName="total_fee" />
+                <ScalarProperty Name="ship_fee" ColumnName="ship_fee" />
+                <ScalarProperty Name="g" ColumnName="g" />
+                <ScalarProperty Name="session" ColumnName="session" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

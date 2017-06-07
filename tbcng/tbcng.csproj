@@ -1425,6 +1425,7 @@
     <Content Include="Views\Products\LoadRelateProduct.cshtml" />
     <Content Include="Views\Products\LoadCart.cshtml" />
     <Content Include="Views\Products\Cart.cshtml" />
+    <Content Include="Views\Products\CartStep2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

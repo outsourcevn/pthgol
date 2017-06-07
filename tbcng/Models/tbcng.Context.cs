@@ -12,7 +12,7 @@ namespace tbcng.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class thietbicnEntities : DbContext
     {
         public thietbicnEntities()
@@ -33,8 +33,8 @@ namespace tbcng.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<product_customer_order> product_customer_order { get; set; }
         public virtual DbSet<product_order> product_order { get; set; }
         public virtual DbSet<ship> ships { get; set; }
+        public virtual DbSet<product_customer_order> product_customer_order { get; set; }
     }
 }

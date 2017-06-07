@@ -19,9 +19,9 @@
         <AssociationConnector Association="tbcngModel.FK_products_cats" />
         <AssociationConnector Association="tbcngModel.FK_product_img_products" />
         <EntityTypeShape EntityType="tbcngModel.customer" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="tbcngModel.product_order" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="tbcngModel.ship" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="9.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

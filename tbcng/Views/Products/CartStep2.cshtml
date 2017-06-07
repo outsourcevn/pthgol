@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "Thanh toán online";
+    Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
+    int count = 0;
+    int total_quantity = 0;
+    int total_val = 0;
+    string allCartItem = "[{product_id:-1,quantity:-1}";
+}
+<div class="cp-inner-banner2" style="height:50px;">
+    <div class="container2">
+        <div class="cp-inner-banner-outer2" style="color:black;">
+            <h2 style="color:black;">Thanh Toán Online</h2>
+            <!--Breadcrumb Start-->
+            <ul class="breadcrumb2">
+                <li><a href="#">Trang Sản Phẩm</a></li>
+                <li class="active">Chi Tiết</li>
+            </ul><!--Breadcrumb End-->
+        </div>
+    </div>
+</div>
+<!-- Main Content Start -->
+<section class="cp-main-content">
+    <!--Product Section Start-->
+    <section class="cp-product-section_v2 pd-tb100" style="padding-bottom: 0px;padding: 0px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Form Box Start-->
+                    <div class="cp-form-box">
+                        <h3>Chuyển Khoản Đến Chủ Tài Khoản Với Mã Đơn Hàng @ViewBag.ordercode</h3>
+                        <div class="row">
+                            
+                        </div>
+                    </div><!--Form Box End-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Cart Section Start-->
+    <section class="cp-cart-section pd-tb100">
+        <div class="container">
+            <!--Cart Inner Holder Start-->
+            @*<div class="cp-cart-inner">
+                    <p class="first">RIDER ipsum dolor sit amet, consectetuer adipiscing elitSuspendisse et justo. Praesent mattis commodo augue Aliquam Praesent mattis.</p>
+                    <p>Etiam dictum. Nunc enim. Sed massa tellus, aliquam rhoncus, venenatis quis, suscipit ac, libero. Praesent odio tellus, posuere sed, dictum sed, fermentum at, orci. Aenean arcu tortor, suscipit vitae, hendrerit condimentum, dapibus ac, nulla. Curabitur sit consectetuer ipsum.</p>
+                </div>*@
+            <!--Cart Table Row Start-->
+            <div class="cart-table-row">
+                <div class="woocommerce">
+                    @if (ViewBag.list != null)
+                    {
+                        <form method="get">
+                            <input id="session" name="session" value="@ViewBag.session" />
+                            <table class="cp-shop_table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Sản phẩm</th>
+                                        <th class="product-price">Giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.list)
+                                    {
+                                        double total = double.Parse(item.product_price.ToString()) * double.Parse(item.quantity.ToString());
+                                        count++;
+                                        total_quantity += item.quantity;
+                                        total_val += item.quantity * item.product_price;
+                                        allCartItem += ",{ product_id: " + item.product_id + ", quantity: " + item.quantity + "}";
+                                        <tr class="cart_item" id="row_@count">
+                                            <td class="product-thumbnail">
+                                                <a href="#"><img src="@item.product_photos" alt="" style="height:50px;width:50px;"></a>
+                                            </td>
+                                            <td class="product-price" id="price_@count">
+                                                @String.Format("{0:n0}", @item.product_price)
+                                            </td>
+                                            <td class="product-quantity">
+                                                <div class="input-append spinner" data-trigger="spinner">
+                                                    @item.quantity
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotal" id="total_@count">
+                                                @String.Format("{0:n0}", @total)
+                                            </td>
+                                        </tr>
+                                    }
+                                    @{allCartItem += "]";}
+                                    <tr class="cart_item">
+                                        <td class="product-remove"></td>
+                                        <td class="product-thumbnail"></td>
+                                        <td class="product-price" id="price_@count">
+                                            Tổng số lượng
+                                        </td>
+                                        <td class="product-thumbnail" id="quantity_final">
+                                            @String.Format("{0:n0}", @total_quantity)
+                                        </td>
+                                        <td class="product-subtotal" id="total_final">@String.Format("{0:n0}", @total_val)</td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="product-remove"></td>
+                                        <td class="product-thumbnail"></td>
+                                        <td class="product-price">
+                                            
+                                        </td>
+                                        <td class="product-thumbnail" id="ship_kg"></td>
+                                        <td class="product-subtotal" id="ship_fee">@String.Format("{0:n0}", @ViewBag.ship_fee)</td>
+                                    </tr>
+                                    <tr class="cart_item">
+                                        <td class="product-remove"></td>
+                                        <td class="product-thumbnail"></td>
+                                        <td class="product-price"></td>
+                                        <td class="product-thumbnail"></td>
+                                        <td class="product-subtotal" id="all_fee">@String.Format("{0:n0}", @ViewBag.total)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    }
+                    <!--Cart Bottom Holder Start-->
+                    <div class="cp-cart-bottom">
+                        @*<span class="icon-cart icomoon"></span>*@
+                        <h3 id="_total_quantity_">Có tổng số @count sản phẩm với @total_quantity số lượng trong giỏ hàng</h3>
+                        @*<a href="#" class="cp-btn-style1" onclick="submitOrder();">Đặt Hàng</a>*@
+                    </div><!--Cart Bottom Holder End-->
+                </div>
+            </div><!--Cart Table Row End-->
+        </div>
+    </section><!--Cart Section End-->
+</section>
+
