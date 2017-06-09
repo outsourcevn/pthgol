@@ -12,7 +12,7 @@ namespace tbcng.Helpers
     public static class configs
     {
         private static thietbicnEntities db = new thietbicnEntities();
-        public static bool Sendmail(string from, string pass, string to, string mailHost, int mailPort, bool mailEnableSsl, int MailTimeout, string topic, string content)
+        public static bool Sendmail(string from, string pass, string to, string topic, string content)
         {
             try
             {
@@ -32,12 +32,12 @@ namespace tbcng.Helpers
                 message.Body = body;
                 var smtp = new System.Net.Mail.SmtpClient();
                 {
-                    smtp.Host = mailHost;//"smtp.gmail.com";
-                    smtp.Port = mailPort;// 465;//587;
-                    smtp.EnableSsl = mailEnableSsl;
+                    smtp.Host = "smtp.gmail.com";//"smtp.gmail.com";
+                    smtp.Port = 587;// 465;//587;
+                    smtp.EnableSsl = true;
                     smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
                     smtp.Credentials = new NetworkCredential(fromAddress, fromPassword);
-                    smtp.Timeout = MailTimeout;
+                    smtp.Timeout = 20000;
                 }
                 // Passing values to smtp object
                 smtp.Send(message);

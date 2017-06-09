@@ -14,6 +14,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
+using System.Web.Configuration;
+using tbcng.Helpers;
 namespace tbcng.Controllers
 {
     //[Authorize(Roles = "Administrator")]
@@ -857,28 +859,36 @@ namespace tbcng.Controllers
         {
              try
              {
-                 customer ctm = new customer();
-                 ctm.customer_address = customer_address;
-                 ctm.customer_email = customer_email;
-                 ctm.customer_name = customer_name;
-                 ctm.customer_phone = customer_phone;
-                 ctm.lat = lat;
-                 ctm.lon = lon;
-                 db.customers.Add(ctm);
-                 db.SaveChanges();
-                 int customer_id=ctm.id;
-                 product_customer_order pco = new product_customer_order();
-                 pco.customer_id = customer_id;
-                 pco.g = g;
-                 pco.session = session;
-                 pco.ship_fee = ship_fee;
-                 pco.total_fee = total_fee;
-                 pco.total = ship_fee + total_fee;
-                 db.product_customer_order.Add(pco);
-                 db.SaveChanges();
+                 //customer ctm = new customer();
+                 //ctm.customer_address = customer_address;
+                 //ctm.customer_email = customer_email;
+                 //ctm.customer_name = customer_name;
+                 //ctm.customer_phone = customer_phone;
+                 //ctm.lat = lat;
+                 //ctm.lon = lon;
+                 //db.customers.Add(ctm);
+                 //db.SaveChanges();
+                 //int customer_id=ctm.id;
+                 //product_customer_order pco = new product_customer_order();
+                 //pco.customer_id = customer_id;
+                 //pco.g = g;
+                 //pco.session = session;
+                 //pco.ship_fee = ship_fee;
+                 //pco.total_fee = total_fee;
+                 //pco.total = ship_fee + total_fee;
+                 //db.product_customer_order.Add(pco);
+                 //db.SaveChanges();
 
+                 string result ="";
+                 result += "<table style=\"margin: 0 auto;width: 700px;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
+                 + "<tr><td colspan=\"5\">Đơn Đặt Hàng</td></tr>"
+                 + "<tr><td colspan=\"5\">Khách Hàng: " + customer_name + ", điện thoại:" + customer_phone + ", địa chỉ:" + customer_address + " </td></tr>"
+                 + "<tr><td colspan=\"5\">Chi Tiết Đơn Hàng</td></tr>"
+                 + "<tr><th>Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
                  List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
                  //double total_kg = 0;
+                 int total_quantity = 0;
+                 long? total = ship_fee + total_fee;
                  if (thelist.Count > 1) { 
 
                      foreach (var detail in thelist)
@@ -890,22 +900,28 @@ namespace tbcng.Controllers
                          int quantity = detail.quantity;
                          float? product_price = detail.product_price;
                          float product_total = detail.product_total;
-                         product_order po = new product_order();
-                         po.customer_id = customer_id;
-                         po.date_time = DateTime.Now;
-                         po.product_id = product_id;
-                         po.product_name = product_name;
-                         po.product_photos = product_photos;
-                         po.product_price = product_price;
-                         po.product_total = product_total;
-                         po.quantity = quantity;
-                         po.session = session;
-                         po.status = 1;
-                         db.product_order.Add(po);
-                         db.SaveChanges();
+                         total_quantity += quantity;
+                         //product_order po = new product_order();
+                         //po.customer_id = customer_id;
+                         //po.date_time = DateTime.Now;
+                         //po.product_id = product_id;
+                         //po.product_name = product_name;
+                         //po.product_photos = product_photos;
+                         //po.product_price = product_price;
+                         //po.product_total = product_total;
+                         //po.quantity = quantity;
+                         //po.session = session;
+                         //po.status = 1;
+                         //db.product_order.Add(po);
+                         //db.SaveChanges();
+                         result += "<tr><td><img src=\"" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td>" + product_name + "</td><td>" + String.Format("{0:n0}", product_price) + "</td><td>" + quantity + "</td><td>" + String.Format("{0:n0}", product_total) + "</td></tr>";
                      }
+                     result += "<tr><td colspan=\"2\">Tổng</td><td>Tổng số lượng " + total_quantity + "</td><td>Phí ship " + String.Format("{0:n0}", ship_fee) + "</td><td>Tổng giá trị hàng" + String.Format("{0:n0}", total_fee) + "</td></tr>";
+                     result += "<tr><td colspan=\"4\">Tổng</td><td>Tổng tiền: " + String.Format("{0:n0}", total) + "</td></tr>";
+                     var sendmail =configs.Sendmail(WebConfigurationManager.AppSettings["emailroot"], WebConfigurationManager.AppSettings["passroot"], "thuexevn.com@gmail.com", customer_phone + "-Khách đặt hàng", result);
                      return session;
                  }
+                 
                  return "0";
              }
              catch (Exception ex)

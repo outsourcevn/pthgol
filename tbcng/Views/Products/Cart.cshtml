@@ -177,7 +177,7 @@
                     <div class="cp-cart-bottom">
                         @*<span class="icon-cart icomoon"></span>*@
                         <h3 id="_total_quantity_">Có tổng số @count sản phẩm với @total_quantity số lượng trong giỏ hàng</h3>
-                        <a href="#" class="cp-btn-style1" onclick="submitOrder();">Đặt Hàng</a>
+                        <input type="button" class="cp-btn-style1" value="Đặt Hàng" onclick="submitOrder();" id="btnSubmitOrder">
                     </div><!--Cart Bottom Holder End-->
                 </div>
             </div><!--Cart Table Row End-->
@@ -255,22 +255,54 @@
             allCartItem+=item;
         }
         allCartItem+="]";
+        //alert(allCartItem);
         if (confirm("Xác nhận đặt hàng")==true){
-            $.ajax({
-                url: '/Products/submitOrder',
-                type: 'POST',
-                datatype: 'text',
-                data: "data=" + allCartItem+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee+"&total_fee="+total_fee+"&customer_address="+customer_address+"&customer_name="+customer_name+"&customer_email="+customer_email+"&customer_phone="+customer_phone+"&lon="+lon+"&lat="+lat,
-                success: function (data) {
-                    if (data != "0") {
-                        window.location.href="/Products/CartStep2?session"+data;
-                        //window.location.reload();
-                    };
-                },
-                error: function (jqXHR, exception) {
-                    alert(exception.toString());
+            document.getElementById("btnSubmitOrder").value="Đang xử lý đơn hàng xin đợi...";
+            //document.getElementById("btnSubmitOrder").disabled=true;
+            //alert("data=" + allCartItem+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee);//+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee+"&total_fee="+total_fee+"&customer_address="+customer_address+"&customer_name="+customer_name+"&customer_email="+customer_email+"&customer_phone="+customer_phone+"&lon="+lon+"&lat="+lat
+            var formdata = new FormData();
+            //$.ajax({
+            //    url: '/Products/submitOrder',
+            //    type: 'POST',
+            //    datatype: 'text',
+            //    data: "data=" + allCartItem+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee+"&total_fee="+total_fee+"&customer_address="+customer_address+"&customer_name="+customer_name+"&customer_email="+customer_email+"&customer_phone="+customer_phone+"&lon="+lon+"&lat="+lat,
+            //    success: function (data) {
+            //        if (data != "0") {
+            //            window.location.href="/Products/CartStep2?session"+data;
+            //            //window.location.reload();
+            //        };
+            //    },
+            //    error: function (jqXHR, exception) {
+            //        alert(exception.toString());
+            //        document.getElementById("btnSubmitOrder").disabled=false;
+            //    }
+            //});
+            formdata.append("data", allCartItem);
+            formdata.append("session", session);
+            formdata.append("g", ship_kg);
+            formdata.append("ship_fee", ship_fee);
+            formdata.append("total_fee", total_fee);
+            formdata.append("customer_address", customer_address);
+            formdata.append("customer_name", customer_name);
+            formdata.append("customer_email", customer_email);
+            formdata.append("customer_phone", customer_phone);
+            formdata.append("lon", lon);
+            formdata.append("lat", lat);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Products/submitOrder');
+            xhr.send(formdata);
+            var content = "";
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText != "0") {
+                        window.location.href="/Products/CartStep2?session"+xhr.responseText;
+                    }else{
+                        alert("Có lỗi!");
+                       document.getElementById("btnSubmitOrder").disabled=false;
+                    }
                 }
-            });
+            }
+            
         }
     }
     function formatDollar(num) {
@@ -307,6 +339,8 @@
             type=3;
         else if (address.indexOf("Đà Nẵng")>=0 || address.indexOf("Da Nang")>=0) type=2;
         else if (address.indexOf("Ha Noi")>=0 || address.indexOf("Hà Nội")>=0) type=1;
+        $("#ship_kg").html("<img src='/images/loader.gif'>Đang tính trọng lượng...");
+        $("#ship_fee").html("<img src='/images/loader.gif'>Đang tính phí ship...");
         $.ajax({
             url: '/Products/getPriceShip',
             type: 'POST',

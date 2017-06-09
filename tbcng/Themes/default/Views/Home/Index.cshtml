@@ -1,58 +1,65 @@
 ﻿@{
     ViewBag.Title = "Phụ Tùng Hoàng Gia";
 }
+<style>
+    #map {
+        float: left;
+        width: 100%;
+        min-height: 600px;
+      }
+</style>
 <!-- Banner Slider Start -->
-<div class="cp-banner cp-banner2" style="max-height: 842px;">
+  <div class="cp-banner cp-banner2">
     <!--Banner Slider Start-->
-    <div id="home-slider2" class="owl-carousel">
-        <div class="item">
-            <img src="/Content/themes/pthg/images/banner/banner2-img-01.jpg" alt="">
-            <!--Slider Caption Start-->
-            <div class="cp-slider-content">
-                <div class="container">
-                    <strong class="title" style="text-shadow: 12px 12px red;">Hoàng Gia</strong>
-                    <p style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;">Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
-                </div>
-            </div><!--Slider Caption End-->
-        </div>
-        <div class="item">
-            <img src="/Content/themes/pthg/images/banner/banner2-img-02.jpg" alt="">
-            <!--Slider Caption Start-->
-            <div class="cp-slider-content">
-                <div class="container">
-                    <strong class="title" style="text-shadow: 12px 12px blue;">Phụ Tùng Hoàng Gia</strong>
-                    <p style="text-shadow: 0 0 33px #FF0000, 0 0 35px #0000FF;line-height: 60px;display: block;margin: 0 0 25px;">Tất cả những gì bạn cần chúng tôi đều có, không có chúng tôi mua giúp!</p>
-                </div>
-            </div><!--Slider Caption End-->
-        </div>
-        <div class="item">
-            <img src="/Content/themes/pthg/images/banner/banner2-img-03.jpg" alt="">
-            <!--Slider Caption Start-->
-            <div class="cp-slider-content">
-                <div class="container">
-                    <strong class="title">Ride A Bike</strong>
-                    <p>Cycling is the sport that can easily be picked up as an adult. </p>
-                </div>
-            </div><!--Slider Caption End-->
+    <div id="home-slider2" class="owl-carousel" style="max-height: 840px;">
+      <div class="item">
+        <img src="~/Content/themes/pthg/images/banner/banner2-img-01.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title" >Hoàng Gia <a href="http://phutunghoanggia.vn" target="_blank" style="color:#ffd800;">phutunghoanggia.vn</a></strong>
+            <p style="text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;">Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
+          </div>
+        </div><!--Slider Caption End-->
+      </div>
+      <div class="item">
+        <img src="~/Content/themes/pthg/images/banner/banner2-img-02.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title" style="text-shadow: 12px 12px blue;">Phụ Tùng Hoàng Gia</strong>
+            <p style="text-shadow: 0 0 33px #FF0000, 0 0 35px #0000FF;line-height: 60px;display: block;margin: 0 0 25px;">Tất cả những gì bạn cần chúng tôi đều có!</p>
+          </div>
+        </div><!--Slider Caption End-->
+      </div>
+      <div class="item">
+        <img src="/Content/themes/pthg/images/banner/banner2-img-03.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title">Ride A Bike</strong>
+            <p>Cycling is the sport that can easily be picked up as an adult. </p>
+          </div>
+        </div><!--Slider Caption End-->
 
-        </div>
+      </div>
 
-        <div class="item">
-            <img src="/Content/themes/pthg/images/banner/banner2-img-04.jpg" alt="">
-            <!--Slider Caption Start-->
-            <div class="cp-slider-content">
-                <div class="container">
-                    <strong class="title">Hoàng Gia</strong>
-                    <p>Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
-                </div>
-            </div><!--Slider Caption End-->
+      <div class="item">
+        <img src="/Content/themes/pthg/images/banner/banner2-img-04.jpg" alt="">
+        <!--Slider Caption Start-->
+        <div class="cp-slider-content">
+          <div class="container">
+            <strong class="title">Hoàng Gia</strong>
+            <p>Luôn Đoán Trước Nhu Cầu Của Khách Hàng. </p>
+          </div>
+        </div><!--Slider Caption End-->
 
-        </div>
-
+      </div>
+     
     </div><!--Banner Slider End-->
 
     <span class="cp-arrow-btn"></span>
-</div>
+  </div>
 <!-- Banner Slider End -->
 <!--Pop Up Overlay Start-->
 <!--<div id="popup-overlay">
@@ -114,7 +121,7 @@
         </div>
 
     </section><!--Services Section End-->
-    <!--Product Section Start-->
+    @*<!--Product Section Start-->
     <section class="cp-product-section cp-product-section_v5 pd-tb100">
         <div class="container">
             <div class="cp-heading-style2_v1">
@@ -465,9 +472,9 @@
                 </div>
             </div>
         </div>
-    </section><!--Product Section End-->
+    </section><!--Product Section End-->*@
     <!--Instagram Section Start-->
-    <section class="cp-instagram-section" style="background-color: #91c9da;">
+    <section class="cp-instagram-section" style="background-color: #91c9da;padding-top:50px;">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 col-sm-2">
@@ -483,32 +490,32 @@
                     <ul class="cp-instagram-listed">
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img1.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img1.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img2.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img2.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img3.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img3.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img4.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img4.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img5.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img5.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                         <li>
                             <figure class="cp-thumb">
-                                <a href="#"><img src="images/products/flickr-img6.jpg" alt=""></a>
+                                <a href="#"><img src="images/products/flickr-img6.jpg" alt="" style="max-height:180px;border-right:1px solid #ff0000;"></a>
                             </figure>
                         </li>
                     </ul>
@@ -535,8 +542,39 @@
     </section><!--Our Clients Section End-->
     <!--Footer Maps Start-->
     <section class="cp-footer-map" style="background-color: #f8f7f6;">
-        <div id="cp-map_v1"></div>
+        @*<div id="cp-map_v1"></div>*@
+        <div id="map"></div>
     </section><!--Footer Maps End-->
 
 </div>
 <!-- Main Content End --> 
+<script>
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: { lat: 21.008665, lng: 105.8472903 }
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+            });
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    }
+    var locations = [{ lat: 21.008665, lng: 105.8472903 }, { lat: 20.9813294, lng: 105.8149536 }];
+</script>
+<script src="/Scripts/markerclusterer.js">
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLPSKQ4QV4xGiQjnZDUecx-UEr3D0QePY&libraries=places&region=vn&language=vi&callback=initMap" type="text/javascript"></script>
