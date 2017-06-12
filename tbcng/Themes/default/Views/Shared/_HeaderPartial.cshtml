@@ -1,5 +1,8 @@
 ﻿<!-- Header Start -->
-<header class="cp-header" id="cp_header-v2">
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+<header class="cp-header" id="cp_header-v2" style="background:#f7f7f7;">
     <div id="cp-slide-menu" class="cp_side-navigation">
         <ul class="navbar-nav">
             <li id="close"><a href="#"><i class="fa fa-close"></i></a></li>
@@ -54,9 +57,22 @@
                             </li>
                             <li class="dropdown">
                                 <a href="/san-pham" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                @Html.Raw(tbcng.Helpers.configs.getAllMenu())
                                 @*<ul class="dropdown-menu">
-                                    <li><a href="#">Danh mục 1</a></li>
-                                    <li><a href="#">Danh mục 1</a></li>
+                                    <li class="dropdown">
+                                        <a href="/san-pham" >Lốp <i class="fa fa-angle-down"></i></a>
+                                        <a href="/san-pham" >&nbsp Lốp 1 <i class="fa fa-angle-down"></i></a>
+                                        <a href="/san-pham" >&nbsp Lốp 2 <i class="fa fa-angle-down"></i></a>
+                                        <a href="/san-pham" >&nbsp &nbsp Lốp 21 <i class="fa fa-angle-down"></i></a>
+                                        <a href="/san-pham" >&nbsp Lốp 3 <i class="fa fa-angle-down"></i></a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="/san-pham" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dầu <i class="fa fa-angle-down"></i></a>
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="/san-pham" style="color:black;">d 1 </a></li>
+                                            <li><a href="/san-pham" style="color:black;">d 2 </a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="#">Danh mục 1</a></li>
                                 </ul>*@
                             </li>
@@ -130,3 +146,15 @@
 
 </header>
 <!-- Header End --> 
+<script>
+    function viewtree(id) {
+        $('#bs-example-navbar-collapse-1 li').each(function () {
+            //column1RelArray.push($(this).attr('rel'));
+            //console.log($(this).attr('pid'));
+            if ($(this).attr('pid')==id) {
+                if ($(this).is(":visible")) $(this).hide(); else $(this).show();
+                //viewtree($(this).attr('id'));
+            }
+        });
+    }
+</script>

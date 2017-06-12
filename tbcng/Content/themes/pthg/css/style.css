@@ -383,7 +383,7 @@ ul ul,ol ol{
 	padding-bottom: 30px;
 }
 .cp-nav-holder .navbar-default .navbar-nav > li > a{
-	color: #fff;
+	/*color: #fff;*/
 	padding: 0px 20px;
 }
 .cp-nav-holder .dropdown-menu > li > a:hover,.cp-nav-holder .dropdown-menu > li > a:focus{
@@ -626,7 +626,7 @@ ul ul,ol ol{
 #cp_header-v2 .cp-navigation-row .cp-logo{
 	position: absolute;
 	left: 40px;
-	top: 20px;
+	top: 5px;
 }
 #cp_header-v2 .cp-navigation-row .cp-nav-right{
 	position: absolute;
@@ -635,7 +635,7 @@ ul ul,ol ol{
 }
 #cp_header-v2 .cp-navigation-row{
 	padding: 20px 0;
-	background-color: #ed1b2f;;
+	/*background-color: #ed1b2f;*/
 }
 #cp_header-v2 .cp-nav-holder{
 	margin: 23px 0 0;

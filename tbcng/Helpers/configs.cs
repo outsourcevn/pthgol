@@ -48,6 +48,67 @@ namespace tbcng.Helpers
             }
             return true;
         }
+        public static string getAllMenu()
+        {
+            try
+            {
+                string rs = "<ul class=\"dropdown-menu\">";
+                var p = (from q in db.cats where q.cat_parent_id == null select q).OrderBy(o => o.cat_pos).ToList();
+                for (int i = 0; i < p.Count; i++)
+                {
+                    rs += "<li >";
+                    rs += getAllChildMenu(p[i].cat_name,p[i].cat_id,1);
+                    rs += "</li>";
+                }
+                rs += "</ul>";
+                return rs;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+        public static string getAllChildMenu(string name,int id,int l)
+        {
+            try
+            {
+                string space="";
+                for (int j = 0; j <= l*4; j++)
+                {
+                    space += "&nbsp";
+                }
+                string rs = "";// "<a href=\"#\">" + name + " </a>";
+                string temp="<i class=\"fa fa-angle-down\"></i>";//"class=\"dropdown-submenu\"";
+                string temp2 = "";
+                string display = "display:block;";
+                var p2 = (from q2 in db.cats where q2.cat_parent_id == id select q2).OrderBy(o => o.cat_pos).ToList();
+                for (int ii = 0; ii < p2.Count; ii++)
+                {
+                    temp2=getAllChildMenu(p2[ii].cat_name,p2[ii].cat_id, l+1);
+                    if (l > 1) display = "display:none;";
+                    if (temp2 != "")
+                    {
+                        //rs += "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a>";
+                        //rs += "<ul class=\"dropdown-menu\">" + temp2 + "</li></ul>";
+                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + temp + "<span class=\"caret\"></span></a></li>";
+                        rs += temp2;
+                    }
+                    else 
+                    {
+                        //rs += "<li ><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a></li>";
+                        //rs += temp2;
+                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "</a></li>";
+                        rs += temp2;
+                    }
+                    
+                }
+                return rs;
+            }
+            catch
+            {
+                return "";
+            }
+        }
         public static string getcatname(int? catid)
         {
             try
