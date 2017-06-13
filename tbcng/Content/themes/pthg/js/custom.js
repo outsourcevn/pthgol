@@ -720,9 +720,9 @@ function addToCart(product_id) {
         data: "product_id=" + product_id,
         success: function (data) {
             if (data != "0") {
-                alert(data);
+                //alert(data);
                 var obj = JSON.parse(data);
-                alert(obj.product_photos);
+                //alert(obj.product_photos);
                 //add item
                 var item="<li>";
                 item += "<img src=\"" + obj.product_photos + "\" alt=\"\">";

@@ -45,7 +45,7 @@ namespace tbcng.Controllers
             return View(data.ToList().ToPagedList(pageNumber, pageSize));
         }
         // GET: Products
-        public ActionResult Grid(int? pg, string search,int? order)
+        public ActionResult Grid(int? pf,int? pt,int? pg, string search,int? order,int? cat_id)
         {
             int pageSize = 25;
             if (pg == null) pg = 1;
@@ -56,11 +56,31 @@ namespace tbcng.Controllers
             {
                 return View(data);
             }
-            if (!string.IsNullOrWhiteSpace(search))
+            if (!string.IsNullOrWhiteSpace(search) && search != "all")
             {
                 search = search.Trim();
                 data = data.Where(x => x.product_name.ToLower().Contains(search));
                 ViewBag.search = search;
+            }
+            else search = "all";
+            ViewBag.cat_id = -1;
+            if (cat_id != null && cat_id != -1 && cat_id != 0)
+            {
+                data = data.Where(x => x.cat_id==cat_id);
+                ViewBag.cat_id = cat_id;
+                ViewBag.catname = configs.getcatname(cat_id);
+            }
+            ViewBag.pf = 0;
+            if (pf != null && pf != -1 && pf != 0)
+            {
+                data = data.Where(x => x.product_price_public >= pf);
+                ViewBag.pf = pf;
+            }
+            ViewBag.pt = 0;
+            if (pt != null && pt != -1 && pt != 0)
+            {
+                data = data.Where(x => x.product_price_public <= pt);
+                ViewBag.pt = pt;
             }
             if (order == null) order = 4;
             if (order == 1) data = data.OrderBy(x => x.product_price_public);

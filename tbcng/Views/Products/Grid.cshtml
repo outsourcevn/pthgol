@@ -1,7 +1,7 @@
 ﻿@model PagedList.IPagedList<tbcng.Models.product>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Grid";
+    ViewBag.Title = ViewBag.catname;
     Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,100 +9,140 @@
 <div class="cp-main-content">
 
     <!--Product Section Start-->
-    <section class="cp-product-section cp-product-section_v3 pd-tb100">
+    <section class="cp-product-section cp-product-section_v4 pd-tb100">
         <div class="container">
-            <!--Show Result Outer Start-->
-            <div class="cp-show-result-outer">
-                <span class="showing">Showing 1–9 of 16 Results</span>
-                <div class="right-outer">
-                    <select id="order" onchange="orderby();">
-                        <option value="1">Rẻ nhất</option>
-                        <option value="2">Đắt nhất</option>
-                        <option value="3">Cũ nhất</option>
-                        <option value="4" selected>Mới nhất</option>
-                    </select>
-                    <div class="cp-btn-listing">
-                        <!-- Nav tabs Start -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active">
-                                <a href="#tab-01" aria-controls="tab-01" role="tab" data-toggle="tab"><i class="fa fa-th-large" aria-hidden="true"></i></a>
-                            </li>
-                            <li><a href="#tab-02" aria-controls="tab-02" role="tab" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!--Show Result Outer End-->
-
-            <div class="cp-tabs-holder">
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="tab-01">
-                        <div class="row">
-                            @foreach (var item in Model) {
-                                var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) +"/"+ tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
-                            <div class="col-md-4 col-sm-4">
-                                <!--Product Item Start-->
-                                <div class="cp-pro-item">
-                                    <div class="cp-pro-img">
-                                        <img src="@item.product_photo" alt="">
-                                    </div>
-                                    <div class="cp-text">
-                                        <h3><a href="@link">@item.product_name</a></h3>
-                                        <span class="small">@item.product_des </span>
-                                        <span class="pro-price">@String.Format("{0:n0}", @item.product_price_public)</span>
-                                        <ul class="cp-pro-meta">
-                                            <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
-                                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div><!--Product Item End-->
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+                    <!--Show Result Outer Start-->
+                    <div class="cp-show-result-outer">
+                        <span class="showing">Hiển thị 1–25 của @Model.Count kết quả</span>
+                        <div class="right-outer">
+                            <select>
+                                <option value="">Giá tăng dần</option>
+                                <option value="">Giá giảm dần</option>
+                                <option value="">Mới nhất</option>
+                                <option value="">Cũ nhất</option>
+                            </select>
+                            <div class="cp-btn-listing">
+                                <!-- Nav tabs Start -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active">
+                                        <a href="#tab-01" aria-controls="tab-01" role="tab" data-toggle="tab"><i class="fa fa-th-large" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li><a href="#tab-02" aria-controls="tab-02" role="tab" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i></a></li>
+                                </ul>
                             </div>
-                            }
                         </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="tab-02">
-                        <div class="row">
-                            @foreach (var item in Model)
-                            {
-                                var link = "//san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
-                                <div class="col-md-12 col-sm-12">
-                                    <!--Product Item Start-->
-                                    <div class="cp-pro-item cp-pro-list-item">
-                                        <div class="cp-pro-img">
-                                            <img src="@item.product_photo" alt="">
-                                        </div>
-                                        <div class="cp-text">
-                                            <h3><a href="@link">@item.product_name</a></h3>
-                                            <span class="small">@item.product_des </span>
-                                            <span class="price">@String.Format("{0:n0}", @item.product_price_public)</span>
-                                            @*<p>Etiam dictum. Nunc enim. Sed massa tellus, aliquam rhoncus, venenatis quis, suscipit ac, libero. Praesent odio tellus, posuere sed, dictum sed.</p>*@
-                                            <ul class="cp-pro-meta">
-                                                <li class="pro-cart"><a href="#"><span class="icon-shopping-cart icomoon"></span></a></li>
-                                                <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div><!--Product Item End-->
+                    </div><!--Show Result Outer End-->
+
+                    <div class="cp-tabs-holder">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active" id="tab-01">
+                                <div class="row">
+                                    @foreach (var item in Model)
+                                    {
+                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                    <div class="col-md-4 col-sm-4" style="min-height:300px;">
+                                        <!--Product Item Start-->
+                                        <div class="cp-pro-item">
+                                            <div class="cp-pro-img">
+                                                <img src="http://lopnhanh.net/@item.product_photo" alt="@item.product_name" style="border:1px solid #808080;">
+                                            </div>
+                                            <div class="cp-text" style="min-height:160px;">
+                                                <h4 style="min-height:60px;"><a href="@link">@item.product_name</a></h4>
+                                                <small class="small">@tbcng.Helpers.configs.getcatname(item.cat_id)</small>
+                                                <span class="pro-price">@String.Format("{0:n0}", @item.product_price_public)</span>
+                                                <ul class="cp-pro-meta">
+                                                    <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                                    <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div><!--Product Item End-->
+                                    </div>
+                                    }
                                 </div>
-                            }
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab-02">
+                                <div class="row">
+                                    @foreach (var item in Model)
+                                    {
+                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                        <div class="col-md-12 col-sm-12">
+                                            <!--Product Item Start-->
+                                            <div class="cp-pro-item cp-pro-list-item">
+                                                <div class="cp-pro-img">
+                                                    <img src="http://lopnhanh.net/@item.product_photo" alt="@item.product_name" style="border:1px solid #808080;">
+                                                </div>
+                                                <div class="cp-text">
+                                                    <h3><a href="@link">@item.product_name</a></h3>
+                                                    <small class="small">@tbcng.Helpers.configs.getcatname(item.cat_id)</small>
+                                                    <span class="price">@String.Format("{0:n0}", @item.product_price_public)</span>
+                                                    <p>@Html.Raw(@item.product_des)</p>
+                                                    <ul class="cp-pro-meta">
+                                                        <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                                        <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div><!--Product Item End-->
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!--Pagination Row Start-->
+                    <div class="cp-pagination-row">
+                        <nav>
+                            <ul class="pagination">
+                                <li><a href="#">Trang</a></li> 
+                                @for (int pg = 1; pg <= Model.PageCount; pg++)
+                                {
+                                    <li><a href="/san-pham/@ViewBag.catname-@ViewBag.cat_id/@ViewBag.search-@ViewBag.pf-@ViewBag.pt-@pg-@ViewBag.order">@pg</a></li>
+                                }
+                                
+                            </ul>
+                        </nav>
+                    </div><!--Pagination Row End-->
+                </div>
+                <div class="col-md-3 col-sm-12" style="padding-top:10px;">
+                    <!--Sidebar Outer Start-->
+                    <aside class="cp-sidebar-outer">
+                        <!--Widget Start-->
+                        <div class="widget widget-categories" id="allsidebar">
+                            <h3>Danh Mục</h3>
+                            <ul>
+                                <li style="display:block;"><a class="test" tabindex="-1" href="/san-pham/all-0/all-0-0-1-1">Tất Cả</a></li>
+                                @Html.Raw(tbcng.Helpers.configs.getAllMenu2())
+                            </ul>
+                            @*<ul>
+                                <li><a href="#">Mauntain Bike</a></li>
+                                <li><a href="#">City Bike</a></li>
+                                <li><a href="#">Arbun Bike</a></li>
+                                <li><a href="#">Propel Advanced</a></li>
+                                <li><a href="#">Cross Country</a></li>
+                                <li><a href="#">City Road Bike</a></li>
+                            </ul>*@
+                        </div><!--Widget End-->
+                        <!--Widget Start-->
+                        @*<div class="widget widget-range-slider">
+                            <h3>Filter By Price</h3>
+                            <div class="cp-range-slider-holder">
+                                <div id="cp-range-slider"></div>
+                                <p>
+                                    <span>Range</span>
+                                    <input type="text" id="amount">
+                                    <span class="cp-filter">Filter</span>
+                                </p>
+                            </div>
+                        </div>*@<!--Widget End-->
+                        
+
+                    </aside><!--Sidebar Outer End-->
                 </div>
             </div>
 
-            <!--Pagination Row Start-->
-            <div class="cp-pagination-row">
-                <nav>
-                    <ul class="pagination">
-                        <li><a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a> </li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li> <a href="#" aria-label="Next"> <span aria-hidden="true">Next</span> </a> </li>
-                    </ul>
-                </nav>
-            </div><!--Pagination Row End-->
         </div>
     </section><!--Product Section End-->
 

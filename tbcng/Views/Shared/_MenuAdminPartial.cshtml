@@ -2,8 +2,8 @@
     <li>
         <a href="/" target="_blank"><i class="fa icon-home fa-fw"></i> Trang chủ</a>
     </li>
-    @if (User.IsInRole("Administrator"))
-    {
+    @*@if (User.IsInRole("Administrator"))
+    {*@
         @*<li>
             <a href="#"><i class="fa fa-user fa-fw"></i> Cài đặt tài khoản <span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -27,6 +27,6 @@
                 <li>@Html.RouteLink("Danh sách thiết bị", "AdminListProduct")</li>
             </ul>
         </li>
-    }
+    @*}*@
 </ul>
 

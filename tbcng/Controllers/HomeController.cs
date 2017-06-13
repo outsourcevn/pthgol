@@ -15,6 +15,12 @@ namespace tbcng.Controllers
 
         public ActionResult Index()
         {
+            try
+            {
+                ViewBag.products = (from q in db.products select q).OrderByDescending(o => o.loads).ThenByDescending(o => o.product_id).Take(15).ToList();//db.products.OrderByDescending(o => o.loads).ThenByDescending(o=>o.product_id).Take(15);
+            }
+            catch { 
+            }
             return View();
         }
 

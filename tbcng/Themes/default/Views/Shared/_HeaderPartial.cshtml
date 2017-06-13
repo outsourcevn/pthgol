@@ -14,12 +14,13 @@
                 <a href="/dich-vu">Dịch vụ <i class="fa fa-angle-down"></i></a>
             </li>
             <li class="dropdown">
-                <a href="/san-pham" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                @Html.Raw(tbcng.Helpers.configs.getAllMenu())
+                @*<ul class="dropdown-menu">
                     <li><a href="#">Danh mục 1</a></li>
                     <li><a href="#">Danh mục 1</a></li>
                     <li><a href="#">Danh mục 1</a></li>
-                </ul>
+                </ul>*@
             </li>
             @*<li class="dropdown">
                 <a href="/tin-tuc" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <i class="fa fa-angle-down"></i></a>
@@ -56,7 +57,7 @@
                                 <a href="/dich-vu" >Dịch vụ <i class="fa fa-angle-down"></i></a>
                             </li>
                             <li class="dropdown">
-                                <a href="/san-pham" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                 @Html.Raw(tbcng.Helpers.configs.getAllMenu())
                                 @*<ul class="dropdown-menu">
                                     <li class="dropdown">
@@ -152,6 +153,16 @@
             //column1RelArray.push($(this).attr('rel'));
             //console.log($(this).attr('pid'));
             if ($(this).attr('pid')==id) {
+                if ($(this).is(":visible")) $(this).hide(); else $(this).show();
+                //viewtree($(this).attr('id'));
+            }
+        });
+    }
+    function viewtree2(id) {
+        $('#allsidebar li').each(function () {
+            //column1RelArray.push($(this).attr('rel'));
+            //console.log($(this).attr('pid'));
+            if ($(this).attr('pid') == id) {
                 if ($(this).is(":visible")) $(this).hide(); else $(this).show();
                 //viewtree($(this).attr('id'));
             }

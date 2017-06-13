@@ -91,6 +91,7 @@
           <Property Name="code" Type="nvarchar" MaxLength="50" />
           <Property Name="color" Type="nvarchar" MaxLength="50" />
           <Property Name="lang" Type="nvarchar" MaxLength="50" />
+          <Property Name="loads" Type="int" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -435,6 +436,10 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="customers" EntityType="tbcngModel.customer" />
+          <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
+          <EntitySet Name="ships" EntityType="tbcngModel.ship" />
+          <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
           <EntitySet Name="products" EntityType="tbcngModel.product" />
           <AssociationSet Name="FK_products_cats" Association="tbcngModel.FK_products_cats">
             <End Role="cat" EntitySet="cats" />
@@ -444,64 +449,7 @@
             <End Role="product" EntitySet="products" />
             <End Role="product_img" EntitySet="product_img" />
           </AssociationSet>
-          <EntitySet Name="customers" EntityType="tbcngModel.customer" />
-          <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
-          <EntitySet Name="ships" EntityType="tbcngModel.ship" />
-          <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
         </EntityContainer>
-        <EntityType Name="product">
-          <Key>
-            <PropertyRef Name="product_id" />
-          </Key>
-          <Property Name="product_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="product_des" Type="String" MaxLength="555" FixedLength="false" Unicode="true" />
-          <Property Name="product_type" Type="Int32" />
-          <Property Name="product_new_type" Type="Int32" />
-          <Property Name="product_price_public" Type="Int32" />
-          <Property Name="product_photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="product_photo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="updated_date" Type="DateTime" Precision="3" />
-          <Property Name="edit_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted_date" Type="DateTime" Precision="3" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="cat_id" Type="Int32" />
-          <Property Name="orderby" Type="Int32" />
-          <Property Name="w" Type="Double" />
-          <Property Name="h" Type="Double" />
-          <Property Name="l" Type="Double" />
-          <Property Name="g" Type="Double" />
-          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="cat" Relationship="tbcngModel.FK_products_cats" FromRole="product" ToRole="cat" />
-          <NavigationProperty Name="product_img" Relationship="tbcngModel.FK_product_img_products" FromRole="product" ToRole="product_img" />
-        </EntityType>
-        <Association Name="FK_products_cats">
-          <End Type="tbcngModel.cat" Role="cat" Multiplicity="0..1" />
-          <End Type="tbcngModel.product" Role="product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cat">
-              <PropertyRef Name="cat_id" />
-            </Principal>
-            <Dependent Role="product">
-              <PropertyRef Name="cat_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_product_img_products">
-          <End Type="tbcngModel.product" Role="product" Multiplicity="0..1" />
-          <End Type="tbcngModel.product_img" Role="product_img" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="product">
-              <PropertyRef Name="product_id" />
-            </Principal>
-            <Dependent Role="product_img">
-              <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="id" />
@@ -556,6 +504,60 @@
           <Property Name="total_fee" Type="Int64" />
           <Property Name="total" Type="Int64" />
         </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="product_des" Type="String" MaxLength="555" FixedLength="false" Unicode="true" />
+          <Property Name="product_type" Type="Int32" />
+          <Property Name="product_new_type" Type="Int32" />
+          <Property Name="product_price_public" Type="Int32" />
+          <Property Name="product_photo" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="product_photo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="product_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="updated_date" Type="DateTime" Precision="3" />
+          <Property Name="edit_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="orderby" Type="Int32" />
+          <Property Name="w" Type="Double" />
+          <Property Name="h" Type="Double" />
+          <Property Name="l" Type="Double" />
+          <Property Name="g" Type="Double" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="loads" Type="Int32" />
+          <NavigationProperty Name="cat" Relationship="tbcngModel.FK_products_cats" FromRole="product" ToRole="cat" />
+          <NavigationProperty Name="product_img" Relationship="tbcngModel.FK_product_img_products" FromRole="product" ToRole="product_img" />
+        </EntityType>
+        <Association Name="FK_products_cats">
+          <End Type="tbcngModel.cat" Role="cat" Multiplicity="0..1" />
+          <End Type="tbcngModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cat">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_img_products">
+          <End Type="tbcngModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="tbcngModel.product_img" Role="product_img" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="product_img">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -637,34 +639,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="tbcngModel.product">
-              <MappingFragment StoreEntitySet="products">
-                <ScalarProperty Name="lang" ColumnName="lang" />
-                <ScalarProperty Name="color" ColumnName="color" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="g" ColumnName="g" />
-                <ScalarProperty Name="l" ColumnName="l" />
-                <ScalarProperty Name="h" ColumnName="h" />
-                <ScalarProperty Name="w" ColumnName="w" />
-                <ScalarProperty Name="orderby" ColumnName="orderby" />
-                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />
-                <ScalarProperty Name="edit_date" ColumnName="edit_date" />
-                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
-                <ScalarProperty Name="product_content" ColumnName="product_content" />
-                <ScalarProperty Name="product_photo2" ColumnName="product_photo2" />
-                <ScalarProperty Name="product_photo" ColumnName="product_photo" />
-                <ScalarProperty Name="product_price_public" ColumnName="product_price_public" />
-                <ScalarProperty Name="product_new_type" ColumnName="product_new_type" />
-                <ScalarProperty Name="product_type" ColumnName="product_type" />
-                <ScalarProperty Name="product_des" ColumnName="product_des" />
-                <ScalarProperty Name="product_name" ColumnName="product_name" />
-                <ScalarProperty Name="product_id" ColumnName="product_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="customers">
             <EntityTypeMapping TypeName="tbcngModel.customer">
               <MappingFragment StoreEntitySet="customer">
@@ -720,6 +694,35 @@
                 <ScalarProperty Name="session" ColumnName="session" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="tbcngModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="loads" ColumnName="loads" />
+                <ScalarProperty Name="lang" ColumnName="lang" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="g" ColumnName="g" />
+                <ScalarProperty Name="l" ColumnName="l" />
+                <ScalarProperty Name="h" ColumnName="h" />
+                <ScalarProperty Name="w" ColumnName="w" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />
+                <ScalarProperty Name="edit_date" ColumnName="edit_date" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="product_content" ColumnName="product_content" />
+                <ScalarProperty Name="product_photo2" ColumnName="product_photo2" />
+                <ScalarProperty Name="product_photo" ColumnName="product_photo" />
+                <ScalarProperty Name="product_price_public" ColumnName="product_price_public" />
+                <ScalarProperty Name="product_new_type" ColumnName="product_new_type" />
+                <ScalarProperty Name="product_type" ColumnName="product_type" />
+                <ScalarProperty Name="product_des" ColumnName="product_des" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
