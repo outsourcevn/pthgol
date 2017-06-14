@@ -97,9 +97,14 @@ namespace tbcng
             new { controller = "Products", action = "List" }
           );
             routes.MapRoute(
+               "danh muc san pham",
+               "san-pham/{cat}-{cat_id}/{search}-{pf}-{pt}-{pg}-{order}",
+            new { controller = "Products", action = "Grid", cat = UrlParameter.Optional, cat_id = UrlParameter.Optional, pf = UrlParameter.Optional, pt = UrlParameter.Optional, pg = UrlParameter.Optional, search = UrlParameter.Optional, order = UrlParameter.Optional }
+             );
+            routes.MapRoute(
             "san pham chi tiet",
             "san-pham/{cat}/{title}-{id}",
-            new { controller = "Products", action = "Detail",cat= UrlParameter.Optional,title = UrlParameter.Optional, id = UrlParameter.Optional }
+            new { controller = "Products", action = "Detail", cat = UrlParameter.Optional, title = UrlParameter.Optional, id = UrlParameter.Optional }
           );
 
             #region 404 Notfound
@@ -118,17 +123,17 @@ namespace tbcng
             //);
 
             // Chi tiết sản phẩm
-            routes.Add("chitietsanpham", new SeoFriendlyRoute("san-pham/{danhmuc}/{tensanpham}-{id}",
-                new RouteValueDictionary(
-                    new
-                    {
-                        controller = "Home",
-                        action = "ProductDetail",
-                        danhmuc = UrlParameter.Optional,
-                        tensanpham = UrlParameter.Optional,
-                        id = UrlParameter.Optional
-                    }),
-                new MvcRouteHandler()));
+            //routes.Add("chitietsanpham", new SeoFriendlyRoute("san-pham/{danhmuc}/{tensanpham}-{id}",
+            //    new RouteValueDictionary(
+            //        new
+            //        {
+            //            controller = "Home",
+            //            action = "ProductDetail",
+            //            danhmuc = UrlParameter.Optional,
+            //            tensanpham = UrlParameter.Optional,
+            //            id = UrlParameter.Optional
+            //        }),
+            //    new MvcRouteHandler()));
 
             // danh mục sản phẩm
             routes.Add("danhmucsanpham", new SeoFriendlyRoute("danh-muc/{url}-{id}",

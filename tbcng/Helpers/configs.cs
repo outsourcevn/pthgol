@@ -90,7 +90,7 @@ namespace tbcng.Helpers
                     {
                         //rs += "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a>";
                         //rs += "<ul class=\"dropdown-menu\">" + temp2 + "</li></ul>";
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + temp + "<span class=\"caret\"></span></a></li>";
+                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + temp + "<span class=\"caret\"></span></a></li>";
                         rs += temp2;
                     }
                     else 
@@ -150,7 +150,7 @@ namespace tbcng.Helpers
                     if (temp2 != "")
                     {
 
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" onclick=\"viewtree2(" + p2[ii].cat_id + ");\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + temp + "<span class=\"caret\"></span></a></li>";
+                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" onclick=\"viewtree2(" + p2[ii].cat_id + ");\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + temp + "<span class=\"caret\"></span></a></li>";
                         rs += temp2;
                     }
                     else

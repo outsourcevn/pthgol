@@ -92,6 +92,11 @@ namespace tbcng.Controllers
             ViewBag.order = order;
             return View(data.ToList().ToPagedList(pageNumber, pageSize));
         }
+        public string autosearch(string keyword)
+        {
+            var p = (from q in db.products where q.product_name.Contains(keyword) orderby q.product_name select q.product_name).Take(10).ToList();
+            return JsonConvert.SerializeObject(p);
+        }
         // GET: Cats
         public ActionResult Add()
         {
