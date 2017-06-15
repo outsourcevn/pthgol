@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = ViewBag.catname;
     Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
+    string keyword = ViewBag.search != "all" ? ViewBag.search : "";
 }
 <script src="/Scripts/jquery-ui.js"></script>
 @*<link rel="stylesheet" href="/Scripts/slider.css">
@@ -21,6 +22,14 @@
     }
     function search() {
         var source = $("#search").val();
+        if (source.indexOf("/") >= 0) {
+            var arr = source.split("/");
+            source = arr[0];
+        } else
+            if (source.indexOf("-")) {
+                var arr = source.split("-");
+                source = arr[0];
+            }
         var order = $("#order").val();
         var pf = $("#pf").val();
         var pt = $("#pf").find(':selected').attr('pt');
@@ -46,7 +55,7 @@
                     <div class="cp-show-result-outer">
                         <div class="col-md-12">
                             <div class="col-md-3">
-                                <input type="text" placeholder="gõ từ khóa tìm kiếm" value="" id="search" class="form-control" style="height:37px;" onkeyup="autosearch();" autocomplete="off" />
+                                <input type="text" placeholder="gõ từ khóa tìm kiếm" value="@keyword" id="search" class="form-control" style="height:37px;" onkeyup="autosearch();" autocomplete="off" />
                             </div>
                             <div class="col-md-3">
                                 <select id="order" onchange="search();" style="width:150px;">
@@ -58,7 +67,8 @@
                             </div>
                             <div class="col-md-3">
                                 <select id="pf" onchange="search();" style="width:180px;">
-                                    <option value="0" pt="500000" selected>Từ 0 đến 500.000 đồng</option>
+                                    <option value="0" pt="500000000" selected>Chọn khoảng giá</option>
+                                    <option value="0" pt="500000">Từ 0 đến 500.000 đồng</option>
                                     <option value="500000" pt="1000000">Từ 500.000 đến 1.000.000 đồng</option>
                                     <option value="1000000" pt="2000000">Từ 1.000.000 đến 2.000.000 đồng</option>
                                     <option value="2000000" pt="4000000">Từ 2.000.000 đến 4.000.000 đồng</option>
@@ -110,7 +120,7 @@
                                 <div class="row">
                                     @foreach (var item in Model)
                                     {
-                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatnameurl(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
                                     <div class="col-md-4 col-sm-4" style="min-height:300px;">
                                         <!--Product Item Start-->
                                         <div class="cp-pro-item">
@@ -135,7 +145,7 @@
                                 <div class="row">
                                     @foreach (var item in Model)
                                     {
-                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                                        var link = "/san-pham/" + tbcng.Helpers.configs.getcatnameurl(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
                                         <div class="col-md-12 col-sm-12">
                                             <!--Product Item Start-->
                                             <div class="cp-pro-item cp-pro-list-item">

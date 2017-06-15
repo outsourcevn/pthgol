@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = Model.product_name;
     Layout = "~/Themes/default/Views/Shared/_Layout.cshtml";
+    var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(Model.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(Model.product_name) + "-" + Model.product_id;
+    ViewBag.url = "http://lopnhanh.net/" + link;
 }
 <!---PrettyPhoto CSS-->
 <link href="~/Content/themes/pthg/css/prettyPhoto.css" rel="stylesheet">
@@ -23,6 +25,15 @@
     <meta property="og:description" content="@Html.Raw(Model.product_des)">
     <meta property="og:image" itemprop="thumbnailUrl" content="@Model.product_photo">
 }
+<div id="fb-root"></div>
+<script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=234024337101252";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="cp-inner-banner2" style="height:50px;">
     <div class="container2">
         <div class="cp-inner-banner-outer2" style="color:black;">
@@ -64,20 +75,21 @@
                                     </div>
                                     <p class="first">@Model.product_des</p>
                                     @*<p>Etiam dictum. Nunc enim. Sed massa tellus, aliquam rhoncus, venenatis quis, suscipit ac, libero. Praesent odio tellus, posuere sed, dictum sed, fermentum at, orci.</p>*@
-                                    <ul class="items-list">
+                                    @*<ul class="items-list">
                                         <li>Dài @Model.l (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
                                         <li>Rộng @Model.w (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
                                         <li>Cao @Model.h (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
                                         <li>Nặng @Model.g (g)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                    </ul>
+                                    </ul>*@
                                     <strong class="price">@String.Format("{0:n0}", @Model.product_price_public) đồng</strong>
                                     <ul class="categories-list">
                                         <li>Danh Mục : <span>@ViewBag.cat</span></li>
                                         <li>
                                             Chia sẻ link :
                                             <span class="cp-social-links">
-                                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                                @*<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>*@
+                                                <iframe src="https://www.facebook.com/plugins/like.php?href=@ViewBag.url&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=234024337101252" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
                                             </span>
                                         </li>
                                     </ul>
@@ -99,6 +111,7 @@
                                     @Html.Raw(@Model.product_content)
                                 </div>
                             </div>
+                            <div class="fb-comments" data-href="@ViewBag.url" data-numposts="5"></div>
                             @*<div class="tab-pane fade" id="cp_tab2">
                                 <div class="cp-tab-info-box">
                                     <div class="cp-tab-text">

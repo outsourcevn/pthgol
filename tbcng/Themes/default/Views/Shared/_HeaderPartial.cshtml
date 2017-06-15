@@ -133,14 +133,14 @@
         </div>
     </div><!--Navigation Row End-->
     <!--Search Bar Holder Start-->
-    <div class="overlay overlay-contentscale">
+    <div class="overlay overlay-contentscale" style="z-index:1001;">
         <button type="button" class="overlay-close">Close</button>
         <!--Search Bar Inner Start-->
         <div class="cp-search-inner">
-            <form method="get">
-                <input type="text" placeholder="Enter your search" required="required">
-                <button class="submit"><i class="fa fa-search"></i></button>
-            </form>
+            <div class="col-md-12">
+                <input type="text" placeholder="Gõ từ khóa tìm kiếm sản phẩm" required="required" id="search2" onkeyup="autosearch2();" style="font-size: 14px; color: #fff; height: 40px; line-height: 40px; text-transform: uppercase; padding: 0; background: transparent; border: none; border-bottom: 1px solid #fff; position: relative; float: left; width: 100%;">
+                <button class="submit" onclick="search2();" style="font-size: 18px; color: #fff; height: 40px; line-height: 40px; padding: 0; position: absolute; right: 0; top: 0; display: inline-block; background-color: transparent; border: none;"><i class="fa fa-search"></i></button>
+            </div>
         </div><!--Search Bar Inner End-->
     </div>
     <!--Search Bar Holder End-->
@@ -167,5 +167,35 @@
                 //viewtree($(this).attr('id'));
             }
         });
+    }
+    function autosearch2() {
+        var urlSearch = '/Products/autosearch?keyword=';
+        $('#search2').autocomplete({
+            source: urlSearch + $("#search2").val(),
+            select: function (event, ui) {
+                $(event.target).val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+    }
+    function search2() {
+        var source = $("#search2").val();
+        if (source.indexOf("/") >= 0) {
+            var arr = source.split("/");
+            source = arr[0];
+        } else
+            if (source.indexOf("-")) {
+                var arr = source.split("-");
+                source = arr[0];
+            }
+        if (source == "") {
+            //alert("Nhập từ khóa");
+            //return;
+            source = "all";
+        }
+        var urlSearch = "/san-pham/all-0/" + source + "-0-500000000-1-1";
+        window.location.href = urlSearch;
+
     }
 </script>

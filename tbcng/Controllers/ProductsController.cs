@@ -270,10 +270,12 @@ namespace tbcng.Controllers
                 return RedirectToAction("Grid");
             }
             product _model = db.products.Find(id);
+           
             if (_model == null)
             {
                 return View();
             }
+            db.Database.ExecuteSqlCommand("update products set loads=loads+1 where product_id="+id);
             ViewBag.cat = db.cats.Find(_model.cat_id).cat_name;
             return View(_model);
         }

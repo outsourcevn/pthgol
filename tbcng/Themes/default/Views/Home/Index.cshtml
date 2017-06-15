@@ -158,7 +158,7 @@
                     <div class="carousel-inner">
                         @foreach (var item in ViewBag.products)
                         {
-                            var link = "/san-pham/" + tbcng.Helpers.configs.getcatname(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
+                            var link = "/san-pham/" + tbcng.Helpers.configs.getcatnameurl(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
                             var atv = "";
                             if (countslide == 0) { atv = "active"; }
                             countslide++;

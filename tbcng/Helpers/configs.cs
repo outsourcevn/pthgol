@@ -117,9 +117,9 @@ namespace tbcng.Helpers
                 var p = (from q in db.cats where q.cat_parent_id == null select q).OrderBy(o => o.cat_pos).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
-                    rs += "<li >";
+                    //rs += "<li >";
                     rs += getAllChildMenu2(p[i].cat_name, p[i].cat_id, 1);
-                    rs += "</li>";
+                    //rs += "</li>";
                 }
                 
                 return rs;
@@ -174,7 +174,28 @@ namespace tbcng.Helpers
             try
             {
                 cat ct = db.cats.Find(catid);
-                return ct.cat_name;
+                string cname=ct.cat_name.ToLowerInvariant();               
+                //if (cname.EndsWith("-x")) cname = cname.Replace("-x", "x");
+                //if (cname.EndsWith("-i")) cname = cname.Replace("-i", "i");
+                //if (cname.EndsWith("-v")) cname = cname.Replace("-v", "v");
+                return cname;
+            }
+            catch
+            {
+                return "chi-tiet";
+            }
+        }
+        public static string getcatnameurl(int? catid)
+        {
+            try
+            {
+                cat ct = db.cats.Find(catid);
+                string cname = ct.cat_name.ToLowerInvariant();
+                cname = unicodeToNoMark(cname);
+                if (cname.EndsWith("-x")) cname = cname.Replace("-x", "x");
+                if (cname.EndsWith("-i")) cname = cname.Replace("-i", "i");
+                if (cname.EndsWith("-v")) cname = cname.Replace("-v", "v");
+                return cname.Replace(" ", "").Replace("-", "");
             }
             catch
             {
