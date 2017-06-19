@@ -19,10 +19,11 @@
         <EntityTypeShape EntityType="tbcngModel.product_order" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="tbcngModel.ship" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="9.375" PointY="4.75" />
-        <EntityTypeShape EntityType="tbcngModel.product" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="tbcngModel.email" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="tbcngModel.product" Width="1.5" PointX="3" PointY="6.625" />
         <AssociationConnector Association="tbcngModel.FK_products_cats" />
         <AssociationConnector Association="tbcngModel.FK_product_img_products" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

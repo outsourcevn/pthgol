@@ -258,6 +258,9 @@
     <Compile Include="Models\customer.cs">
       <DependentUpon>tbcng.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\email.cs">
+      <DependentUpon>tbcng.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\product.cs">
@@ -1472,6 +1475,8 @@
     <Content Include="Views\Products\LoadCart.cshtml" />
     <Content Include="Views\Products\Cart.cshtml" />
     <Content Include="Views\Products\CartStep2.cshtml" />
+    <Content Include="Themes\default\Views\Home\DanhMucSanPhamPartial.cshtml" />
+    <Content Include="Themes\default\Views\Home\_ProductWithCatelog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

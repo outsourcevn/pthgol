@@ -27,6 +27,14 @@
           <Property Name="lon" Type="float" />
           <Property Name="lat" Type="float" />
         </EntityType>
+        <EntityType Name="emails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" />
+          <Property Name="date_time" Type="datetime" />
+        </EntityType>
         <EntityType Name="product_customer_order">
           <Key>
             <PropertyRef Name="id" />
@@ -83,6 +91,8 @@
           <Property Name="deleted_date" Type="datetime" />
           <Property Name="status" Type="bit" />
           <Property Name="cat_id" Type="int" />
+          <Property Name="cat_id_2" Type="int" />
+          <Property Name="cat_id_3" Type="int" />
           <Property Name="orderby" Type="int" />
           <Property Name="w" Type="float" />
           <Property Name="h" Type="float" />
@@ -253,6 +263,7 @@
         <EntityContainer Name="tbcngModelStoreContainer">
           <EntitySet Name="cats" EntityType="Self.cats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emails" EntityType="Self.emails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_customer_order" EntityType="Self.product_customer_order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_img" EntityType="Self.product_img" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_order" EntityType="Self.product_order" Schema="dbo" store:Type="Tables" />
@@ -440,6 +451,7 @@
           <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
           <EntitySet Name="ships" EntityType="tbcngModel.ship" />
           <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
+          <EntitySet Name="emails" EntityType="tbcngModel.email" />
           <EntitySet Name="products" EntityType="tbcngModel.product" />
           <AssociationSet Name="FK_products_cats" Association="tbcngModel.FK_products_cats">
             <End Role="cat" EntitySet="cats" />
@@ -504,6 +516,14 @@
           <Property Name="total_fee" Type="Int64" />
           <Property Name="total" Type="Int64" />
         </EntityType>
+        <EntityType Name="email">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="product_id" />
@@ -522,6 +542,8 @@
           <Property Name="deleted_date" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Boolean" />
           <Property Name="cat_id" Type="Int32" />
+          <Property Name="cat_id_2" Type="Int32" />
+          <Property Name="cat_id_3" Type="Int32" />
           <Property Name="orderby" Type="Int32" />
           <Property Name="w" Type="Double" />
           <Property Name="h" Type="Double" />
@@ -697,6 +719,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="emails">
+            <EntityTypeMapping TypeName="tbcngModel.email">
+              <MappingFragment StoreEntitySet="emails">
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="tbcngModel.product">
               <MappingFragment StoreEntitySet="products">
@@ -709,6 +740,8 @@
                 <ScalarProperty Name="h" ColumnName="h" />
                 <ScalarProperty Name="w" ColumnName="w" />
                 <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="cat_id_3" ColumnName="cat_id_3" />
+                <ScalarProperty Name="cat_id_2" ColumnName="cat_id_2" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="deleted_date" ColumnName="deleted_date" />

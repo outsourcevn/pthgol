@@ -23,7 +23,17 @@ namespace tbcng.Controllers
             }
             return View();
         }
+        public ActionResult DanhMucSanPhamPartial()
+        {
+            var data = db.cats.Where(x => x.cat_parent_id == 44).ToList();
 
+            return PartialView("DanhMucSanPhamPartial", data);
+        }
+        public ActionResult ProductWithCatelog(int? cat_id)
+        {
+            var data = db.products.Where(x => x.cat_id == cat_id || x.cat_id_2 == cat_id || x.cat_id_3 == cat_id).Take(10).ToList();
+            return PartialView("_ProductWithCatelog", data);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

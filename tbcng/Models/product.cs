@@ -33,6 +33,8 @@ namespace tbcng.Models
         public Nullable<System.DateTime> deleted_date { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<int> cat_id { get; set; }
+        public Nullable<int> cat_id_2 { get; set; }
+        public Nullable<int> cat_id_3 { get; set; }
         public Nullable<int> orderby { get; set; }
         public Nullable<double> w { get; set; }
         public Nullable<double> h { get; set; }

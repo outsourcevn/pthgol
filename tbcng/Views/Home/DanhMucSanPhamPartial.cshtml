@@ -1,0 +1,62 @@
+﻿@model List<tbcng.Models.cat>
+@using tbcng.Controllers;
+
+@if (Model != null)
+{
+    if (Model.Count > 0)
+    {
+        int count=0;
+        string style = "";
+        
+<section class="cp-product-section cp-product-section_v5 pd-tb100">
+    <div class="container">
+        <div class="cp-heading-style2_v1">
+            <h2>SẢN PHẨM CỦA CHÚNG TÔI</h2>
+        </div>
+        <div class="cp-tabs-holder">
+            <!-- Nav tabs Start -->
+            @foreach (var item in Model)
+            {
+                count++;
+                style = "";
+                if (count == 1) { style = "class=\"active\""; }
+                <ul class="nav nav-tabs" role="tablist">
+                    <li @style><a href="#tab-@count" aria-controls="tab-@count" role="tab" data-toggle="tab">@item.cat_name</a></li>
+                </ul>  <!-- Nav tabs End -->
+            }
+           @{count=0;}            
+            <!-- Tab panes -->
+            <div class="tab-content">
+                @foreach (var item in Model)
+                 {
+                    <div role="tabpanel" class="tab-pane fade in active" id="tab-01">
+                        <div class="row">
+                            @*@{Html.RenderAction("_ProductWithCatelog", new { id = item.cat_id });}*@
+                            @*<div class="col-md-4 col-sm-4">
+                                <!--Product Item Start-->
+                                <div class="cp-pro-item">
+                                    <div class="cp-pro-img">
+                                        <img src="images/product-img4.jpg" alt="">
+                                    </div>
+                                    <div class="cp-text">
+                                        <h3><a href="product-detail.html">Propel Advanced SL 0</a></h3>
+                                        <span class="small">EST. 1999 </span>
+                                        <span class="pro-price">$1580.00</span>
+                                        <ul class="cp-pro-meta">
+                                            <li class="pro-cart"><a href="#"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                            <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div><!--Product Item End-->
+                            </div>*@                        
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section><!--Product Section End-->
+    }
+}
+
+

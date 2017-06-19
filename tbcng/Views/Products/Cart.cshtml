@@ -156,7 +156,7 @@
                                     <td class="product-remove"></td>
                                     <td class="product-thumbnail"></td>
                                     <td class="product-price">
-                                        <b>Chi phí ship</b>:(Nhập chính xác địa chỉ nhận hàng)
+                                        <span onclick="getPriceShip()" style="cursor:pointer;"><b>Tính chi phí ship</b>:(Nhập chính xác địa chỉ nhận hàng)<img src="~/images/cal.png" style="width:32px;height:32px;"/></span>
                                     </td>
                                     <td class="product-thumbnail" id="ship_kg"><span style="color:red">Bạn chưa nhập địa chỉ nhận hàng</span></td>
                                     <td class="product-subtotal" id="ship_fee"></td>
@@ -166,8 +166,8 @@
                                     <td class="product-thumbnail"></td>
                                     <td class="product-price">
                                     </td>
-                                    <td class="product-thumbnail" ></td>
-                                    <td class="product-subtotal" id="all_fee"></td>
+                                    <td class="product-thumbnail" >Tổng tiền:</td>
+                                    <td class="product-subtotal" id="all_fee">Đang tính...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -215,34 +215,39 @@
         }
     }
     function submitOrder(){
-        var address= $("#customer_address").val();
+        var customer_address= $("#customer_address").val();
         var customer_name=$("#customer_name").val();
         var customer_email=$("#customer_email").val();
         var customer_phone=$("#customer_phone").val();
         var lon=$("#lon").val();
         var lat=$("#lat").val();
-        if (address=="" || lon==""){
+        if (customer_address=="" || lon==""){
             document.getElementById("customer_address").focus();
+            window.scrollTo(0, 0);
             return;
         }
         if (customer_name==""){
             document.getElementById("customer_name").focus();
+            window.scrollTo(0, 0);
             return;
         }
         if (customer_email==""){
             document.getElementById("customer_email").focus();
+            window.scrollTo(0, 0);
             return;
         }
         if (customer_phone==""){
             document.getElementById("customer_phone").focus();
+            window.scrollTo(0, 0);
             return;
         }
         var count=@count;
         var total_quantity=0;
         var total_money=0;
         var session=document.getElementById("session").value;
-        var ship_kg=parseInt(document.getElementById("ship_kg").innerText);
-        var ship_fee=parseInt(document.getElementById("ship_fee").innerText);
+        var ship_kg=parseInt(document.getElementById("ship_kg").innerText.replace(/,/g , "").replace(/,/g , ""));
+        var ship_fee=parseInt(document.getElementById("ship_fee").innerText.replace(/,/g , "").replace(/,/g , ""));
+        var total_fee=parseInt(document.getElementById("all_fee").innerText.replace(/,/g , "").replace(/,/g , ""));
         allCartItem="[{product_id:-1,quantity:-1}";
         for(var i=1;i<=count;i++){
             var item1=parseInt(document.getElementById("product_id_"+i).value);
@@ -250,7 +255,7 @@
             var item3=document.getElementById("product_name_"+i).value;
             var item4=parseInt(document.getElementById("product_price_"+i).value);
             var item5=parseInt(document.getElementById("quantity_"+i).value);
-            var item6=parseInt(document.getElementById("total_"+i).innerText);
+            var item6=parseInt(document.getElementById("total_"+i).innerText.replace(/,/g , "").replace(/,/g , ""));
             var item = ",{product_id:"+ item1+", product_photos: '"+item2+"', product_name: '"+item3+"', product_price: "+item4+", quantity: "+item5+", product_total: "+item6+"}";
             allCartItem+=item;
         }
@@ -277,6 +282,8 @@
             //        document.getElementById("btnSubmitOrder").disabled=false;
             //    }
             //});
+            //alert(allCartItem+'-'+session+'-'+ship_kg+'-'+ship_fee+'-'+total_fee+'-'+customer_address+'-'+customer_name+'-'+customer_email+'-'+customer_phone+'-'+lon+'-'+lat);//+customer_address+customer_name+customer_email+customer_phone+lon+lat
+            //return;
             formdata.append("data", allCartItem);
             formdata.append("session", session);
             formdata.append("g", ship_kg);
@@ -346,15 +353,21 @@
             type: 'POST',
             datatype: 'text',
             data: "lon1=105.8194541&lat1=21.0227431&lon2="+lon2+"&lat2="+lat2+"&type="+type+"&data="+allCartItem,
+            cache: false,
             success: function (data) {
 
                 if (data != "0") {
                     var rs=data.split("_");
                     var kg=parseFloat(rs[0]);
                     var price=parseFloat(rs[1]);
+                    var total_final=parseFloat(document.getElementById("total_final").innerText.replace(/,/g , "").replace(/,/g , ""));
+                    //alert(total_final);
+                    var all_fee=total_final+price;
+                    //alert(all_fee);
                     //alert(price);
                     $("#ship_kg").html(formatDollar(kg)+" g");
                     $("#ship_fee").html(formatDollar(price)+" vnd");
+                    $("#all_fee").html(formatDollar(all_fee)+" vnd");                    
                 };
             },
             error: function (jqXHR, exception) {

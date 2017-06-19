@@ -57,7 +57,31 @@
 </head>
 
 <body>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: "234024337101252",
+                xfbml: true,
+                version: "v2.6"
+            });
 
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+    <div class="fb-messengermessageus"
+         messenger_app_id="234024337101252"
+         page_id="1239503812745313"
+         color="blue"
+         size="large" style="float: right;top: 0;z-index: 10000;position: fixed;display: block;right: 0;">
+    </div>  
     <!--Kode Wrapper Start-->
     <div class="cp-wrapper" id="cp-rider-store">
         @Html.Partial("_HeaderPartial")
