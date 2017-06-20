@@ -934,11 +934,11 @@ namespace tbcng.Controllers
                  //db.SaveChanges();
 
                  string result ="";
-                 result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 700px;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
+                 result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 100%;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng</b></td></tr>"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + customer_name + ", điện thoại:" + customer_phone + ", địa chỉ:" + customer_address + "</b></td></tr>"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\">Chi Tiết Đơn Hàng</td></tr>"
-                 + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th>Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
+                 + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th style=\"width:60px;\">Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
                  List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
                  //double total_kg = 0;
                  int total_quantity = 0;
@@ -970,8 +970,12 @@ namespace tbcng.Controllers
                          //db.SaveChanges();
                          result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: center; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
                      }
-                     result += "<tr><td colspan=\"2\"></td><td style=\"text-align: center; vertical-align: middle;\"><b>Số lượng:<br>" + total_quantity + "</b></td><td style=\"text-align: center; vertical-align: middle;\"><b>Phí ship:<br>" + String.Format("{0:n0}", ship_fee) + "</b></td><td style=\"text-align: center; vertical-align: middle;\"><b>Giá trị hàng:<br>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
-                     result += "<tr><td colspan=\"4\"></td><td style=\"text-align: center; vertical-align: middle;\"><b>Tổng tiền:<br>" + String.Format("{0:n0}", total) + "</b></td></tr>";
+                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số Lượng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + total_quantity + "</b></td></tr>";
+                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí Ship:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", ship_fee) + "</b></td></tr>";
+                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Giá trị hàng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
+                     result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", total) + "</b></td></tr>";
+                     //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số lượng:</b>" + total_quantity + "</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí ship:<br>" + String.Format("{0:n0}", ship_fee) + "</b></td><td style=\"text-align: center; vertical-align: middle;\"><b>Giá trị hàng:<br>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
+                     //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:<br>" + String.Format("{0:n0}", total) + "</b></td></tr>";
                      var sendmail =configs.Sendmail(WebConfigurationManager.AppSettings["emailroot"], WebConfigurationManager.AppSettings["passroot"], "vnnvh80@gmail.com", customer_phone + "-Khách đặt hàng", result);
                      return session;
                  }
