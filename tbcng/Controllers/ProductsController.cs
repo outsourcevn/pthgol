@@ -44,6 +44,27 @@ namespace tbcng.Controllers
             data = data.OrderBy(x => x.updated_date);
             return View(data.ToList().ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult Order(int? pg, string search)
+        {
+            int pageSize = 25;
+            if (pg == null) pg = 1;
+            int pageNumber = (pg ?? 1);
+            ViewBag.pg = pg;
+            var data = db.product_customer_order.Select(x => x);
+            if (data == null)
+            {
+                return View(data);
+            }
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim();
+                data = data.Where(x => x.ordercode.ToLower().Contains(search) || x.customer_email.ToLower().Contains(search) || x.customer_phone.ToLower().Contains(search));
+                ViewBag.search = search;
+            }
+
+            data = data.OrderByDescending(x => x.date_time);
+            return View(data.ToList().ToPagedList(pageNumber, pageSize));
+        }
         // GET: Products
         public ActionResult Grid(int? pf,int? pt,int? pg, string search,int? order,int? cat_id)
         {
@@ -594,7 +615,7 @@ namespace tbcng.Controllers
         {
             try {
                 string session = Helpers.configs.getCookie("session");
-                var model = (from q in db.product_order where q.session == session select q).OrderBy(o => o.id).ToList();//Đoạn này cần dùng query sql
+                var model = (from q in db.product_order where q.session == session && q.status==0 select q).OrderBy(o => o.id).ToList();//Đoạn này cần dùng query sql
                 ViewBag.count = model.Count;
                 return PartialView("LoadCart", model);
             }
@@ -689,6 +710,7 @@ namespace tbcng.Controllers
             {
                 ViewBag.list = null;
             }
+            if (ViewBag.list == null || ViewBag.list.Count==0) return RedirectToAction("CartStep2", new { session = session });
             if (lon!=null) ViewBag.lon = lon;
             if (lat != null) ViewBag.lat = lat;
             if (address != null) ViewBag.address = address;
@@ -706,10 +728,23 @@ namespace tbcng.Controllers
                 var list = db.Database.SqlQuery<itemCart>(query).ToList();
                 ViewBag.list = list;
                 var p = db.product_customer_order.Where(o => o.session == session).FirstOrDefault();
-                ViewBag.ordercode = p.id;
+                ViewBag.ordercode = session.Split('-')[0];
                 ViewBag.session = session;
-                ViewBag.ship_fee = p.ship_fee;
-                ViewBag.total = p.total;
+                long? ship_fee = 0;
+                double? g = 0;
+                long? total_fee = 0;
+                long? total = 0;
+                var q=(from pmo in db.product_customer_order where pmo.session== session select pmo).ToList();
+                foreach(var item in q){
+                    ship_fee += item.ship_fee;
+                    g += item.g;
+                    total_fee += item.total_fee;
+                    total += item.total;
+                }
+                ViewBag.ship_fee = ship_fee;
+                ViewBag.ship_kg = g;
+                ViewBag.total_fee = total_fee;
+                ViewBag.total = total;
             }
             catch
             {
@@ -913,30 +948,41 @@ namespace tbcng.Controllers
         {
              try
              {
-                 //customer ctm = new customer();
-                 //ctm.customer_address = customer_address;
-                 //ctm.customer_email = customer_email;
-                 //ctm.customer_name = customer_name;
-                 //ctm.customer_phone = customer_phone;
-                 //ctm.lat = lat;
-                 //ctm.lon = lon;
-                 //db.customers.Add(ctm);
-                 //db.SaveChanges();
-                 //int customer_id=ctm.id;
-                 //product_customer_order pco = new product_customer_order();
-                 //pco.customer_id = customer_id;
-                 //pco.g = g;
-                 //pco.session = session;
-                 //pco.ship_fee = ship_fee;
-                 //pco.total_fee = total_fee;
-                 //pco.total = ship_fee + total_fee;
-                 //db.product_customer_order.Add(pco);
-                 //db.SaveChanges();
+                 string ordercode = session.Split('-')[0];
+                 string query = "delete from product_order where session=N'" + session + "' and status=0";
+                 db.Database.ExecuteSqlCommand(query);
+                 customer ctm = new customer();
+                 if (!db.customers.Any(o => o.customer_email == customer_email && o.customer_phone == customer_phone && o.customer_address == customer_address))
+                 {                  
+                     ctm.customer_address = customer_address;
+                     ctm.customer_email = customer_email;
+                     ctm.customer_name = customer_name;
+                     ctm.customer_phone = customer_phone;
+                     ctm.lat = lat;
+                     ctm.lon = lon;
+                     db.customers.Add(ctm);
+                     db.SaveChanges();
+                 }
+                 else
+                 {
+                     ctm = db.customers.Where(o => o.customer_email == customer_email && o.customer_phone == customer_phone && o.customer_address == customer_address).FirstOrDefault();
+                 }
+                 int customer_id = ctm.id;
+                 product_customer_order pco = new product_customer_order();
+                 pco.customer_id = customer_id;
+                 pco.g = g;
+                 pco.session = session;
+                 pco.ship_fee = ship_fee;
+                 pco.total_fee = total_fee;
+                 pco.total = ship_fee + total_fee;
+                 pco.ordercode = ordercode;
+                 db.product_customer_order.Add(pco);
+                 db.SaveChanges();
 
                  string result ="";
                  result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 100%;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
-                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng</b></td></tr>"
-                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + customer_name + ", điện thoại:" + customer_phone + ", địa chỉ:" + customer_address + "</b></td></tr>"
+                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng: Mã #" + ordercode + "</b></td></tr>"
+                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + customer_name + ", điện thoại: " + customer_phone + ", địa chỉ: " + customer_address + ", email: " + customer_email + "</b></td></tr>"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\">Chi Tiết Đơn Hàng</td></tr>"
                  + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th style=\"width:60px;\">Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
                  List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
@@ -955,20 +1001,20 @@ namespace tbcng.Controllers
                          float? product_price = detail.product_price;
                          float product_total = detail.product_total;
                          total_quantity += quantity;
-                         //product_order po = new product_order();
-                         //po.customer_id = customer_id;
-                         //po.date_time = DateTime.Now;
-                         //po.product_id = product_id;
-                         //po.product_name = product_name;
-                         //po.product_photos = product_photos;
-                         //po.product_price = product_price;
-                         //po.product_total = product_total;
-                         //po.quantity = quantity;
-                         //po.session = session;
-                         //po.status = 1;
-                         //db.product_order.Add(po);
-                         //db.SaveChanges();
-                         result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: center; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
+                         product_order po = new product_order();
+                         po.customer_id = customer_id;
+                         po.date_time = DateTime.Now;
+                         po.product_id = product_id;
+                         po.product_name = product_name;
+                         po.product_photos = product_photos;
+                         po.product_price = product_price;
+                         po.product_total = product_total;
+                         po.quantity = quantity;
+                         po.session = session;
+                         po.status = 1;
+                         db.product_order.Add(po);
+                         db.SaveChanges();
+                         result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
                      }
                      result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số Lượng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + total_quantity + "</b></td></tr>";
                      result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí Ship:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", ship_fee) + "</b></td></tr>";
@@ -976,7 +1022,7 @@ namespace tbcng.Controllers
                      result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", total) + "</b></td></tr>";
                      //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số lượng:</b>" + total_quantity + "</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí ship:<br>" + String.Format("{0:n0}", ship_fee) + "</b></td><td style=\"text-align: center; vertical-align: middle;\"><b>Giá trị hàng:<br>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
                      //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:<br>" + String.Format("{0:n0}", total) + "</b></td></tr>";
-                     var sendmail =configs.Sendmail(WebConfigurationManager.AppSettings["emailroot"], WebConfigurationManager.AppSettings["passroot"], "vnnvh80@gmail.com", customer_phone + "-Khách đặt hàng", result);
+                     var sendmail = configs.Sendmail(WebConfigurationManager.AppSettings["emailroot"], WebConfigurationManager.AppSettings["passroot"], customer_email, "Khách đặt hàng " + thelist[0].product_name, result);
                      return session;
                  }
                  

@@ -247,7 +247,7 @@
         var session=document.getElementById("session").value;
         var ship_kg=parseInt(document.getElementById("ship_kg").innerText.replace(/,/g , "").replace(/,/g , ""));
         var ship_fee=parseInt(document.getElementById("ship_fee").innerText.replace(/,/g , "").replace(/,/g , ""));
-        var total_fee=parseInt(document.getElementById("all_fee").innerText.replace(/,/g , "").replace(/,/g , ""));
+        var total_fee=parseInt(document.getElementById("total_final").innerText.replace(/,/g , "").replace(/,/g , ""));
         allCartItem="[{product_id:-1,quantity:-1}";
         for(var i=1;i<=count;i++){
             var item1=parseInt(document.getElementById("product_id_"+i).value);
@@ -262,8 +262,8 @@
         allCartItem+="]";
         //alert(allCartItem);
         if (confirm("Xác nhận đặt hàng")==true){
-            document.getElementById("btnSubmitOrder").value="Đang xử lý đơn hàng xin đợi...";
-            //document.getElementById("btnSubmitOrder").disabled=true;
+            document.getElementById("btnSubmitOrder").value="Đang xử lý đơn hàng xin đợi chuyển sang phần thanh toán online";
+            document.getElementById("btnSubmitOrder").disabled=true;
             //alert("data=" + allCartItem+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee);//+"&session="+session+"&g="+ship_kg+"&ship_fee="+ship_fee+"&total_fee="+total_fee+"&customer_address="+customer_address+"&customer_name="+customer_name+"&customer_email="+customer_email+"&customer_phone="+customer_phone+"&lon="+lon+"&lat="+lat
             var formdata = new FormData();
             //$.ajax({
@@ -302,7 +302,7 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     if (xhr.responseText != "0") {
-                        window.location.href="/Products/CartStep2?session"+xhr.responseText;
+                        window.location.href="/Products/CartStep2?session="+xhr.responseText;
                     }else{
                         alert("Có lỗi!");
                        document.getElementById("btnSubmitOrder").disabled=false;

@@ -47,10 +47,10 @@
     </div>
 </div>
 <!-- Main Content Start -->
-<div class="cp-main-content">
+<div class="cp-main-content" style="background:#ffffff;">
 
     <!--Product Section Start-->
-    <section class="cp-product-section_v2 pd-tb100">
+    <section class="cp-product-section_v2 pd-tb100" style="background:#ffffff;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -76,11 +76,11 @@
                                     <p class="first">@Model.product_des</p>
                                     @*<p>Etiam dictum. Nunc enim. Sed massa tellus, aliquam rhoncus, venenatis quis, suscipit ac, libero. Praesent odio tellus, posuere sed, dictum sed, fermentum at, orci.</p>*@
                                     @*<ul class="items-list">
-                                        <li>Dài @Model.l (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                        <li>Rộng @Model.w (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                        <li>Cao @Model.h (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                        <li>Nặng @Model.g (g)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
-                                    </ul>*@
+                                            <li>Dài @Model.l (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
+                                            <li>Rộng @Model.w (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
+                                            <li>Cao @Model.h (cm)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
+                                            <li>Nặng @Model.g (g)<i class="fa fa-check-circle" aria-hidden="true"></i></li>
+                                        </ul>*@
                                     <strong class="price">@String.Format("{0:n0}", @Model.product_price_public) đồng</strong>
                                     <ul class="categories-list">
                                         <li>Danh Mục : <span>@ViewBag.cat</span></li>
@@ -88,12 +88,12 @@
                                             Chia sẻ link :
                                             <span class="cp-social-links">
                                                 @*<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                                <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>*@
+                                                    <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>*@
                                                 <iframe src="https://www.facebook.com/plugins/like.php?href=@ViewBag.url&width=450&layout=standard&action=like&size=small&show_faces=true&share=true&height=80&appId=234024337101252" width="450" height="80" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true"></iframe>
                                             </span>
                                         </li>
                                     </ul>
-                                    <a href="#" class="cp-btn-style1" onclick="addToCart(@Model.product_id);">Thêm vào giỏ hàng</a>
+                                    <a style="cursor:pointer" class="cp-btn-style1" onclick="addToCart(@Model.product_id);">Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +101,9 @@
                     <!--Product Tab Box Start-->
                     <div class="cp-tab-box cp-tab-box2">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li ><a href="#cp_tab1" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
+                            <li><a href="#cp_tab1" role="tab" data-toggle="tab">Thông tin sản phẩm</a></li>
                             @*<li><a href="#cp_tab2" role="tab" data-toggle="tab">Events Performer</a></li>
-                            <li class="active"><a href="#cp_tab3" role="tab" data-toggle="tab">Thông tin thêm</a></li>*@
+                                <li class="active"><a href="#cp_tab3" role="tab" data-toggle="tab">Thông tin thêm</a></li>*@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active fade in" id="cp_tab1">
@@ -113,59 +113,59 @@
                             </div>
                             <div class="fb-comments" data-href="@ViewBag.url" data-numposts="5"></div>
                             @*<div class="tab-pane fade" id="cp_tab2">
-                                <div class="cp-tab-info-box">
-                                    <div class="cp-tab-text">
-                                        <p class="first">@Model.product_content</p>
+                                    <div class="cp-tab-info-box">
+                                        <div class="cp-tab-text">
+                                            <p class="first">@Model.product_content</p>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>*@
+                                </div>*@
                             @*<div class="class=" tab-pane active fade in"" id="cp_tab3">
-                                <div class="cp-tab-info-box">
-                                    <div class="cp-tab-text">
-                                        <p class="first">@Html.Raw(@Model.product_content)</p>
+                                    <div class="cp-tab-info-box">
+                                        <div class="cp-tab-text">
+                                            <p class="first">@Html.Raw(@Model.product_content)</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                         </div>
                     </div><!--Product Tab Box End-->
                     @*<!--Form Box Start-->
-                    <div class="cp-form-box">
-                        <h3>Leaves Review</h3>
-                        <form action="form3.php" method="post">
-                            <div class="row">
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="inner-holder">
-                                        <input type="text" placeholder="Your Name" name="name2" required pattern="[a-zA-Z ]+">
+                        <div class="cp-form-box">
+                            <h3>Leaves Review</h3>
+                            <form action="form3.php" method="post">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="inner-holder">
+                                            <input type="text" placeholder="Your Name" name="name2" required pattern="[a-zA-Z ]+">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="inner-holder">
+                                            <input type="text" placeholder="Your Email" name="email2" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="inner-holder">
+                                            <input type="text" placeholder="Subject" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="inner-holder">
+                                            <textarea placeholder="Comments" name="comment2" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="inner-holder cp-btn-holder">
+                                            <button type="submit" class="cp-btn-style1 btn-submit" value="Submit" name="submit2">Submit Now</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="inner-holder">
-                                        <input type="text" placeholder="Your Email" name="email2" >
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="inner-holder">
-                                        <input type="text" placeholder="Subject" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="inner-holder">
-                                        <textarea placeholder="Comments" name="comment2" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="inner-holder cp-btn-holder">
-                                        <button type="submit" class="cp-btn-style1 btn-submit" value="Submit" name="submit2">Submit Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div><!--Form Box End-->*@
+                            </form>
+                        </div><!--Form Box End-->*@
                     <!--Product Slider Outer Start-->
                     <div class="cp-product-slider-outer">
                         <h3>Sản Phẩm Liên Quan</h3>
-                        @{Html.RenderAction("LoadRelateProduct", "Products", new { cat_id = @Model.cat_id,product_id=@Model.product_id });}
+                        @{Html.RenderAction("LoadRelateProduct", "Products", new { cat_id = @Model.cat_id, product_id = @Model.product_id });}
                     </div>
                     <!--Product Slider Outer End-->
 

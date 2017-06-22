@@ -737,9 +737,14 @@ function addToCart(product_id) {
                 item+= "</li>";
                 $("#cart-listed").append(item);
                 //alert(item);
-                var total = parseInt($("#totalcartitems").html());
-                total++;
-                $("#totalcartitems").html(total);
+                if (document.getElementById("totalcartitems")) {
+                    var total = parseInt($("#totalcartitems").html());
+                    total++;
+                    $("#totalcartitems").html(total);
+                } else {
+                    $("#totalcartitems").html("1");
+                }
+                
             };
         },
         error: function (jqXHR, exception) {

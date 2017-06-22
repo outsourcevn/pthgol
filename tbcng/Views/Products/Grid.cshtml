@@ -132,7 +132,7 @@
                                                 <small class="small">@tbcng.Helpers.configs.getcatname(item.cat_id)</small>
                                                 <span class="pro-price">@String.Format("{0:n0}", @item.product_price_public)</span>
                                                 <ul class="cp-pro-meta">
-                                                    <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                                    <li class="pro-cart"><a style="cursor:pointer" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
                                                     <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                                 </ul>
                                             </div>
@@ -158,7 +158,7 @@
                                                     <span class="price">@String.Format("{0:n0}", @item.product_price_public)</span>
                                                     <p>@Html.Raw(@item.product_des)</p>
                                                     <ul class="cp-pro-meta">
-                                                        <li class="pro-cart"><a href="#" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
+                                                        <li class="pro-cart"><a style="cursor:pointer" onclick="addToCart(@item.product_id);"><span class="icon-shopping-cart icomoon"></span></a></li>
                                                         <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                                                     </ul>
                                                 </div>
