@@ -25,5 +25,6 @@ namespace tbcng.Models
         public Nullable<long> total { get; set; }
         public string ordercode { get; set; }
         public Nullable<System.DateTime> date_time { get; set; }
+        public Nullable<int> status { get; set; }
     }
 }

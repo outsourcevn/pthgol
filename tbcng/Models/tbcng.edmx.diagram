@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="tbcngModel.product" Width="1.5" PointX="3" PointY="6.625" />
         <AssociationConnector Association="tbcngModel.FK_products_cats" />
         <AssociationConnector Association="tbcngModel.FK_product_img_products" />
-        <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="11.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

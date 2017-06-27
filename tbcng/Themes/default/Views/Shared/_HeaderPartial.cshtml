@@ -2,34 +2,65 @@
 @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+<style>
+    #cp-slide-menu2 a{
+        font-size:9px;
+    }
+</style>
 <header class="cp-header" id="cp_header-v2" style="background:#f7f7f7;">
     <div id="cp-slide-menu" class="cp_side-navigation">
-        <ul class="navbar-nav">
-            <li id="close"><a href="#"><i class="fa fa-close"></i></a></li>
-            <li >
-                <a href="/" >Trang chủ <i class="fa fa-angle-down"></i></a>
-            </li>
-            <li><a href="/gioi-thieu">Giới thiệu</a></li>
-            <li>
-                <a href="/dich-vu">Dịch vụ <i class="fa fa-angle-down"></i></a>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
-                @Html.Raw(tbcng.Helpers.configs.getAllMenu())
+        <div class="col-md-12 navbar-nav" id="cp-slide-menu2" style="overflow-x: scroll;">
+            <div class="col-md-12"><li id="close"><a href="#"><i class="fa fa-close"></i></a></li></div>
+            <div class="col-md-12"><a href="/">Trang Chủ</a></div>
+            <div class="col-md-12"><a href="/gioi-thieu">Giới Thiệu</a></div>
+            <div class="col-md-12"><a href="/dich-vu">Dịch Vụ </a></div>
+            <div class="col-md-12" id="productsmenu" onclick="showtreeproduct();" style="cursor:pointer;">
+                <a >Sản Phẩm <i class="fa fa-angle-down"></i></a>
+                @*@Html.Raw(tbcng.Helpers.configs.getAllMenu(0))*@
+                <div class="col-md-12" id="productsmenuchild" style="display:none;overflow-y:auto; min-height:150px;">@Html.Raw(tbcng.Helpers.configs.getAllMenu(1))</div>
+                @*<div class="panel-group" id="productsmenuchild" style="display:none;overflow-y:auto; height:450px;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a data-toggle="collapse" href="#collapse1">Collapsible panel <span class="caret"></span></a>
+                        </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="panel-body" style="color:#000;font-size:10px;">Panel Body 1</div>
+                            <div class="panel-body"><a data-toggle="collapse" href="#collapse2" style="color:#000;font-size:10px;">Panel Body 22 <span class="caret"></span></a></div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body" style="color:#000;font-size:10px;">Panel Body 222</div>
+                                <div class="panel-body" style="color:#000;font-size:10px;">Panel Body 2222222</div>
+                            </div>
+                            <div class="panel-body">Panel Footer</div>
+                        </div>
+                        <div class="panel-heading">
+                            <a data-toggle="collapse" href="#collapse2">Collapsible panel 2222</a>
+                        </div>
+                    </div>
+                </div>*@ 
                 @*<ul class="dropdown-menu">
-                    <li><a href="#">Danh mục 1</a></li>
-                    <li><a href="#">Danh mục 1</a></li>
-                    <li><a href="#">Danh mục 1</a></li>
+                    <li><a tabindex="-1" href="#">HTML</a></li>
+                    <li><a tabindex="-1" href="#">CSS</a></li>
+                    <li class="dropdown-submenu">
+                        <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                            <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                            <li class="dropdown-submenu">
+                                <a class="test" href="#">Another dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">3rd level dropdown</a></li>
+                                    <li><a href="#">3rd level dropdown</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>*@
-            </li>
-            @*<li class="dropdown">
-                <a href="/tin-tuc" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức <i class="fa fa-angle-down"></i></a>
-            </li>*@
-            <li class="dropdown">
-                <a href="/lien-he" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ <i class="fa fa-angle-down"></i></a>
-            </li>
-        </ul>
+            </div>            
+            <div class="col-md-12"><a href="/lien-he" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liên hệ </a></div>
+        </div>
+         
     </div>
+    
     <!-- Navigation Row Start -->
     <div class="cp-navigation-row">
         <div class="container">
@@ -58,7 +89,7 @@
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm <i class="fa fa-angle-down"></i></a>
-                                @Html.Raw(tbcng.Helpers.configs.getAllMenu())
+                                @Html.Raw(tbcng.Helpers.configs.getAllMenu(0))
                                 @*<ul class="dropdown-menu">
                                     <li class="dropdown">
                                         <a href="/san-pham" >Lốp <i class="fa fa-angle-down"></i></a>
@@ -144,19 +175,44 @@
         </div><!--Search Bar Inner End-->
     </div>
     <!--Search Bar Holder End-->
-
+    <!-- cart notice-->
+    <div style="display:none;position:fixed;top:30%;left:30%;width:40%;z-index:1002;background:#4cff00;" id="showpopupdv">
+        <a class="btn btn-circle btn-info" href="/Products/Cart" style="width:100%;">Thanh Toán</a>
+        <a class="btn btn-circle btn-success" onclick='$("#showpopupdv").hide();' style="width:100%;">Tiếp Tục Mua Hàng</a>
+        <input type="checkbox" id="chkshowpopupdv"/>Không hiện thông báo này
+    </div>
 </header>
 <!-- Header End --> 
 <script>
     function viewtree(id) {
-        $('#bs-example-navbar-collapse-1 li').each(function () {
-            //column1RelArray.push($(this).attr('rel'));
-            //console.log($(this).attr('pid'));
-            if ($(this).attr('pid')==id) {
-                if ($(this).is(":visible")) $(this).hide(); else $(this).show();
-                //viewtree($(this).attr('id'));
-            }
-        });
+        if (screen.width>767){
+            $('#bs-example-navbar-collapse-1 li').each(function () {
+                //column1RelArray.push($(this).attr('rel'));
+                //console.log($(this).attr('pid'));
+                if ($(this).attr('pid')==id) {
+                    if ($(this).is(":visible")) $(this).hide(); else $(this).show();
+                    //viewtree($(this).attr('id'));
+                }
+            });
+        }else{
+            $('#cp-slide-menu2 div').each(function () {
+                //column1RelArray.push($(this).attr('rel'));
+                //console.log($(this).attr('pid'));
+                if ($(this).attr('pid') == id) {
+                    if ($(this).is(":visible")) $(this).hide(); else $(this).show();
+                    //viewtree($(this).attr('id'));
+                    console.log($(this).attr('pid'));
+                }
+            });
+        }
+        
+    }
+    var isLoadMenu = 0;
+
+    function showtreeproduct() {
+        if (isLoadMenu == 1) return;
+        if ($("#productsmenuchild").is(":visible")) $("#productsmenuchild").hide(); else $("#productsmenuchild").show();
+        isLoadMenu = 1;
     }
     function viewtree2(id) {
         $('#allsidebar li').each(function () {

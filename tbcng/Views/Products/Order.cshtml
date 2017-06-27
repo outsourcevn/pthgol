@@ -1,0 +1,199 @@
+﻿@model PagedList.IPagedList<tbcng.Models.product_customer_order>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách đặt hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+    <link href="~/Content/admin/vendor/datatable/dataTables.bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @*<div class="page-header">
+            <h3>@ViewBag.Title <span class="btn btn-primary pull-right" onclick="gotoUrl('@Url.RouteUrl("AdminAddProduct")')"><i class="fa fa-plus"></i> Thêm sản phẩm mới</span></h3>
+        </div>*@
+        @if (TempData["Deleted"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                @Html.Raw(TempData["Deleted"])
+            </div>
+        }
+
+        @if (TempData["Updated"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                @Html.Raw(TempData["Updated"])
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default box box-primary">
+            <div class="panel-heading">
+                @using (Html.BeginForm("Order", "Products", FormMethod.Get, new { @class = "form-inline", role = "form", @id = "search-products", onsubmit = "return validate()" }))
+                {
+                    <div class="form-group">
+                        <label for="searchQuery" class="control-label">Tìm kiếm: </label>
+                        @Html.TextBox("search", "", new { @class = "form-control", placeholder = "Nhập từ khóa tìm kiếm" })
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary"><i class="fa fa-search"></i>Tìm kiếm</button>
+                    </div>
+                }
+            </div>
+
+            <script>
+                function validate() {
+                    if (document.getElementById("search").value === "") {
+                        alert('Vui lòng nhập từ khóa tìm kiếm');
+                        return false;
+                    } else {
+                        return true;
+                    };
+                }
+            </script>
+
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="table-articles">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn hàng</th>
+                                <th>Đặt ngày</th>
+                                <th>Thông tin Khách hàng</th>
+                                <th>Trọng lượng</th>
+                                <th>Trị giá hàng</th>
+                                <th>Phí Ship</th>
+                                <th>Tổng giá trị</th>
+                                <th>Trạng thái</th>
+                                <th>In đơn đặt hàng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                int count=0;
+                                if (Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        count++;
+                                        <tr >
+                                            <td>@item.ordercode</td>
+                                            <td>@item.date_time</td>
+                                            <td id="ctminfo_@count">Email: @item.customer_email <br>Phone: @item.customer_phone</td>
+                                            <td>@String.Format("{0:n0}", item.g != null ? item.g : 0)</td>
+                                            <td>@String.Format("{0:n0}", item.total_fee != null ? item.total_fee : 0)</td>
+                                            <td>@String.Format("{0:n0}", item.ship_fee != null ? item.ship_fee : 0)</td>
+                                            <td>@String.Format("{0:n0}", item.total != null ? item.total : 0)</td>
+                                            <td id="ctmpay_@count">
+                                                @if (item.status == 1)
+                                                {
+                                                    <span style="color:red;">Mới đặt hàng. Đang chờ thanh toán</span><br />
+                                                    <span class="btn btn-danger" onclick="submitPayment('@item.session',@count);"><i class="fa fa-trash"></i>Xác nhận thanh toán<br />(Với khách tự chuyển qua ATM)</span>
+                                                }
+                                                else
+                                                {
+                                                    if (item.status == 2)
+                                                    {
+                                                        <span style="color:blue;">Đã Thanh Toán</span>
+                                                    }
+                                                }
+
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" href="/Products/PrintOrder?session=@item.session&customer_id=@item.customer_id" target="_blank">In đơn hàng</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="6">
+                                            Chưa có sản phẩm nào.
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="6">
+                                        Chưa có sản phẩm nào.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @if (Model != null)
+                {
+                    @Html.PagedListPager(Model, page => Url.RouteUrl("AdminListOrder", new { search = ViewBag.search, pg = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatable")
+    <script>
+
+        $(document).ready(function () {
+            $('#table-products').DataTable({
+                paging: false,
+                "oLanguage": {
+                    "sEmptyTable": "Không tìm thấy sản phẩm nào.",
+                    "sLoadingRecords": "Vui lòng - chờ...",
+                    "sSearch": "Tìm kiếm nhanh: ",
+                    "sZeroRecords": "Không tìm thấy sản phẩm nào.",
+                    "sInfo": ""
+                },
+                "order": [],
+                columnDefs: [
+                    { targets: 'no-sort', orderable: false }
+                ]
+            });
+        });
+        function submitPayment(session,count){
+            if (confirm("Xác nhận đơn hàng này đã thanh toán?")==true){
+                $.ajax({
+                    url: '/Products/submitPayment',
+                    type: 'POST',
+                    datatype: 'text',
+                    data: "session=" + session,
+                    success: function (data) {
+                        if (data == "1") {
+                            //window.location.reload();
+                            //window.location.reload();
+                            $('#ctmpay_' + count).html("<span style=\"color:blue;\">Đã Thanh Toán</span>");
+                        };
+                    },
+                    error: function (jqXHR, exception) {
+                        alert(exception.toString());
+                    }
+                });
+            }
+        }
+        function print(session, customer_id) {
+            window.open("/Products/Order?session=" + session + "&customer_id=" + customer_id);
+        }
+    </script>
+}
+

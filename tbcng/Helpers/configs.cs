@@ -48,19 +48,28 @@ namespace tbcng.Helpers
             }
             return true;
         }
-        public static string getAllMenu()
+        public static string getAllMenu(int? mobile)
         {
             try
             {
-                string rs = "<ul class=\"dropdown-menu\">";
+                string rs = "";
+                if (mobile==0) rs="<ul class=\"dropdown-menu\">";
                 var p = (from q in db.cats where q.cat_parent_id == null select q).OrderBy(o => o.cat_pos).ToList();
                 for (int i = 0; i < p.Count; i++)
                 {
-                    rs += "<li >";
-                    rs += getAllChildMenu(p[i].cat_name,p[i].cat_id,1);
-                    rs += "</li>";
+                    if (mobile == 0) { 
+                        rs += "<li >";
+                        rs += getAllChildMenu(p[i].cat_name, p[i].cat_id, 1, mobile);
+                        rs += "</li>";
+                    }
+                    else
+                    {
+                        rs += "<div class=\"col-md-12\">";
+                        rs += getAllChildMenu(p[i].cat_name, p[i].cat_id, 1, mobile);
+                        rs += "</div>";
+                    }
                 }
-                rs += "</ul>";
+                if (mobile == 0) rs += "</ul>";
                 return rs;
             }
             catch
@@ -68,7 +77,7 @@ namespace tbcng.Helpers
                 return "";
             }
         }
-        public static string getAllChildMenu(string name,int id,int l)
+        public static string getAllChildMenu(string name, int id, int l, int? mobile)
         {
             try
             {
@@ -80,24 +89,40 @@ namespace tbcng.Helpers
                 string rs = "";// "<a href=\"#\">" + name + " </a>";
                 string temp="<i class=\"fa fa-angle-down\"></i>";//"class=\"dropdown-submenu\"";
                 string temp2 = "";
-                string display = "display:block;";
+                string display = "display:block;";//float:left;position:relative;
+                //string classcss="";
                 var p2 = (from q2 in db.cats where q2.cat_parent_id == id select q2).OrderBy(o => o.cat_pos).ToList();
                 for (int ii = 0; ii < p2.Count; ii++)
                 {
-                    temp2=getAllChildMenu(p2[ii].cat_name,p2[ii].cat_id, l+1);
-                    if (l > 1) display = "display:none;";
+                    temp2 = getAllChildMenu(p2[ii].cat_name, p2[ii].cat_id, l + 1, mobile);
+                    if (l > 1) display = "display:none;";//float:left;position:relative;
+                    //temp = "";
                     if (temp2 != "")
                     {
                         //rs += "<li class=\"dropdown-submenu\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a>";
                         //rs += "<ul class=\"dropdown-menu\">" + temp2 + "</li></ul>";
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\"><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + temp + "</a></li>";//<span class=\"caret\"  style='float:right;'></span>
+                        //if (mobile == 1) { classcss = ""; }
+                        if (mobile == 0) { 
+                            rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\" onclick=\"viewtree(" + p2[ii].cat_id + ");\"><a class=\"test\" tabindex=\"-1\" style=\"cursor:pointer\">" + space + p2[ii].cat_name + temp + "</a></li>";//<span class=\"caret\"  style='float:right;'></span>
+                        }
+                        else
+                        {
+                            rs += "<div id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\"  style=\"" + display + "\" class=\"col-md-12\" onclick=\"viewtree(" + p2[ii].cat_id + ");\"><a class=\"test\" tabindex=\"-1\" style=\"cursor:pointer\">" + space + p2[ii].cat_name + temp + "</a></div>";
+                        }
                         rs += temp2;
                     }
                     else 
                     {
                         //rs += "<li ><a class=\"test\" tabindex=\"-1\" href=\"#\">" + space + p2[ii].cat_name + "<span class=\"caret\"></span></a></li>";
                         //rs += temp2;
-                        rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></li>";
+                        if (mobile == 0)
+                        {
+                            rs += "<li id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></li>";
+                        }
+                        else
+                        {
+                            rs += "<div id=\"" + p2[ii].cat_id + "\" pid=\"" + p2[ii].cat_parent_id + "\" style=\"" + display + "\" class=\"col-md-12\"><a class=\"test\" tabindex=\"-1\" href=\"/san-pham/" + unicodeToNoMark(p2[ii].cat_name) + "-" + p2[ii].cat_id + "/all-0-0-1-1\">" + space + p2[ii].cat_name + "</a></div>";
+                        }
                         rs += temp2;
                     }
                     
@@ -313,6 +338,15 @@ namespace tbcng.Helpers
             HttpCookie MyCookie = new HttpCookie(field);
             MyCookie.Value = value;
             MyCookie.Expires = DateTime.Now.AddDays(365);
+            HttpContext.Current.Response.Cookies.Add(MyCookie);
+            //Response.Cookies.Add(MyCookie);   
+
+        }
+        public static void removieCookie(string field)
+        {
+            HttpCookie MyCookie = new HttpCookie(field);
+            MyCookie.Value = "1";
+            MyCookie.Expires = DateTime.Now.AddDays(-1);
             HttpContext.Current.Response.Cookies.Add(MyCookie);
             //Response.Cookies.Add(MyCookie);   
 

@@ -50,6 +50,7 @@
           <Property Name="total" Type="bigint" />
           <Property Name="ordercode" Type="nvarchar" MaxLength="50" />
           <Property Name="date_time" Type="datetime" />
+          <Property Name="status" Type="int" />
         </EntityType>
         <EntityType Name="product_img">
           <Key>
@@ -587,6 +588,7 @@
           <Property Name="total" Type="Int64" />
           <Property Name="ordercode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="date_time" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -757,6 +759,7 @@
           <EntitySetMapping Name="product_customer_order">
             <EntityTypeMapping TypeName="tbcngModel.product_customer_order">
               <MappingFragment StoreEntitySet="product_customer_order">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="date_time" ColumnName="date_time" />
                 <ScalarProperty Name="ordercode" ColumnName="ordercode" />
                 <ScalarProperty Name="total" ColumnName="total" />

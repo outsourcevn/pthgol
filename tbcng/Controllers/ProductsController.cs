@@ -118,6 +118,18 @@ namespace tbcng.Controllers
             var p = (from q in db.products where q.product_name.Contains(keyword) orderby q.product_name select q.product_name).Take(10).ToList();
             return JsonConvert.SerializeObject(p);
         }
+        [HttpPost]
+        public string submitPayment(string session)
+        {
+            try { 
+                db.Database.ExecuteSqlCommand("update product_customer_order set status=2 where session=N'" + session + "'");
+                db.Database.ExecuteSqlCommand("update product_order set status=2 where session=N'" + session + "'");
+                Helpers.configs.removieCookie("session");
+                return "1";
+            }catch(Exception ex){
+                return "0";
+            }
+        }
         // GET: Cats
         public ActionResult Add()
         {
@@ -970,12 +982,16 @@ namespace tbcng.Controllers
                  int customer_id = ctm.id;
                  product_customer_order pco = new product_customer_order();
                  pco.customer_id = customer_id;
+                 pco.customer_email = customer_email;
+                 pco.customer_phone = customer_phone;
                  pco.g = g;
                  pco.session = session;
                  pco.ship_fee = ship_fee;
                  pco.total_fee = total_fee;
                  pco.total = ship_fee + total_fee;
                  pco.ordercode = ordercode;
+                 pco.date_time = DateTime.Now;
+                 pco.status = 1;
                  db.product_customer_order.Add(pco);
                  db.SaveChanges();
 
@@ -1033,6 +1049,85 @@ namespace tbcng.Controllers
                  return "0";
                  //configs.SaveTolog(ex.ToString());
              }
+        }
+        public ActionResult PrintOrder(int customer_id, string session)
+        {
+            try
+            {
+                
+                string query = "delete from product_order where session=N'" + session + "' and status=0";
+                db.Database.ExecuteSqlCommand(query);
+                customer ctm = new customer();
+                ctm = db.customers.Find(customer_id);
+
+                product_customer_order pco = db.product_customer_order.Where(o => o.session == session).FirstOrDefault();
+
+                string customer_email = pco.customer_email;
+                string customer_phone = pco.customer_phone;
+                double? g = pco.g;
+                //string session = session;
+                long? ship_fee = pco.ship_fee;
+                long? total_fee = pco.total_fee;
+                long? total = pco.total;
+                string ordercode = pco.ordercode;
+                DateTime? date_time = pco.date_time;
+
+                string result = "";
+                result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 100%;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
+                + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng: Mã #" + ordercode + "</b></td></tr>"
+                + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + ctm.customer_name + ", điện thoại: " + ctm.customer_phone + ", địa chỉ: " + ctm.customer_address + ", email: " + ctm.customer_email + "</b></td></tr>"
+                + "<tr><td colspan=\"5\" style=\"text-align:center;\">Chi Tiết Đơn Hàng</td></tr>"
+                + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th style=\"width:60px;\">Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
+                //List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
+                var thelist = (from q in db.product_order where q.session == session select q).ToList();
+                //double total_kg = 0;
+                int? total_quantity = 0;
+                ViewBag.result = "";
+                if (thelist.Count > 1)
+                {
+
+                    foreach (var detail in thelist)
+                    {
+                        long? product_id = detail.product_id;
+                        if (product_id == -1) continue;
+                        string product_name = detail.product_name;
+                        string product_photos = detail.product_photos;
+                        int? quantity = detail.quantity;
+                        double? product_price = detail.product_price;
+                        double? product_total = detail.product_total;
+                        total_quantity += quantity;
+                        //product_order po = new product_order();
+                        //po.customer_id = customer_id;
+                        //po.date_time = DateTime.Now;
+                        //po.product_id = product_id;
+                        //po.product_name = product_name;
+                        //po.product_photos = product_photos;
+                        //po.product_price = product_price;
+                        //po.product_total = product_total;
+                        //po.quantity = quantity;
+                        //po.session = session;
+                        //po.status = 1;
+                        //db.product_order.Add(po);
+                        //db.SaveChanges();
+                        result += "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><td style=\"text-align: center; vertical-align: middle;\"><img src=\"http://lopnhanh.net/" + product_photos + "\"  style=\"height:50px;width:50px;\"></td><td style=\"text-align: left; vertical-align: middle;\">" + product_name + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_price) + "</td><td style=\"text-align: center; vertical-align: middle;\">" + quantity + "</td><td style=\"text-align: center; vertical-align: middle;\">" + String.Format("{0:n0}", product_total) + "</td></tr>";
+                    }
+                    result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số Lượng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + total_quantity + "</b></td></tr>";
+                    result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí Ship:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", ship_fee) + "</b></td></tr>";
+                    result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Giá trị hàng:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
+                    result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>" + String.Format("{0:n0}", total) + "</b></td></tr>";
+                    //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Số lượng:</b>" + total_quantity + "</b></td><td style=\"text-align: right; vertical-align: middle;\"><b>Phí ship:<br>" + String.Format("{0:n0}", ship_fee) + "</b></td><td style=\"text-align: center; vertical-align: middle;\"><b>Giá trị hàng:<br>" + String.Format("{0:n0}", total_fee) + "</b></td></tr>";
+                    //result += "<tr><td colspan=\"3\"></td><td style=\"text-align: right; vertical-align: middle;\"><b>Tổng tiền:<br>" + String.Format("{0:n0}", total) + "</b></td></tr>";
+                    //var sendmail = configs.Sendmail(WebConfigurationManager.AppSettings["emailroot"], WebConfigurationManager.AppSettings["passroot"], customer_email, "Khách đặt hàng " + thelist[0].product_name, result);
+                    ViewBag.result = result;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                ViewBag.result = "";
+                //configs.SaveTolog(ex.ToString());
+            }
+            return View();
         }
         //public ActionResult upanhsanpham(long? product_id, string img_url, string img_title, string img_alt)
         //{

@@ -2,6 +2,22 @@
 /*===========================================================================*/
 							/*480px CSS*/
 /*===========================================================================*/
+@media screen and (max-width: 320px) and (max-width: 360px) {
+    .cp-slider-content .title {
+        font-size: 12px;
+        line-height: 12px;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .cp-slider-content .title {
+        font-size: 24px;
+        line-height: 24px;
+        margin-bottom: 5px;
+    }
+}
+
 @media (max-width: 480px) {
 #cp_header-v1.cp_sticky .cp-navigation-row{
 	min-height: 80px;
@@ -287,9 +303,9 @@ body #home-slider1 .cp-slider-content{
 	bottom: 150px;
 }
 .cp-slider-content .title{
-	font-size: 36px;
-	line-height: 30px;
-	margin-bottom: 15px;
+	font-size: 16px;
+	line-height: 23px;
+	margin-bottom: 13px;
 }
 .cp-slider-content p,#home-slider2 .cp-slider-content p{
 	font-size: 18px;

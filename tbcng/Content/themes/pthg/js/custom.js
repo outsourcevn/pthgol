@@ -744,6 +744,7 @@ function addToCart(product_id) {
                 } else {
                     $("#totalcartitems").html("1");
                 }
+                if (document.getElementById("chkshowpopupdv").checked==false) $("#showpopupdv").show();
                 
             };
         },

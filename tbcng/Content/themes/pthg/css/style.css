@@ -92,7 +92,7 @@ body p {
 	color: #666666;
 }
 h1,h2,h3,h4,h5,h6,strong {
-	font-family: 'Archivo Narrow', sans-serif;
+	font-family: sans-serif;
 	color: #424242;
 	margin: 0;
 }
@@ -372,7 +372,7 @@ ul ul,ol ol{
 	bottom: 30px;
 }
 .cp-nav-holder .navbar-default .navbar-nav li a {
-	font-family: 'Archivo Narrow', sans-serif;
+	font-family: sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	padding: 8px 30px;
@@ -520,7 +520,7 @@ ul ul,ol ol{
 	text-align:left;
 }
 .cart-listed .cart-text strong{
-	font-family: 'Roboto Slab', sans-serif;
+	font-family: sans-serif;
 	font-size: 12px;
 	font-weight: 400;
 	display: inline-block;
@@ -1122,7 +1122,7 @@ ul ul,ol ol{
 	margin: 0 0 10px;
 }
 .cp-banner-info span{
-	font-family: 'Archivo Narrow', sans-serif;
+	font-family: sans-serif;
 	color: #fff;
 	font-size: 14px;
 	display: block;
@@ -1296,7 +1296,7 @@ ul ul,ol ol{
 	margin: 0;
 }
 #home-slider3 .cp-slider-content p{
-	font-family: 'Archivo Narrow', sans-serif;
+	font-family: sans-serif;
 	font-weight: 600;
 	color: #bebebe;
 	margin: 0 0 47px;
@@ -1438,7 +1438,7 @@ ul ul,ol ol{
 	margin: 0;
 }
 .cp-inner-banner-outer .breadcrumb li{
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Roboto', serif;
 	font-size: 18px;
 	font-weight: 300;
 }
@@ -1475,7 +1475,7 @@ ul ul,ol ol{
 	margin: 0 0 22px;
 }
 .cp-about-text .first{
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Roboto', serif;
 	font-weight: 300;
 	text-transform: uppercase;
 }

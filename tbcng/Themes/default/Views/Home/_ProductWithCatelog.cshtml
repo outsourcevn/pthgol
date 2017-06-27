@@ -6,11 +6,11 @@
         foreach (var item in Model)
             {
                 var link = "/san-pham/" + tbcng.Helpers.configs.getcatnameurl(item.cat_id) + "/" + tbcng.Helpers.configs.unicodeToNoMark(item.product_name) + "-" + item.product_id;
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-4 col-sm-2">
                     <!--Product Item Start-->
                     <div class="cp-pro-item">
                         <div class="cp-pro-img">
-                            <img src="http://lopnhanh.net/@item.product_photo" alt="" style="border:solid 1px #808080;">
+                            <a href="@link"><img src="http://lopnhanh.net/@item.product_photo" alt="" style="border:solid 1px #808080;"></a>
                         </div>
                         <div class="cp-text">
                             <h3><a href="@link">@item.product_name</a></h3>

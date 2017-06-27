@@ -5,7 +5,7 @@
         <ul>
             <li class="cp-cart-holder">
                 <a href="/Products/Cart"><span class="icon-shopping-cart icomoon"></span></a>
-                <span class="cart-item" id="totalcartitems">@ViewBag.count</span>
+                <span class="cart-item" id="totalcartitems" style="background-color:red;">@ViewBag.count</span>
                 @if (Model.Count > 0)
                 {
                     <div class="cp-cart-inner">
