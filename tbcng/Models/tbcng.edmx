@@ -15,6 +15,17 @@
           <Property Name="cat_pos" Type="int" />
           <Property Name="cat_parent_id" Type="int" />
         </EntityType>
+        <EntityType Name="contacts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="topic" Type="nvarchar" MaxLength="501" />
+          <Property Name="full_content" Type="ntext" />
+          <Property Name="date_time" Type="datetime" />
+        </EntityType>
         <EntityType Name="customer">
           <Key>
             <PropertyRef Name="id" />
@@ -26,6 +37,7 @@
           <Property Name="customer_address" Type="nvarchar" MaxLength="151" />
           <Property Name="lon" Type="float" />
           <Property Name="lat" Type="float" />
+          <Property Name="customer_full_address" Type="nvarchar" MaxLength="801" />
         </EntityType>
         <EntityType Name="emails">
           <Key>
@@ -267,6 +279,7 @@
         </Association>
         <EntityContainer Name="tbcngModelStoreContainer">
           <EntitySet Name="cats" EntityType="Self.cats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contacts" EntityType="Self.contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emails" EntityType="Self.emails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product_customer_order" EntityType="Self.product_customer_order" Schema="dbo" store:Type="Tables" />
@@ -452,7 +465,6 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="customers" EntityType="tbcngModel.customer" />
           <EntitySet Name="product_order" EntityType="tbcngModel.product_order" />
           <EntitySet Name="ships" EntityType="tbcngModel.ship" />
           <EntitySet Name="emails" EntityType="tbcngModel.email" />
@@ -466,19 +478,9 @@
             <End Role="product_img" EntitySet="product_img" />
           </AssociationSet>
           <EntitySet Name="product_customer_order" EntityType="tbcngModel.product_customer_order" />
+          <EntitySet Name="contacts" EntityType="tbcngModel.contact" />
+          <EntitySet Name="customers" EntityType="tbcngModel.customer" />
         </EntityContainer>
-        <EntityType Name="customer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="customer_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="customer_address" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
-          <Property Name="lon" Type="Double" />
-          <Property Name="lat" Type="Double" />
-        </EntityType>
         <EntityType Name="product_order">
           <Key>
             <PropertyRef Name="id" />
@@ -590,6 +592,30 @@
           <Property Name="date_time" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" />
         </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="topic" Type="String" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Name="full_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="date_time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_address" Type="String" MaxLength="151" FixedLength="false" Unicode="true" />
+          <Property Name="lon" Type="Double" />
+          <Property Name="lat" Type="Double" />
+          <Property Name="customer_full_address" Type="String" MaxLength="801" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -671,19 +697,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="customers">
-            <EntityTypeMapping TypeName="tbcngModel.customer">
-              <MappingFragment StoreEntitySet="customer">
-                <ScalarProperty Name="lat" ColumnName="lat" />
-                <ScalarProperty Name="lon" ColumnName="lon" />
-                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
-                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
-                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
-                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="product_order">
             <EntityTypeMapping TypeName="tbcngModel.product_order">
               <MappingFragment StoreEntitySet="product_order">
@@ -770,6 +783,32 @@
                 <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
                 <ScalarProperty Name="customer_email" ColumnName="customer_email" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="tbcngModel.contact">
+              <MappingFragment StoreEntitySet="contacts">
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="full_content" ColumnName="full_content" />
+                <ScalarProperty Name="topic" ColumnName="topic" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="tbcngModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="customer_full_address" ColumnName="customer_full_address" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="customer_address" ColumnName="customer_address" />
+                <ScalarProperty Name="customer_phone" ColumnName="customer_phone" />
+                <ScalarProperty Name="customer_email" ColumnName="customer_email" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

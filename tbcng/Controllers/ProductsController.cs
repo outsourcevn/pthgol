@@ -159,6 +159,7 @@ namespace tbcng.Controllers
                 //_new.product_type = model.product_type ?? null;
                 _new.product_new_type = model.product_new_type ?? null;
                 _new.status = model.status;
+				_new.loads = 1;
                 _new.updated_date = DateTime.Now;
                 _new.product_des = model.product_des ?? null;
                 _new.g=model.g;
@@ -956,7 +957,7 @@ namespace tbcng.Controllers
             }
         }
         [HttpPost]
-        public string submitOrder(string data, string session, float? g, long? ship_fee, long? total_fee, string customer_address, string customer_name, string customer_email, string customer_phone, double? lon, double? lat)
+        public string submitOrder(string data, string session, float? g, long? ship_fee, long? total_fee, string customer_address,string customer_full_address, string customer_name, string customer_email, string customer_phone, double? lon, double? lat)
         {
              try
              {
@@ -970,6 +971,7 @@ namespace tbcng.Controllers
                      ctm.customer_email = customer_email;
                      ctm.customer_name = customer_name;
                      ctm.customer_phone = customer_phone;
+                     ctm.customer_full_address = customer_full_address;
                      ctm.lat = lat;
                      ctm.lon = lon;
                      db.customers.Add(ctm);
@@ -998,7 +1000,7 @@ namespace tbcng.Controllers
                  string result ="";
                  result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 100%;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng: Mã #" + ordercode + "</b></td></tr>"
-                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + customer_name + ", điện thoại: " + customer_phone + ", địa chỉ: " + customer_address + ", email: " + customer_email + "</b></td></tr>"
+                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + customer_name + ", điện thoại: " + customer_phone + ", địa chỉ: " + customer_full_address + ", email: " + customer_email + "</b></td></tr>"
                  + "<tr><td colspan=\"5\" style=\"text-align:center;\">Chi Tiết Đơn Hàng</td></tr>"
                  + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th style=\"width:60px;\">Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
                  List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);
@@ -1075,7 +1077,7 @@ namespace tbcng.Controllers
                 string result = "";
                 result += "<table align=\"center\" border=\"0\" cellpadding=\"1\" cellspacing=\"1\" style=\"margin: 0 auto;width: 100%;border: 1px solid #cbcbcb;background: rgba(193, 193, 193, 0.08);\">"
                 + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Đơn Đặt Hàng: Mã #" + ordercode + "</b></td></tr>"
-                + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + ctm.customer_name + ", điện thoại: " + ctm.customer_phone + ", địa chỉ: " + ctm.customer_address + ", email: " + ctm.customer_email + "</b></td></tr>"
+                + "<tr><td colspan=\"5\" style=\"text-align:center;\"><b>Khách Hàng: " + ctm.customer_name + ", điện thoại: " + ctm.customer_phone + ", địa chỉ: " + ctm.customer_full_address + ", email: " + ctm.customer_email + "</b></td></tr>"
                 + "<tr><td colspan=\"5\" style=\"text-align:center;\">Chi Tiết Đơn Hàng</td></tr>"
                 + "<tr style=\"border-bottom:1px solid #1f1f1f;background:#ffffff;\"><th style=\"width:60px;\">Ảnh</th><th>Sản phẩm</th><th>Giá</th><th>Số lượng</th><th>Tổng</th></tr>";
                 //List<itemallcartall> thelist = JsonConvert.DeserializeObject<List<itemallcartall>>(data);

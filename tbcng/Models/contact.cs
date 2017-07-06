@@ -12,15 +12,13 @@ namespace tbcng.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class customer
+    public partial class contact
     {
         public int id { get; set; }
-        public string customer_name { get; set; }
-        public string customer_email { get; set; }
-        public string customer_phone { get; set; }
-        public string customer_address { get; set; }
-        public Nullable<double> lon { get; set; }
-        public Nullable<double> lat { get; set; }
-        public string customer_full_address { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string topic { get; set; }
+        public string full_content { get; set; }
+        public Nullable<System.DateTime> date_time { get; set; }
     }
 }

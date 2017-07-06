@@ -362,5 +362,16 @@ namespace tbcng.Helpers
                 return "";
             }
         }
+        public static string getFullAdress(int customer_id)
+        {
+            try
+            {
+                return db.customers.Find(customer_id).customer_full_address;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
     }
 }

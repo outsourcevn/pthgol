@@ -95,7 +95,7 @@
                                         <tr >
                                             <td>@item.ordercode</td>
                                             <td>@item.date_time</td>
-                                            <td id="ctminfo_@count">Email: @item.customer_email <br>Phone: @item.customer_phone</td>
+                                            <td id="ctminfo_@count">Email: @item.customer_email <br>Phone: @item.customer_phone <br>Địa chỉ:@tbcng.Helpers.configs.getFullAdress((int)item.customer_id)</td>
                                             <td>@String.Format("{0:n0}", item.g != null ? item.g : 0)</td>
                                             <td>@String.Format("{0:n0}", item.total_fee != null ? item.total_fee : 0)</td>
                                             <td>@String.Format("{0:n0}", item.ship_fee != null ? item.ship_fee : 0)</td>

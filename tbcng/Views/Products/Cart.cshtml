@@ -57,9 +57,14 @@
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <div class="inner-holder">
-                                        <input type="text" placeholder="địa chỉ nhận hàng" name="customer_address" id="customer_address" onblur="getPriceShip();" value="@ViewBag.address">
+                                        <input type="text" placeholder="Gõ quận, huyện để tính phí ship" name="customer_address" id="customer_address" onblur="getPriceShip();" value="@ViewBag.address">
                                         <input name="lon" id="lon" type="hidden" value="@ViewBag.lon">
                                         <input name="lat" id="lat" type="hidden" value="@ViewBag.lat">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-6">
+                                    <div class="inner-holder">
+                                        <input type="text" placeholder="Gõ chính xác địa chỉ giao hàng" name="customer_full_address" id="customer_full_address" value="@ViewBag.full_address">                                        
                                     </div>
                                 </div>
                             </div>
@@ -219,10 +224,16 @@
         var customer_name=$("#customer_name").val();
         var customer_email=$("#customer_email").val();
         var customer_phone=$("#customer_phone").val();
+        var customer_full_address=$("#customer_full_address").val();
         var lon=$("#lon").val();
         var lat=$("#lat").val();
         if (customer_address=="" || lon==""){
             document.getElementById("customer_address").focus();
+            window.scrollTo(0, 0);
+            return;
+        }
+        if (customer_full_address==""){
+            document.getElementById("customer_full_address").focus();
             window.scrollTo(0, 0);
             return;
         }
@@ -290,6 +301,7 @@
             formdata.append("ship_fee", ship_fee);
             formdata.append("total_fee", total_fee);
             formdata.append("customer_address", customer_address);
+            formdata.append("customer_full_address", customer_full_address);            
             formdata.append("customer_name", customer_name);
             formdata.append("customer_email", customer_email);
             formdata.append("customer_phone", customer_phone);

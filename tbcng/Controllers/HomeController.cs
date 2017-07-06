@@ -31,7 +31,7 @@ namespace tbcng.Controllers
         }
         public ActionResult ProductWithCatelog(int? cat_id)
         {
-            var data = db.products.Where(x => x.cat_id == cat_id || x.cat_id_2 == cat_id || x.cat_id_3 == cat_id).Take(10).ToList();
+            var data = db.products.Where(x => x.cat_id == cat_id || x.cat_id_2 == cat_id || x.cat_id_3 == cat_id).Take(12).ToList();
             return PartialView("_ProductWithCatelog", data);
         }
         public ActionResult About()

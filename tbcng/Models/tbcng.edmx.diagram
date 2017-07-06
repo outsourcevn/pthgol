@@ -15,7 +15,6 @@
         <AssociationConnector Association="tbcngModel.FK_dbo_UserClaims_dbo_Users_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="tbcngModel.FK_dbo_UserLogins_dbo_Users_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="tbcngModel.UserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="tbcngModel.customer" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="tbcngModel.product_order" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="tbcngModel.ship" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="tbcngModel.email" Width="1.5" PointX="9.375" PointY="8.75" />
@@ -23,6 +22,8 @@
         <AssociationConnector Association="tbcngModel.FK_products_cats" />
         <AssociationConnector Association="tbcngModel.FK_product_img_products" />
         <EntityTypeShape EntityType="tbcngModel.product_customer_order" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="tbcngModel.contact" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="tbcngModel.customer" Width="1.5" PointX="11.375" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
